@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    align-items: center;
+
+    a {
+        &:link,
+        &:visited {
+            color: #212121;
+            font-size: 1.45rem;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            text-transform: uppercase;
+        }
+
+        &:first-of-type {
+            padding-left: 0;
+        }
+
+        &:last-of-type {
+            padding-right: 0;
+        }
+
+        &:not(:last-of-type) {
+            border-right: 1px solid #212121;
+        }
+    }
+}

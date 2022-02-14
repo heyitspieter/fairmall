@@ -1,0 +1,14 @@
+.container {
+    top: 0;
+    z-index: 20;
+    display: flex;
+    padding: 2rem 0;
+    position: sticky;
+    align-items: center;
+    background: #fdf3fa;
+    justify-content: space-around;
+
+    .default {
+        background: #ffffff;
+    }
+}
