@@ -1,10 +1,20 @@
 import Image from "next/image";
+import className from "classnames";
+import { useRouter } from "next/router";
 
 import styles from "src/components/Home/Home.module.scss";
 
 function SectionFive() {
+  const router = useRouter();
+
+  const containerClass = className({
+    [styles.container]: router.pathname !== "/",
+    [styles.bg__white]: router.pathname !== "/",
+    [styles.section_5]: router.pathname === "/",
+  });
+
   return (
-    <section className={styles.section_5}>
+    <section className={containerClass}>
       <div className={styles.heading}>
         <p>Inspirations</p>
       </div>

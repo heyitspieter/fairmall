@@ -2,13 +2,18 @@
     top: 0;
     z-index: 20;
     display: flex;
-    padding: 2rem 0;
     position: sticky;
     align-items: center;
+    grid-column: 1 / -1;
+    padding: 2rem 13rem;
     background: #fdf3fa;
-    justify-content: space-around;
+    justify-content: space-between;
 
-    .default {
+    @media screen and (max-width: 72em) {
+        padding: 2rem 5rem;
+    }
+
+    &.default {
         background: #ffffff;
     }
 }

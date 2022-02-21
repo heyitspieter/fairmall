@@ -10,6 +10,11 @@
             text-decoration: none;
             padding: 0.5rem 1.5rem;
             text-transform: uppercase;
+            transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+            color: #e11493;
         }
 
         &:first-of-type {
@@ -22,6 +27,10 @@
 
         &:not(:last-of-type) {
             border-right: 1px solid #212121;
+        }
+
+        &.active {
+            color: #e11493;
         }
     }
 }

@@ -45,3 +45,10 @@ button {
     cursor: pointer;
     background: none;
 }
+
+select,
+option {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}

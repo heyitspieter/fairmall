@@ -1,7 +1,8 @@
 .container {
     display: grid;
     gap: 4rem 15rem;
-    padding: 7rem 13.2rem;
+    grid-column: 1 / -1;
+    padding: 7rem 13rem;
     background-color: #212121;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, min-content);
@@ -117,6 +118,11 @@
                 padding: 2rem 1.6rem;
                 text-transform: uppercase;
                 background-color: #e11493;
+                transition: all 0.3s ease-in-out;
+
+                &:hover:enabled {
+                    background-color: #d11d8c;
+                }
             }
         }
     }
@@ -180,6 +186,7 @@
             svg {
                 width: 2rem;
                 height: 2rem;
+                fill: #ffffff;
             }
         }
     }

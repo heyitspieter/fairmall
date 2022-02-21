@@ -1,9 +1,15 @@
 .container {
     display: flex;
     padding: 7rem 0 0;
+    grid-column: 1 / -1;
     margin-bottom: 7rem;
     background: #fdf3fa;
     flex-direction: column;
+
+    &.bg__white {
+        padding: 10rem 0 0;
+        background-color: #ffffff;
+    }
 }
 
 .heading {
@@ -18,36 +24,33 @@
 
 .section_1 {
     display: block;
-    align-self: center;
-
-    @media screen and (max-width: 72em) {
-        max-width: 100%;
-        overflow: hidden;
-    }
 
     &__grid {
-        gap: 4.2rem;
         display: grid;
+        padding: 0 13rem;
+        gap: 4.5rem 4rem;
         position: relative;
         margin-bottom: 2rem;
-        grid-template-rows: repeat(2, min-content);
-        grid-template-columns: repeat(4, minmax(max-content, min-content));
+        grid-template-rows: repeat(4, 6vw);
+        grid-template-columns: repeat(4, 1fr);
+
+        @media screen and (max-width: 72em) {
+            padding: 0 5rem 0;
+        }
     }
 
     &__heading {
-        top: 9%;
-        left: 50%;
         display: flex;
-        position: absolute;
-        transform: translate(-50%, -50%);
-
-        @media screen and (max-width: 72em) {
-            left: 85%;
-            width: 100%;
-        }
+        grid-row: 1 / 2;
+        grid-column: 2 / 4;
+        justify-self: center;
 
         p {
-            font-size: 6rem;
+            font-size: 6.5rem;
+
+            @media screen and (max-width: 72em) {
+                font-size: 5rem;
+            }
 
             &:nth-of-type(1) {
                 font-weight: 400;
@@ -68,7 +71,6 @@
 
     &__imgGroup {
         position: relative;
-        align-self: flex-end;
 
         p {
             z-index: 2;
@@ -77,6 +79,8 @@
         }
 
         figure {
+            width: 100%;
+            height: 100%;
             position: relative;
         }
 
@@ -88,15 +92,10 @@
                 right: 0;
                 top: -2rem;
             }
-
-            figure {
-                width: 28.7rem;
-                height: 49.1rem;
-            }
         }
 
         &:nth-of-type(2) {
-            grid-row: 2 / 3;
+            grid-row: 3 / 5;
             grid-column: 2 / 3;
 
             p {
@@ -104,25 +103,15 @@
                 left: -4.6rem;
                 transform: rotate(270deg);
             }
-
-            figure {
-                width: 36.6rem;
-                height: 26.9rem;
-            }
         }
 
         &:nth-of-type(3) {
-            grid-row: 2 / 3;
+            grid-row: 2 / 5;
             grid-column: 3 / 4;
 
             p {
                 left: 0;
                 top: -2rem;
-            }
-
-            figure {
-                width: 28.7rem;
-                height: 36.5rem;
             }
         }
 
@@ -133,11 +122,6 @@
             p {
                 left: 0;
                 bottom: -2rem;
-            }
-
-            figure {
-                width: 26.6rem;
-                height: 47.8rem;
             }
 
             & > *:last-child {
@@ -200,9 +184,13 @@
         transform: translate(-50%, -50%);
 
         h2 {
-            font-size: 8rem;
             color: #e11493;
             font-weight: 300;
+            font-size: 9.5rem;
+
+            @media screen and (max-width: 72em) {
+                font-size: 8rem;
+            }
 
             span {
                 color: #e11493;
@@ -450,7 +438,7 @@
         gap: 2.4rem;
         display: grid;
         margin-top: 4rem;
-        padding: 0 13.2rem 0;
+        padding: 0 13rem 0;
         grid-template-rows: repeat(4, 10vw);
         grid-template-columns: repeat(4, 1fr);
 
@@ -492,7 +480,11 @@
 
     &__btn {
         align-self: flex-end;
-        padding: 1.2rem 13.2rem 0;
+        padding: 1.2rem 13rem 0;
+
+        @media screen and (max-width: 72em) {
+            padding: 1.2rem 5rem 0;
+        }
 
         button {
             color: #e11493;

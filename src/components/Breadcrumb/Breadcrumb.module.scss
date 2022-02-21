@@ -1,0 +1,76 @@
+.container {
+    margin: 3rem 0;
+    padding: 0 13rem;
+    grid-column: 1 / -1;
+
+    @media screen and (max-width: 72em) {
+        padding: 0 5rem;
+    }
+
+    @media screen and (max-width: 37.5em) {
+        margin-top: 2rem;
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+    }
+
+    nav {
+        @media screen and (max-width: 37.5em) {
+            overflow: hidden;
+            overflow-x: auto;
+        }
+
+        &::-webkit-scrollbar {
+            width: 11px;
+            height: 0;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #ffffff;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #ffffff;
+        }
+
+        ol {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+           
+
+            li {
+                display: flex;
+                position: relative;
+                align-items: center;
+
+                a {
+                    &:visited,
+                    &:link {
+                        color: #BDBDBD;
+                        display: inline;
+                        font-weight: 400;
+                        font-size: 1.4rem;
+                        text-decoration: none;
+                        text-transform: capitalize;
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+
+                    &.current {
+                        cursor: auto;
+                        color: #BDBDBD !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.iconChevronRight {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: #BDBDBD;
+    margin: 0 0.6rem 0.3rem;
+}

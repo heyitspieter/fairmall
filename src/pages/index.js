@@ -1,6 +1,6 @@
 import Home from "src/components/Home/Home";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
-import NewsLetter from "src/components/NewsLetter/NewsLetter";
+import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 
 export default function home() {
   return (

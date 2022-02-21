@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import styles from "src/components/NewsLetter/NewsLetter.module.scss";
+import styles from "src/containers/NewsLetter/NewsLetter.module.scss";
 
 function NewsLetter() {
   const [formValidity, setFormValidity] = useState(false);
