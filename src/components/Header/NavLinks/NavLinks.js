@@ -11,7 +11,7 @@ function NavLinks() {
       <ActiveLink href="/about-us" activeClassName={styles.active}>
         About Us
       </ActiveLink>
-      <ActiveLink href="/inspiration" activeClassName={styles.active}>
+      <ActiveLink href="/inspirations" activeClassName={styles.active}>
         Inspiration
       </ActiveLink>
     </div>
