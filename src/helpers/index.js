@@ -60,3 +60,17 @@ export const checkFormValidity = (value, rules) => {
 
   return isValid;
 };
+
+export const formatNumber = (num, fixed = false) => {
+  if (num === 0) {
+    return num + ".00";
+  }
+
+  let parts = fixed
+    ? Math.abs(num).toFixed(2).toString().split(".")
+    : num.toString().split(".");
+
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  return parts.join(".");
+};

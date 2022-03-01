@@ -1,9 +1,12 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import styles from "src/components/Orders/Orders.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 
 function Orders() {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={spiralLeft}>
@@ -35,7 +38,9 @@ function Orders() {
               <td>28th December, 2021</td>
               <td>
                 <div className={styles.action}>
-                  <button>View</button>
+                  <button onClick={() => router.push("/order/12F78GQ")}>
+                    View
+                  </button>
                 </div>
               </td>
             </tr>
@@ -54,7 +59,9 @@ function Orders() {
               </td>
               <td>
                 <div className={styles.action}>
-                  <button>View</button>
+                  <button onClick={() => router.push("/order/12F78GQ")}>
+                    View
+                  </button>
                 </div>
               </td>
             </tr>

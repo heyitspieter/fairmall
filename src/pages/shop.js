@@ -1,4 +1,4 @@
-import ShopFeed from "src/components/ShopFeed/ShopFeed";
+import ShopFeed from "src/containers/ShopFeed/ShopFeed";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Categories from "src/components/Categories/Categories";

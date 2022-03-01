@@ -61,7 +61,7 @@ function SectionFive() {
         </figure>
       </div>
       <div className={styles.section_5__btn}>
-        <button>See More</button>
+        <button onClick={() => router.push("/inspirations")}>See More</button>
       </div>
     </section>
   );

@@ -108,6 +108,7 @@
 
             button {
                 display: flex;
+                position: relative;
                 padding: 0.9rem 1rem;
                 border-radius: 0.2rem;
                 background-color: #212121;
@@ -119,6 +120,15 @@
                     svg {
                         fill: #212121;
                     }
+                }
+
+                span {
+                    left: 0;
+                    z-index: 4;
+                    top: -10rem;
+                    overflow: visible;
+                    position: absolute;
+                    background-color: #ffffff;
                 }
 
                 svg {

@@ -15,5 +15,77 @@
             height: 2.2rem;
             fill: #212121;
         }
+
+        + button {
+            position: relative;
+
+            &:focus-within {
+                svg {
+                    fill: #e11493;
+                }
+            }
+
+            &:focus-within .dropdown {
+                display: flex;
+            }
+        }
+    }
+}
+
+.dropdown {
+    top: 4rem;
+    left: -4rem;
+    width: 17rem;
+    display: none;
+    padding: 1.2rem;
+    overflow-y: auto;
+    max-height: 50rem;
+    position: absolute;
+    flex-direction: column;
+    background-color: #ffffff;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+
+    a {
+        &:link,
+        &:visited {
+            width: 100%;
+            display: flex;
+            color: inherit;
+            padding: 1.2rem;
+            align-self: center;
+            text-align: center;
+            align-items: center;
+            font-family: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        &:hover {
+            background-color: #f2f2f2;
+        }
+
+        svg {
+            
+            width: 2.2rem;
+            height: 2.2rem;
+            fill: #212121 !important;
+        }
+
+        span {
+            height: 100%;
+            align-self:stretch;
+            font-size: 1.45rem;
+            margin-left: 1.2rem;
+        }
+
+        &:last-of-type {
+            display: block;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-top: 0.8rem;
+            text-transform: uppercase;
+            background-color: #e11493;
+        }
     }
 }
