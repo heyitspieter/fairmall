@@ -7,6 +7,10 @@
     @media screen and (max-width: 72em) {
         padding: 0 5rem 0;
     }
+
+    @media screen and (max-width: 50em) {
+        padding: 0 1.5rem 0;
+    }
 }
 
 .heading {
@@ -18,6 +22,10 @@
         font-size: 1.8rem;
         letter-spacing: 3px;
         text-transform: uppercase;
+
+        @media screen and (max-width: 50em) {
+            font-size: 1.7rem;
+        }
     }
 }
 
@@ -65,6 +73,10 @@
         p {
             font-size: 1.45rem;
             color: #bdbdbd;
+
+            @media screen and (max-width: 50em) {
+                display: none;
+            }
         }
     }
 }
@@ -94,6 +106,10 @@
             display: flex;
             align-items: center;
             padding-top: 0.9rem;
+
+            @media screen and (max-width: 50em) {
+                margin-right: 0 !important;
+            }
 
             svg {
                 width: 2rem;
@@ -153,10 +169,21 @@
     grid-template-rows: min-content;
     grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
 
+    @media screen and (max-width: 50em) {
+        padding: 0;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     &__item {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 38.5rem repeat(2, min-content);
+
+        @media screen and (max-width: 50em) {
+            grid-template-rows: 23.7rem repeat(2, min-content);
+        }
 
         figure {
             width: 100%;
@@ -222,6 +249,16 @@
         align-items: center;
         align-self: stretch;
         justify-content: center;
+
+        @media screen and (max-width: 50em) {
+            & > *:nth-last-child(4) {
+                display: none;
+            }
+
+            & > *:nth-last-child(3) {
+                display: none;
+            }
+        }
 
         span {
             cursor: pointer;

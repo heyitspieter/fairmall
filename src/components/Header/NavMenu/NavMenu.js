@@ -41,6 +41,9 @@ function NavMenu() {
       <button onClick={() => router.push("/basket")}>
         <Svg symbol="shopping-basket" />
       </button>
+      <button>
+        <Svg symbol="menu" />
+      </button>
     </div>
   );
 }

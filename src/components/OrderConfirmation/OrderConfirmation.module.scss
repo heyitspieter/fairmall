@@ -9,6 +9,10 @@
     @media screen and (max-width: 72em) {
         padding: 3rem 5rem 10rem;
     }
+
+    @media screen and (max-width: 50em) {
+        padding: 2rem 1.5rem 5rem;
+    }
 }
 
 .heading {
@@ -21,6 +25,10 @@
         font-size: 1.8rem;
         letter-spacing: 3px;
         text-transform: uppercase;
+
+        @media screen and (max-width: 50em) {
+            font-size: 1.7rem;
+        }
     }
 }
 
@@ -37,6 +45,12 @@
         gap: 0 1.5rem;
     }
 
+    @media screen and (max-width: 50em) {
+        display: flex;
+        margin-top: 2rem;
+        flex-direction: column;
+    }
+
     &__col {
         &:nth-of-type(1) {
             display: flex;
@@ -46,6 +60,10 @@
 
             p {
                 font-size: 1.45rem;
+
+                @media screen and (max-width: 50em) {
+                    text-align: center;
+                }
 
                 span {
                     color: #0d8f84;
@@ -61,6 +79,11 @@
 
             @media screen and (max-width: 72em) {
                 padding-left: 2rem;
+            }
+
+            @media screen and (max-width: 50em) {
+                padding-left: 0;
+                margin-top: 3rem;
             }
 
             p {
@@ -83,6 +106,10 @@
 
             & > *:not(:last-child) {
                 margin-bottom: 1.4rem;
+            }
+
+            @media screen and (max-width: 50em) {
+                margin-top: 0;
             }
 
             button {
@@ -136,15 +163,41 @@
     position: absolute;
     transform: translate(-50%, -50%);
 
+    @media screen and (max-width: 50em) {
+        top: 0;
+        left: 0;
+        display: flex;
+        padding: 3.5rem 0;
+        align-self: center;
+        position: relative;
+        align-items: center;
+        transform: translate(0, 0);
+    }
+
     span {
         &:first-of-type {
             left: 50%;
+            top: -6.5rem;
             height: 10em;
             width: 0.1em;
-            top: -6.5rem;
             position: absolute;
             background-color: #212121;
             transform: translate(-50%, -50%);
+
+            @media screen and (max-width: 50em) {
+                top: 0;
+                left: 0;
+                width: 10em;
+                height: 0.1em;
+                position: initial;
+                transform: translate(0, 0);
+            }
+
+            + span {
+                @media screen and (max-width: 50em) {
+                    padding: 0 1.2rem;
+                }
+            }
         }
 
         &:last-of-type {
@@ -155,6 +208,20 @@
             position: absolute;
             background-color: #212121;
             transform: translate(-50%, -50%);
+
+            @media screen and (max-width: 50em) {
+                height: 0;
+                width: 0.5em;
+            }
+
+            @media screen and (max-width: 50em) {
+                top: 0;
+                left: 0;
+                width: 10em;
+                height: 0.1em;
+                position: initial;
+                transform: translate(0, 0);
+            }
         }
     }
 }

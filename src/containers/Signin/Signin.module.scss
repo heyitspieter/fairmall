@@ -9,6 +9,10 @@
     @media screen and (max-width: 72em) {
         padding: 3rem 5rem 10rem;
     }
+
+    @media screen and (max-width: 50em) {
+        padding: 2rem 1.5rem 5rem;
+    }
 }
 
 .heading {
@@ -21,6 +25,10 @@
         color: #e11493;
         font-size: 3.4rem;
 
+        @media screen and (max-width: 50em) {
+            font-size: 3rem;
+        }
+
         span {
             font-weight: 400;
         }
@@ -32,6 +40,11 @@
     margin-top: 4rem;
     align-self: center;
     flex-direction: column;
+
+    @media screen and (max-width: 50em) {
+        margin-top: 2rem;
+        align-self: stretch;
+    }
 
     h4 {
         font-weight: 400;
@@ -56,6 +69,11 @@
     max-width: 30rem;
     align-self: center;
     flex-direction: column;
+
+    @media screen and (max-width: 50em) {
+        min-width: 100%;
+        max-width: 100%;
+    }
 
     & > *:nth-last-child(5) {
         margin-bottom: 2.4rem;

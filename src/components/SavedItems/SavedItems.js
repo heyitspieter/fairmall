@@ -135,6 +135,13 @@ function SavedItems() {
           .${container} {
             margin-bottom: 10rem;
           }
+
+          @media screen and (max-width: 50em) {
+            .${container} {
+              padding-top: 2rem;
+              margin-bottom: 5rem;
+            }
+          }
         `}
       </style>
     </>

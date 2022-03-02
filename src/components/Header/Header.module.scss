@@ -13,6 +13,10 @@
         padding: 2rem 5rem;
     }
 
+    @media screen and (max-width: 50em) {
+        padding: 1.2rem 1.5rem;
+    }
+
     &.default {
         background: #ffffff;
     }

@@ -4,12 +4,20 @@
     position: relative;
     grid-column: 1 / -1;
     background-color: #e11493;
+
+    @media screen and (max-width: 50em) {
+        height: 100%;
+    }
 }
 
 .spiralLeft {
     top: 15%;
     left: -8.8rem;
     position: absolute;
+
+    @media screen and (max-width: 50em) {
+        display: none;
+    }
 }
 
 .spiralRight {
@@ -17,6 +25,10 @@
     right: -9rem;
     position: absolute;
     transform: rotate(180deg);
+
+    @media screen and (max-width: 50em) {
+        display: none;
+    }
 }
 
 .content {
@@ -28,11 +40,26 @@
     flex-direction: column;
     transform: translate(-50%, -50%);
 
+    @media screen and (max-width: 50em) {
+        top: 0;
+        left: 0;
+        display: flex;
+        padding: 4rem;
+        position: initial;
+        flex-direction: column;
+        transform: translate(0, 0);
+    }
+
     h2 {
         color: #ffffff;
         font-weight: 700;
         font-size: 3.9rem;
         text-align: center;
+
+        @media screen and (max-width: 50em) {
+            font-weight: 700;
+            font-size: 1.7rem;
+        }
     }
 }
 
@@ -41,6 +68,10 @@
     display: flex;
     margin-top: 2rem;
     flex-direction: column;
+
+    @media screen and (max-width: 50em) {
+        margin-top: 1.5rem;
+    }
 
     label {
         display: none;
@@ -62,6 +93,10 @@
         &::-webkit-input-placeholder {
             color: #ffffff;
         }
+
+        @media screen and (max-width: 50em) {
+            width: 100%;
+        }
     }
 
     button {
@@ -75,5 +110,10 @@
         letter-spacing: 0.3px;
         text-transform: uppercase;
         background-color: #212121;
+
+        @media screen and (max-width: 50em) {
+            font-size: 1.4rem;
+            padding: 1.6rem 3rem;
+        }
     }
 }

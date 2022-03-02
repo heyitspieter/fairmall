@@ -7,15 +7,13 @@
         padding: 0 5rem;
     }
 
-    @media screen and (max-width: 37.5em) {
+    @media screen and (max-width: 50em) {
         margin-top: 2rem;
-        margin-left: 1.5rem;
-        margin-right: 1.5rem;
+        padding: 0 1.5rem;
     }
 
     nav {
-        @media screen and (max-width: 37.5em) {
-            overflow: hidden;
+        @media screen and (max-width: 43.75em) {
             overflow-x: auto;
         }
 
@@ -36,7 +34,6 @@
             display: flex;
             align-items: center;
             list-style-type: none;
-           
 
             li {
                 display: flex;
@@ -46,12 +43,16 @@
                 a {
                     &:visited,
                     &:link {
-                        color: #BDBDBD;
+                        color: #bdbdbd;
                         display: inline;
                         font-weight: 400;
                         font-size: 1.4rem;
                         text-decoration: none;
                         text-transform: capitalize;
+
+                        @media screen and (max-width: 43.75em) {
+                            white-space: nowrap;
+                        }
                     }
 
                     &:hover {
@@ -60,7 +61,7 @@
 
                     &.current {
                         cursor: auto;
-                        color: #BDBDBD !important;
+                        color: #bdbdbd !important;
                     }
                 }
             }
@@ -71,6 +72,6 @@
 .iconChevronRight {
     width: 1.5rem;
     height: 1.5rem;
-    fill: #BDBDBD;
+    fill: #bdbdbd;
     margin: 0 0.6rem 0.3rem;
 }

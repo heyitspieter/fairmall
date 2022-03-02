@@ -9,6 +9,10 @@
     @media screen and (max-width: 72em) {
         padding: 3rem 5rem 10rem;
     }
+
+    @media screen and (max-width: 50em) {
+        padding: 3rem 1.5rem 5rem;
+    }
 }
 
 .heading {
@@ -30,6 +34,11 @@
     max-width: 70rem;
     align-self: center;
     margin-top: 2.7rem;
+
+    @media screen and (max-width: 50em) {
+        min-width: 100%;
+        max-width: 100%;
+    }
 }
 
 .list {
@@ -63,10 +72,6 @@
                 @media screen and (max-width: 64em) {
                     flex: 1;
                 }
-
-                @media screen and (max-width: 37.5em) {
-                    font-size: 2.1rem;
-                }
             }
 
             svg {
@@ -80,10 +85,6 @@
             width: 80rem;
             margin-top: 3rem;
             font-size: 1.5rem;
-
-            @media screen and (max-width: 37.5em) {
-                font-size: 1.85rem;
-            }
 
             @media screen and (max-width: 64em) {
                 width: 100%;

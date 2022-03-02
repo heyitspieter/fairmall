@@ -76,6 +76,18 @@
     display: flex;
     flex-direction: column;
     padding: 2rem 10rem 1rem;
+
+    @media screen and (max-width: 56.8em) {
+        padding: 2rem 5rem 1rem;
+    }
+
+    @media screen and (max-width: 50em) {
+        padding: 2rem 1.55rem 1rem;
+    }
+
+    @media screen and (max-width: 37.5em) {
+        padding: 1rem 0 1rem;
+    }
 }
 
 .slider {
@@ -83,6 +95,10 @@
 
     & > *:first-child {
         left: 0.7rem;
+
+        @media screen and (max-width: 50em) {
+            left: -1.3rem;
+        }
     }
 
     &__flex {
@@ -92,6 +108,10 @@
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
+
+        @media screen and (max-width: 50em) {
+            margin: 0;
+        }
 
         &::-webkit-scrollbar {
             height: 0.3rem;
@@ -112,10 +132,18 @@
 
         & > *:not(:last-child) {
             margin-right: 1.5rem;
+
+            @media screen and (max-width: 50em) {
+                margin-right: 0.5rem;
+            }
         }
 
         + button {
             right: 0.7rem;
+
+            @media screen and (max-width: 50em) {
+                right: -1.3rem;
+            }
 
             svg {
                 transform: rotate(180deg);
@@ -126,12 +154,20 @@
     &__item {
         display: block;
 
+        @media screen and (max-width: 37.5em) {
+            flex: 0 0 100%;
+        }
+
         figure {
             width: 39.4rem;
             height: 22.8rem;
             overflow: hidden;
             position: relative;
             border-radius: 0.7rem;
+
+            @media screen and (max-width: 37.5em) {
+                width: 100%;
+            }
         }
     }
 }
@@ -160,6 +196,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            @media screen and (max-width: 37.5em) {
+                align-items: stretch;
+                flex-direction: column;
+            }
 
             .left {
                 h4 {
@@ -258,6 +299,10 @@
             margin-top: 1.7rem;
             justify-content: flex-end;
 
+            @media screen and (max-width: 37.5em) {
+                justify-content: space-between;
+            }
+
             & > *:not(:last-child) {
                 margin-right: 1.7rem;
             }
@@ -273,6 +318,10 @@
                     letter-spacing: 0.4px;
                     padding: 1.4rem 2.8rem;
                     border: 1px solid #727376;
+
+                    @media screen and (max-width: 37.5em) {
+                        padding: 1.2rem 2rem;
+                    }
                 }
 
                 &:nth-of-type(2) {
@@ -281,6 +330,10 @@
                     padding: 1.4rem 2.8rem;
                     background-color: #e11493;
                     transition: all 0.3s ease-in-out;
+
+                    @media screen and (max-width: 37.5em) {
+                        padding: 1.2rem 2rem;
+                    }
 
                     &:hover:enabled {
                         background-color: #d11d8c;
@@ -300,6 +353,10 @@
                         padding-top: 0.5rem;
                         margin-left: 1.4rem;
                         letter-spacing: 0.4px;
+
+                        @media screen and (max-width: 37.5em) {
+                            margin-left: 0.7rem;
+                        }
                     }
                 }
             }

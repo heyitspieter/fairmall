@@ -11,6 +11,11 @@
         gap: 4rem 6rem;
         padding: 7rem 5rem;
     }
+
+    @media screen and (max-width: 50em) {
+        grid-template-columns: 1fr;
+        padding: 3rem 1.5rem 1.5rem;
+    }
 }
 
 .col {
@@ -19,6 +24,11 @@
         grid-row: 1 / 2;
         grid-column: 1 / 2;
         flex-direction: column;
+
+        @media screen and (max-width: 50em) {
+            grid-row: 1 / 2;
+            grid-column: 1 / -1;
+        }
 
         p {
             color: #ffffff;
@@ -39,6 +49,11 @@
         grid-row: 1 / 2;
         grid-column: 2 / 3;
 
+        @media screen and (max-width: 50em) {
+            grid-row: 2 / 3;
+            grid-column: 1 / -1;
+        }
+
         & > *:not(:last-child) {
             margin-right: 10rem;
 
@@ -54,6 +69,10 @@
                 font-size: 1.6rem;
                 letter-spacing: 0.3px;
                 text-transform: uppercase;
+
+                @media screen and (max-width: 50em) {
+                    font-size: 1.5rem;
+                }
             }
         }
 
@@ -72,6 +91,10 @@
                         font-size: 1.5rem;
                         text-decoration: none;
                         text-transform: uppercase;
+
+                        @media screen and (max-width: 50em) {
+                            font-size: 1.4rem;
+                        }
                     }
                 }
             }
@@ -84,11 +107,20 @@
         grid-column: 3 / 4;
         flex-direction: column;
 
+        @media screen and (max-width: 50em) {
+            grid-row: 3 / 4;
+            grid-column: 1 / -1;
+        }
+
         h4 {
             color: #ffffff;
             font-size: 1.6rem;
             letter-spacing: 0.3px;
             text-transform: uppercase;
+
+            @media screen and (max-width: 50em) {
+                font-size: 1.5rem;
+            }
         }
 
         form {
@@ -108,6 +140,10 @@
                 padding: 2rem 1.6rem;
                 font-family: inherit;
                 background-color: #ffffff;
+
+                @media screen and (max-width: 50em) {
+                    padding: 1.8rem 1.6rem;
+                }
             }
 
             button {
@@ -120,6 +156,11 @@
                 background-color: #e11493;
                 transition: all 0.3s ease-in-out;
 
+                @media screen and (max-width: 50em) {
+                    padding: 1.6rem;
+                    font-size: 1.4rem;
+                }
+
                 &:hover:enabled {
                     background-color: #d11d8c;
                 }
@@ -130,6 +171,11 @@
     &:nth-of-type(4) {
         grid-row: 3 / -1;
         grid-column: 1 / -1;
+
+        @media screen and (max-width: 50em) {
+            grid-row: 4 / 5;
+            grid-column: 1 / -1;
+        }
 
         p {
             color: #ffffff;
@@ -146,6 +192,11 @@
     div {
         width: 4.4rem;
         height: 4.4rem;
+
+        @media screen and (max-width: 50em) {
+            width: 4rem;
+            height: 4rem;
+        }
     }
 
     div + span {
@@ -156,6 +207,10 @@
         max-height: 100%;
         margin-left: 1rem;
         padding-top: 0.4rem;
+
+        @media screen and (max-width: 50em) {
+            font-size: 3.6rem;
+        }
 
         span {
             font-weight: 700;

@@ -1,19 +1,17 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import Svg from "src/components/Svg/Svg";
 
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import styles from "src/components/ShoppingBasket/ShoppingBasket.module.scss";
 
 function ShoppingBasket() {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={spiralLeft}>
-        <Image
-          src="/svgs/spiral.svg"
-          width={361}
-          height={364}
-          alt="Spiral"
-        />
+        <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
       </div>
       <div className={styles.heading}>
         <p>Basket Items</p>
@@ -53,7 +51,7 @@ function ShoppingBasket() {
                     <button>
                       <Svg symbol="minus" />
                     </button>
-                    <input type="text" value="1" />
+                    <input onChange={() => {}} type="text" value="1" />
                     <button>
                       <Svg symbol="plus" />
                     </button>
@@ -90,7 +88,7 @@ function ShoppingBasket() {
                     <button>
                       <Svg symbol="minus" />
                     </button>
-                    <input type="text" value="1" />
+                    <input onChange={() => {}} type="text" value="1" />
                     <button>
                       <Svg symbol="plus" />
                     </button>
@@ -128,16 +126,16 @@ function ShoppingBasket() {
               <p>201,000 NGN</p>
             </div>
           </div>
-          <button className={styles.btnCheckout}>Checkout</button>
+          <button
+            onClick={() => router.push("/checkout")}
+            className={styles.btnCheckout}
+          >
+            Checkout
+          </button>
         </div>
       </div>
       <div className={spiralRight}>
-        <Image
-          src="/svgs/spiral.svg"
-          width={361}
-          height={364}
-          alt="Spiral"
-        />
+        <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
       </div>
     </div>
   );

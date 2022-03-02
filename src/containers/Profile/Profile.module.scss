@@ -9,6 +9,10 @@
     @media screen and (max-width: 72em) {
         padding: 3rem 5rem 10rem;
     }
+
+    @media screen and (max-width: 50em) {
+        padding: 3rem 1.5rem 5rem;
+    }
 }
 
 .heading {
@@ -29,6 +33,11 @@
     margin-top: 4rem;
     align-self: center;
     flex-direction: column;
+
+    @media screen and (max-width: 50em) {
+        margin-top: 2.7rem;
+        align-self: stretch;
+    }
 }
 
 .formElement {
@@ -39,6 +48,11 @@
     margin-top: 1rem;
     align-self: center;
     flex-direction: column;
+
+    @media screen and (max-width: 50em) {
+        min-width: 100%;
+        max-width: 100%;
+    }
 
     & > *:not(:last-child) {
         margin-bottom: 2.4rem;
@@ -76,6 +90,10 @@
         margin-top: 0.5rem;
         grid-template-rows: min-content;
         grid-template-columns: repeat(2, 1fr);
+
+        @media screen and (max-width: 50em) {
+            grid-template-columns: 1fr;
+        }
     }
 
     &:first-of-type + .col &__grid {
@@ -97,10 +115,10 @@
     width: 100%;
     font-weight: 700;
     color: #ffffff;
+    font-size: 1.4rem;
     grid-column: 1 / 2;
-    font-size: 1.27rem;
     font-family: inherit;
-    padding: 1.35rem 2rem;
+    padding: 1.6rem 2rem;
     text-transform: uppercase;
     background-color: #e11493;
     transition: all 0.3s ease-in-out;
@@ -118,11 +136,11 @@
     width: 100%;
     color: #e11493;
     font-weight: 700;
+    font-size: 1.4rem;
     margin-top: 1.5rem;
     grid-column: 1 / 2;
-    font-size: 1.27rem;
     font-family: inherit;
-    padding: 1.35rem 2rem;
+    padding: 1.6rem 2rem;
     text-transform: uppercase;
     background-color: #ffffff;
     border: 1px solid #e11493;
