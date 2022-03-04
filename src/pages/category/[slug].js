@@ -1,7 +1,7 @@
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
 import NewsLetter from "src/containers/NewsLetter/NewsLetter";
-import CategoryFeed from "src/components/CategoryFeed/CategoryFeed";
+import CategoryFeed from "src/containers/CategoryFeed/CategoryFeed";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 
 export default function category() {

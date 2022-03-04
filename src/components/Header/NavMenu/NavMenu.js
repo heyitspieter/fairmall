@@ -1,11 +1,15 @@
 import Link from "next/link";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 import Svg from "src/components/Svg/Svg";
+import { SidedrawerContext } from "src/context/SidedrawerContext";
 
 import styles from "src/components/Header/NavMenu/NavMenu.module.scss";
 
 function NavMenu() {
   const router = useRouter();
+
+  const sidedrawer = useContext(SidedrawerContext);
 
   return (
     <div role="navigation" className={styles.container}>
@@ -41,7 +45,7 @@ function NavMenu() {
       <button onClick={() => router.push("/basket")}>
         <Svg symbol="shopping-basket" />
       </button>
-      <button>
+      <button onClick={() => sidedrawer.toggle()}>
         <Svg symbol="menu" />
       </button>
     </div>

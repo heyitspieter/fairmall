@@ -1,9 +1,17 @@
 import Image from "next/image";
-import Svg from "/src/components/Svg/Svg";
+import { useState } from "react";
+import className from "classnames";
+import Svg from "src/components/Svg/Svg";
 
-import styles from "src/components/CategoryFeed/CategoryFeed.module.scss";
+import styles from "src/containers/CategoryFeed/CategoryFeed.module.scss";
 
 function CategoryFeed() {
+  const [sortFocus, setSortFocus] = useState(false);
+
+  const onBlur = () => setSortFocus(false);
+
+  const onFocus = () => setSortFocus(true);
+
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
@@ -19,10 +27,23 @@ function CategoryFeed() {
         <div className={styles.toolbar__right}>
           <p>Showing 20 items</p>
           <div className={styles.sortBox}>
-            <button>
+            <div
+              onClick={() => onBlur()}
+              className={className({
+                [styles.sortOverlay]: true,
+                [styles.active]: sortFocus,
+              })}
+            ></div>
+            <button
+              className={className({ [styles.focus]: sortFocus })}
+              onFocus={() => onFocus()}
+            >
               <span>Sort by</span>
               <div>
-                <Svg symbol="caret" />
+                <Svg
+                  symbol="caret"
+                  className={className({ [styles.active]: sortFocus })}
+                />
               </div>
               <div>
                 <a href="#">Price: Highest to Lowest</a>
@@ -90,7 +111,9 @@ function CategoryFeed() {
           <Svg symbol="chevron" />
         </button>
         <div className={styles.pagination__list}>
-          <span role="button" className={styles.active}>1</span>
+          <span role="button" className={styles.active}>
+            1
+          </span>
           <span role="button">2</span>
           <span role="button">3</span>
           <span role="button">4</span>
