@@ -2,6 +2,7 @@ import Head from "next/head";
 import Header from "src/components/Header/Header";
 import Footer from "src/components/Footer/Footer";
 import Sidedrawer from "src/containers/Sidedrawer/Sidedrawer";
+import MobileSearch from "src/containers/MobileSearch/MobileSearch";
 
 import styles from "src/components/BaseLayout/BaseLayout.module.scss";
 
@@ -14,6 +15,7 @@ function BaseLayout({ title, children }) {
       <Sidedrawer />
       <div className={styles.container}>
         <Header />
+        <MobileSearch />
         {children}
         <Footer />
       </div>

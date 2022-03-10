@@ -6,7 +6,7 @@ function SectionTwo() {
   return (
     <section className={styles.section_2}>
       <div className={styles.section_2__left}>
-        <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
+        <Image src="/svgs/spiral.svg" layout="fill" alt="Spiral" />
       </div>
       <div className={styles.section_2__info}>
         <h2>
@@ -25,7 +25,7 @@ function SectionTwo() {
         </span>
       </div>
       <div className={styles.section_2__right}>
-        <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
+        <Image src="/svgs/spiral.svg" layout="fill" alt="Spiral" />
       </div>
     </section>
   );

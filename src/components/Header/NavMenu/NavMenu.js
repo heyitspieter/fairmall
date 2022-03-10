@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { useContext } from "react";
+import className from "classnames";
 import { useRouter } from "next/router";
 import Svg from "src/components/Svg/Svg";
+import { useContext, useState } from "react";
 import { SidedrawerContext } from "src/context/SidedrawerContext";
 
 import styles from "src/components/Header/NavMenu/NavMenu.module.scss";
@@ -11,11 +12,39 @@ function NavMenu() {
 
   const sidedrawer = useContext(SidedrawerContext);
 
+  const [inputFocused, setInputFocused] = useState(false);
+
+  const searchClass = className({
+    [styles.search]: true,
+    [styles.focused]: inputFocused,
+  });
+
+  const onBlur = () => setInputFocused(false);
+
+  const onFocus = () => setInputFocused(true);
+
+  const onClickSearchBtn = () => {
+    if (!inputFocused) {
+      return onFocus();
+    }
+
+    // Handle search logic here
+  };
+
   return (
     <div role="navigation" className={styles.container}>
-      <button>
-        <Svg symbol="search" />
-      </button>
+      <div className={searchClass}>
+        <input
+          value=""
+          type="text"
+          onBlur={onBlur}
+          onChange={() => {}}
+          placeholder="Search furniture, household items, art and craft"
+        />
+        <button onClick={onClickSearchBtn}>
+          <Svg symbol="search" />
+        </button>
+      </div>
       <button>
         <Svg symbol="person" />
         <div className={styles.dropdown}>

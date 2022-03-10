@@ -1,20 +1,23 @@
 .container {
     top: 0;
     z-index: 20;
-    display: flex;
+    display: grid;
     position: sticky;
-    align-items: center;
     grid-column: 1 / -1;
     padding: 2rem 13rem;
-    background: #fdf3fa;
-    justify-content: space-between;
+    background-color: #fdf3fa;
+    grid-template-rows: min-content;
+    grid-template-columns: 1fr min-content 1fr;
 
     @media screen and (max-width: 72em) {
         padding: 2rem 5rem;
     }
 
     @media screen and (max-width: 50em) {
+        display: flex;
+        align-items: center;
         padding: 1.2rem 1.5rem;
+        justify-content: space-between;
     }
 
     &.default {
