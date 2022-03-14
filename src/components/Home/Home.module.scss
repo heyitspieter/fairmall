@@ -335,60 +335,26 @@
         margin-top: 4rem;
         position: relative;
 
+        &:nth-of-type(3) {
+            margin-left: 2rem;
+
+            @media screen and (max-width: 37.5em) {
+                margin-left: 0;
+            }
+        }
+
         .carousel {
-            &__grid {
-                display: flex;
-                overflow: auto;
-                cursor: pointer;
-                user-select: none;
-                scroll-behavior: smooth;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
+            &__wrapper {
+                display: block;
+            }
 
-                &::-webkit-scrollbar {
-                    width: 0;
-                    height: 0;
-                }
-
-                &::-webkit-scrollbar-track {
-                    background: #ffffff;
-                }
-
-                &::-webkit-scrollbar-thumb {
-                    background-color: #ffffff;
-                }
-
-                & > * {
-                    scroll-snap-align: start;
-                    transform-origin: center center;
-                }
-
-                & > *:not(:last-child) {
-                    margin-right: 2.7rem;
-                }
+            &__inner {
+                margin: 0;
 
                 figure {
                     width: 100%;
-                    flex: 0 0 18.2rem;
-
                     height: 27.7rem;
                     position: relative;
-                }
-
-                &.gutter {
-                    & > *:not(:last-child) {
-                        margin-right: 0;
-                        margin-left: 2.7rem;
-                    }
-
-                    & > *:last-child {
-                        margin: 0 2.7rem;
-                    }
-
-                    & > * {
-                        scroll-snap-align: end;
-                        transform-origin: center center;
-                    }
                 }
             }
 
