@@ -4,9 +4,8 @@ import { useRouter } from "next/router";
 
 import styles from "src/components/Home/Home.module.scss";
 
-function SectionFive() {
+function SectionFive({ inspirations }) {
   const router = useRouter();
-
   const containerClass = className({
     [styles.container]: router.pathname !== "/",
     [styles.bg__white]: router.pathname !== "/",
@@ -19,46 +18,27 @@ function SectionFive() {
         <p>Inspirations</p>
       </div>
       <div className={styles.section_5__grid}>
-        <figure>
-          <Image
-            src="/images/inspo-1.png"
-            objectFit="cover"
-            alt="Slide 1"
-            layout="fill"
-          />
+        {inspirations &&
+          inspirations.map((inspiration, idx) => {
+            const img = `https://fairmall.azurewebsites.net${inspiration.images[0].src}`;
+            return (
+              <figure key={idx}>
+                <Image loader={() => img} objectFit="cover" alt={inspiration.name} src={img} layout="fill" />
+              </figure>
+            );
+          })}
+        {/* <figure>
+          <Image src="/images/inspo-2.png" objectFit="cover" layout="fill" alt="Slide 1" />
         </figure>
         <figure>
-          <Image
-            src="/images/inspo-2.png"
-            objectFit="cover"
-            layout="fill"
-            alt="Slide 1"
-          />
+          <Image src="/images/inspo-3.png" objectFit="cover" layout="fill" alt="Slide 1" />
         </figure>
         <figure>
-          <Image
-            src="/images/inspo-3.png"
-            objectFit="cover"
-            layout="fill"
-            alt="Slide 1"
-          />
+          <Image src="/images/inspo-4.png" objectFit="cover" layout="fill" alt="Slide 1" />
         </figure>
         <figure>
-          <Image
-            src="/images/inspo-4.png"
-            objectFit="cover"
-            layout="fill"
-            alt="Slide 1"
-          />
-        </figure>
-        <figure>
-          <Image
-            src="/images/inspo-5.png"
-            objectFit="cover"
-            layout="fill"
-            alt="Slide 1"
-          />
-        </figure>
+          <Image src="/images/inspo-5.png" objectFit="cover" layout="fill" alt="Slide 1" />
+        </figure> */}
       </div>
       <div className={styles.section_5__btn}>
         <button onClick={() => router.push("/inspirations")}>See More</button>

@@ -4,15 +4,18 @@ import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Categories from "src/components/Categories/Categories";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import Recommendations from "src/components/Recommendations/Recommendations";
-import { fetchWooCommerceProducts } from "../utils/woo_commerce";
+import { FetchWooCommerceProducts, FetchProductCategories, FetchInspirations } from "../utils/woo_commerce";
 
-export default function shop({ products }) {
+export default function shop({ products, categories, inspirations }) {
+  console.log("====================================");
+  console.log(inspirations);
+  console.log("====================================");
   return (
     <BaseLayout title="Shop - Fairmall">
       <ShopFeed products={products} />
-      <Categories />
-      <Recommendations title="Featured Items" />
-      <Inspirations />
+      <Categories categories={categories} />
+      {/* <Recommendations title="Featured Items" /> */}
+      <Inspirations inspirations={inspirations} />
       <NewsLetter />
     </BaseLayout>
   );
@@ -21,10 +24,16 @@ export default function shop({ products }) {
 export async function getStaticProps() {
   // Fetch data from api server
   /** Fetch all products */
-  const response = await fetchWooCommerceProducts().catch((error) => console.error(error));
+  const products = await FetchWooCommerceProducts().catch((error) => console.error(error));
+  const categories = await FetchProductCategories().catch((error) => console.error(error));
+  /** find inspiration category */
+  const inspirationCategory = categories.data.find((category) => category.name === "Inspirations");
+  const inspirations = await FetchInspirations(inspirationCategory.id).catch((error) => console.error(error));
   return {
     props: {
-      products: response.data,
+      products: products.data,
+      categories: categories.data,
+      inspirations: inspirations.data,
     },
     // revalidate: 60 // regenerate page with new data fetch after 60 seconds
   };

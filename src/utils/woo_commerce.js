@@ -9,9 +9,27 @@ const api = new WooCommerceRestApi({
 });
 
 // fetch all products from WooCommerce //
-export async function fetchWooCommerceProducts() {
+export async function FetchWooCommerceProducts() {
   try {
     const response = await api.get("products");
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchProductCategories() {
+  try {
+    const response = await api.get("products/categories");
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchInspirations(id) {
+  try {
+    const response = await api.get("products", { category: id });
     return response;
   } catch (error) {
     return error.message;
