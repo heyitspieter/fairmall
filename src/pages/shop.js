@@ -7,9 +7,6 @@ import Recommendations from "src/components/Recommendations/Recommendations";
 import { FetchWooCommerceProducts, FetchProductCategories, FetchInspirations } from "../utils/woo_commerce";
 
 export default function shop({ products, categories, inspirations }) {
-  console.log("====================================");
-  console.log(inspirations);
-  console.log("====================================");
   return (
     <BaseLayout title="Shop - Fairmall">
       <ShopFeed products={products} />
@@ -27,13 +24,13 @@ export async function getStaticProps() {
   const products = await FetchWooCommerceProducts().catch((error) => console.error(error));
   const categories = await FetchProductCategories().catch((error) => console.error(error));
   /** find inspiration category */
-  const inspirationCategory = categories.data.find((category) => category.name === "Inspirations");
+  const inspirationCategory = categories.find((category) => category.name === "Inspirations");
   const inspirations = await FetchInspirations(inspirationCategory.id).catch((error) => console.error(error));
   return {
     props: {
-      products: products.data,
-      categories: categories.data,
-      inspirations: inspirations.data,
+      products: products,
+      categories: categories,
+      inspirations: inspirations,
     },
     // revalidate: 60 // regenerate page with new data fetch after 60 seconds
   };

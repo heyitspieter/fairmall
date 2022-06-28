@@ -27,18 +27,6 @@ function SectionFive({ inspirations }) {
               </figure>
             );
           })}
-        {/* <figure>
-          <Image src="/images/inspo-2.png" objectFit="cover" layout="fill" alt="Slide 1" />
-        </figure>
-        <figure>
-          <Image src="/images/inspo-3.png" objectFit="cover" layout="fill" alt="Slide 1" />
-        </figure>
-        <figure>
-          <Image src="/images/inspo-4.png" objectFit="cover" layout="fill" alt="Slide 1" />
-        </figure>
-        <figure>
-          <Image src="/images/inspo-5.png" objectFit="cover" layout="fill" alt="Slide 1" />
-        </figure> */}
       </div>
       <div className={styles.section_5__btn}>
         <button onClick={() => router.push("/inspirations")}>See More</button>

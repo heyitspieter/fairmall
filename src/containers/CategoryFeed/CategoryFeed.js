@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import className from "classnames";
 import Svg from "src/components/Svg/Svg";
-
+import ReactPaginate from "react-paginate";
 import styles from "src/containers/CategoryFeed/CategoryFeed.module.scss";
 
-function CategoryFeed() {
+function CategoryFeed({ products, handlePageClick, pageCount }) {
+  console.log("====================================");
+  console.log(products);
+  console.log("====================================");
   const [sortFocus, setSortFocus] = useState(false);
 
   const onBlur = () => setSortFocus(false);
@@ -34,16 +37,10 @@ function CategoryFeed() {
                 [styles.active]: sortFocus,
               })}
             ></div>
-            <button
-              className={className({ [styles.focus]: sortFocus })}
-              onFocus={() => onFocus()}
-            >
+            <button className={className({ [styles.focus]: sortFocus })} onFocus={() => onFocus()}>
               <span>Sort by</span>
               <div>
-                <Svg
-                  symbol="caret"
-                  className={className({ [styles.active]: sortFocus })}
-                />
+                <Svg symbol="caret" className={className({ [styles.active]: sortFocus })} />
               </div>
               <div>
                 <a href="#">Price: Highest to Lowest</a>
@@ -56,57 +53,39 @@ function CategoryFeed() {
         </div>
       </div>
       <div className={styles.grid}>
-        <div className={styles.grid__item}>
-          <figure>
-            <Image
-              src="/images/furniture_1.png"
-              objectFit="cover"
-              alt="Slide 1"
-              layout="fill"
-            />
-          </figure>
-          <h3>Keto Hand-made Vase</h3>
-          <p>100,000 NGN</p>
-        </div>
-        <div className={styles.grid__item}>
-          <figure>
-            <Image
-              src="/images/product_2.png"
-              objectFit="cover"
-              alt="Product 2"
-              layout="fill"
-            />
-          </figure>
-          <h3>Keto Hand-made Vase</h3>
-          <p>100,000 NGN</p>
-        </div>
-        <div className={styles.grid__item}>
-          <figure>
-            <Image
-              src="/images/product_3.png"
-              objectFit="cover"
-              alt="Product 3"
-              layout="fill"
-            />
-          </figure>
-          <h3>Keto Hand-made Vase</h3>
-          <p>100,000 NGN</p>
-        </div>
-        <div className={styles.grid__item}>
-          <figure>
-            <Image
-              src="/images/product_4.png"
-              objectFit="cover"
-              alt="Product 4"
-              layout="fill"
-            />
-          </figure>
-          <h3>Keto Hand-made Vase</h3>
-          <p>100,000 NGN</p>
-        </div>
+        {products &&
+          products.map((product, idx) => (
+            <div key={idx} className={styles.grid__item}>
+              <figure>
+                <Image loader={() => `https://fairmall.azurewebsites.net${product.images[0].src}`} src={`https://fairmall.azurewebsites.net${product.images[0].src}`} objectFit="cover" alt="Slide 1" layout="fill" />
+              </figure>
+              <h3>{product.name}</h3>
+              <p>{product.price} NGN</p>
+            </div>
+          ))}
       </div>
       <div className={styles.pagination}>
-        <button>First</button>
+        <ReactPaginate
+          nextLabel={<Svg symbol="chevron" />}
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+          previousLabel={<Svg symbol="chevron" />}
+          pageClassName={styles.pagination__list}
+          pageLinkClassName="page-link"
+          previousClassName={styles.pagination__prev}
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName={styles.pagination__next}
+          breakLabel="..."
+          breakClassName={styles.active}
+          breakLinkClassName={styles.active}
+          containerClassName={styles.pagination}
+          activeClassName={styles.active}
+          renderOnZeroPageCount={null}
+        />
+        {/* <button>First</button>
         <button className={styles.pagination__prev}>
           <Svg symbol="chevron" />
         </button>
@@ -123,7 +102,7 @@ function CategoryFeed() {
         <button className={styles.pagination__next}>
           <Svg symbol="chevron" />
         </button>
-        <button>Last</button>
+        <button>Last</button> */}
       </div>
     </div>
   );

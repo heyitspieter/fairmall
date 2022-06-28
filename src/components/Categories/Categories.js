@@ -16,61 +16,11 @@ function Categories({ categories }) {
             <figure key={idx}>
               <div>
                 <p>{category.name}</p>
-                <button onClick={() => router.push("/category/furniture")}>shop now</button>
+                <button onClick={() => router.push(`/category/${category.id}`)}>shop now</button>
               </div>
               <Image src="/images/category_1.png" objectFit="cover" alt="Category 1" layout="fill" />
             </figure>
           ))}
-        {/* <figure>
-          <div>
-            <p>Household Items</p>
-            <button onClick={() => router.push("/category/household-items")}>
-              shop now
-            </button>
-          </div>
-          <Image
-            src="/images/category_2.png"
-            objectFit="cover"
-            alt="Category 2"
-            layout="fill"
-          />
-        </figure>
-        <figure>
-          <div>
-            <p>Arts & Crafts</p>
-            <button>shop now</button>
-          </div>
-          <Image
-            src="/images/category_3.png"
-            objectFit="cover"
-            alt="Category 3"
-            layout="fill"
-          />
-        </figure>
-        <figure>
-          <div>
-            <p>Fashion</p>
-            <button>shop now</button>
-          </div>
-          <Image
-            src="/images/category_4.png"
-            objectFit="cover"
-            alt="Category 4"
-            layout="fill"
-          />
-        </figure>
-        <figure>
-          <div>
-            <p>Food Items</p>
-            <button>shop now</button>
-          </div>
-          <Image
-            src="/images/category_5.png"
-            objectFit="cover"
-            alt="Category 5"
-            layout="fill"
-          />
-        </figure> */}
       </div>
     </div>
   );

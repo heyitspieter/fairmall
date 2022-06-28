@@ -11,60 +11,19 @@ function ShopFeed({ products }) {
   const [modal, setModal] = useState({
     visibility: false,
   });
+  const [viewProduct, setViewProduct] = useState(products[0]);
 
-  const toggleModalHandler = () => {
+  const toggleModalHandler = (product) => {
+    setViewProduct(product);
     setModal((prevState) => ({
       ...prevState,
       visibility: !prevState.visibility,
     }));
   };
 
-  const items = [
-    {
-      price: 100000,
-      name: "Keto Hand-made Vase",
-      img: "/images/product_5.png",
-    },
-    {
-      price: 100000,
-      name: "Keto Hand-made Vase",
-      img: "/images/product_6.png",
-    },
-    {
-      price: 100000,
-      name: "Keto Hand-made Vase",
-      img: "/images/product_7.png",
-    },
-    {
-      price: 100000,
-      name: "Keto Hand-made Vase",
-      img: "/images/product_8.png",
-    },
-    {
-      price: 100000,
-      name: "Keto Hand-made Vase",
-      img: "/images/product_1.png",
-    },
-    {
-      price: 100000,
-      name: "Keto Hand-made Vase",
-      img: "/images/product_2.png",
-    },
-    {
-      price: 100000,
-      name: "Keto Hand-made Vase",
-      img: "/images/product_3.png",
-    },
-    {
-      price: 100000,
-      name: "Keto Hand-made Vase",
-      img: "/images/product_4.png",
-    },
-  ];
-
   return (
     <>
-      <ProductModal show={modal.visibility} close={toggleModalHandler} />
+      <ProductModal product={viewProduct} show={modal.visibility} close={toggleModalHandler} />
       <div className={styles.container}>
         <div className={styles.heading}>
           <p>Popular Items</p>
@@ -82,7 +41,7 @@ function ShopFeed({ products }) {
                         <span>Add to Basket</span>
                         <Svg symbol="shopping-basket" />
                       </button>
-                      <button onClick={toggleModalHandler}>
+                      <button onClick={() => toggleModalHandler(product)}>
                         <span>Quick View</span>
                         <Svg symbol="eye" />
                       </button>

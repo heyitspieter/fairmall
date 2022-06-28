@@ -12,7 +12,7 @@ const api = new WooCommerceRestApi({
 export async function FetchWooCommerceProducts() {
   try {
     const response = await api.get("products");
-    return response;
+    return response.data;
   } catch (error) {
     return error.message;
   }
@@ -21,7 +21,25 @@ export async function FetchWooCommerceProducts() {
 export async function FetchProductCategories() {
   try {
     const response = await api.get("products/categories");
-    return response;
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchCategoryById(id) {
+  try {
+    const response = await api.get(`products/categories/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchProductByCategory(id) {
+  try {
+    const response = await api.get(`products`, { category: id, per_page: 10 });
+    return response.data;
   } catch (error) {
     return error.message;
   }
@@ -30,7 +48,7 @@ export async function FetchProductCategories() {
 export async function FetchInspirations(id) {
   try {
     const response = await api.get("products", { category: id });
-    return response;
+    return response.data;
   } catch (error) {
     return error.message;
   }

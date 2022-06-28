@@ -12,7 +12,7 @@ const animationTiming = {
   enter: 400,
 };
 
-function ProductModal({ show, close }) {
+function ProductModal({ show, close, product }) {
   const ref = useRef();
 
   const carouselRef = useRef();
@@ -82,29 +82,18 @@ function ProductModal({ show, close }) {
                     <button onClick={gotoPrev} className={styles.sliderBtn}>
                       <Svg symbol="arrow" />
                     </button>
-                    <Carousel
-                      showEmptySlots
-                      itemsToShow={2}
-                      itemsToScroll={1}
-                      outerSpacing={20}
-                      ref={carouselRef}
-                      breakPoints={breakpoints}
-                      itemPadding={[0, 15, 0, 0]}
-                      className={styles.slider__flex}
-                    >
-                      {items.map((item, i) => {
-                        return (
-                          <div key={i} className={styles.slider__item}>
-                            <figure>
-                              <Image
-                                layout="fill"
-                                src={item.img}
-                                alt={item.title}
-                              />
-                            </figure>
-                          </div>
-                        );
-                      })}
+                    <Carousel showEmptySlots itemsToShow={2} itemsToScroll={1} outerSpacing={20} ref={carouselRef} breakPoints={breakpoints} itemPadding={[0, 15, 0, 0]} className={styles.slider__flex}>
+                      {product.images &&
+                        product.images.map((image, i) => {
+                          const img = `https://fairmall.azurewebsites.net${image.src}`;
+                          return (
+                            <div key={i} className={styles.slider__item}>
+                              <figure>
+                                <Image loader={() => img} layout="fill" src={image} alt={product.name} />
+                              </figure>
+                            </div>
+                          );
+                        })}
                     </Carousel>
                     <button onClick={gotoNext} className={styles.sliderBtn}>
                       <Svg symbol="arrow" />
@@ -113,9 +102,14 @@ function ProductModal({ show, close }) {
                   <div className={styles.description}>
                     <div className={styles.description__row}>
                       <div className={styles.left}>
-                        <h4>Arts and Crafts</h4>
-                        <h3>Product name here</h3>
-                        <p>100,000 NGN</p>
+                        <p />
+                        <h4
+                          dangerouslySetInnerHTML={{
+                            __html: product.categories ? product.categories[0].name : null,
+                          }}
+                        />
+                        <h3>{product ? product.name : null}</h3>
+                        <p>{product ? product.price : null} NGN</p>
                       </div>
                       <div className={styles.right}>
                         <div className={styles.rating}>
@@ -143,15 +137,11 @@ function ProductModal({ show, close }) {
                     </div>
                     <div className={styles.description__row}>
                       <h3>Description:</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Dictum fermentum, mauris viverra lobortis lorem vel. At
-                        amet in nulla ullamcorper diam amet, turpis orci dui.
-                        Ornare eget sollicitudin non semper facilisis dolor
-                        nisi, quam lacus. Velit pharetra, vitae sollicitudin
-                        nullam. Feugiat velit senectus in faucibus tempus
-                        malesuada....
-                      </p>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: product ? product.short_description : null,
+                        }}
+                      />
                     </div>
                     <div className={styles.description__row}>
                       <button>View More</button>
