@@ -1,17 +1,30 @@
 import Image from "next/image";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Svg from "src/components/Svg/Svg";
 import { formatNumber } from "src/helpers";
 import ProductModal from "src/components/Modals/ProductModal/ProductModal";
 
 import styles from "src/containers/ShopFeed/ShopFeed.module.scss";
 import product from "src/pages/[slug]";
+import { addLineItem } from "src/store/slices/cartSlice";
 
 function ShopFeed({ products }) {
+  const dispatch = useDispatch();
   const [modal, setModal] = useState({
     visibility: false,
   });
   const [viewProduct, setViewProduct] = useState(products[0]);
+
+  const handleAddToCard = async (product) => {
+    const lineItem = {
+      product_id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    };
+    dispatch(addLineItem(lineItem));
+  };
 
   const toggleModalHandler = (product) => {
     setViewProduct(product);
@@ -37,7 +50,7 @@ function ShopFeed({ products }) {
                   <figure>
                     <Image loader={() => img} objectFit="cover" alt={product.name} src={img} layout="fill" />
                     <div className={styles.grid__item_options}>
-                      <button>
+                      <button onClick={() => handleAddToCard(product)}>
                         <span>Add to Basket</span>
                         <Svg symbol="shopping-basket" />
                       </button>

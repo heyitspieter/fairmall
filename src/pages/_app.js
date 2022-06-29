@@ -1,11 +1,14 @@
 import SidedrawerProvider from "src/context/SidedrawerContext";
-
+import { Provider } from "react-redux";
 import "styles/global.scss";
+import store from "../store/store";
 
 function MyApp({ Component, pageProps }) {
   return (
     <SidedrawerProvider>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </SidedrawerProvider>
   );
 }
