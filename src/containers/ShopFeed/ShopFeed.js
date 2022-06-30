@@ -20,8 +20,10 @@ function ShopFeed({ products }) {
     const lineItem = {
       product_id: product.id,
       name: product.name,
-      price: product.price,
+      price: parseFloat(product.price),
+      image: product.images[0].src,
       quantity: 1,
+      total: product.price * 1,
     };
     dispatch(addLineItem(lineItem));
   };
@@ -44,7 +46,7 @@ function ShopFeed({ products }) {
         <div className={styles.grid}>
           {products &&
             products.map((product, i) => {
-              const img = `https://fairmall.azurewebsites.net${product.images[0].src}`;
+              const img = `${process.env.APP_URL}${product.images[0].src}`;
               return (
                 <div key={i} className={styles.grid__item}>
                   <figure>

@@ -6,9 +6,6 @@ import ReactPaginate from "react-paginate";
 import styles from "src/containers/CategoryFeed/CategoryFeed.module.scss";
 
 function CategoryFeed({ products, handlePageClick, pageCount }) {
-  console.log("====================================");
-  console.log(products);
-  console.log("====================================");
   const [sortFocus, setSortFocus] = useState(false);
 
   const onBlur = () => setSortFocus(false);
@@ -57,7 +54,7 @@ function CategoryFeed({ products, handlePageClick, pageCount }) {
           products.map((product, idx) => (
             <div key={idx} className={styles.grid__item}>
               <figure>
-                <Image loader={() => `https://fairmall.azurewebsites.net${product.images[0].src}`} src={`https://fairmall.azurewebsites.net${product.images[0].src}`} objectFit="cover" alt="Slide 1" layout="fill" />
+                <Image loader={() => `${process.env.APP_URL}${product.images[0].src}`} src={`${process.env.APP_URL}${product.images[0].src}`} objectFit="cover" alt="Slide 1" layout="fill" />
               </figure>
               <h3>{product.name}</h3>
               <p>{product.price} NGN</p>

@@ -5,9 +5,6 @@ const initialState = {
 };
 
 const addLineItemReducer = (state, action) => {
-  console.log("====================================");
-  console.log(action);
-  console.log("====================================");
   const index = state.lineItems.findIndex((lineItem) => lineItem.product_id === action.payload.product_id);
   // if index === -1, id is not in lineItems array
   if (index === -1) {
@@ -15,7 +12,8 @@ const addLineItemReducer = (state, action) => {
     state.lineItems = [...state.lineItems, action.payload];
   } else {
     // update the lineItems[index] quantity
-    state.lineItems[index].quantity += action.payload.quantity;
+    state.lineItems[index].quantity += 1;
+    state.lineItems[index].total = state.lineItems[index].price * state.lineItems[index].quantity;
   }
 };
 
@@ -24,7 +22,8 @@ const decrementQuantityReducer = (state, action) => {
   // if index === -1, id is not in lineItems array
   if (index >= 0 && state.lineItems[index].quantity > 1) {
     // update the lineItems[index] quantity
-    state.lineItems[index].quantity -= action.payload.quantity;
+    state.lineItems[index].quantity -= 1;
+    state.lineItems[index].total = state.lineItems[index].price * state.lineItems[index].quantity;
   }
 };
 

@@ -20,7 +20,7 @@ function SectionFive({ inspirations }) {
       <div className={styles.section_5__grid}>
         {inspirations &&
           inspirations.map((inspiration, idx) => {
-            const img = `https://fairmall.azurewebsites.net${inspiration.images[0].src}`;
+            const img = `${process.env.APP_URL}${inspiration.images[0].src}`;
             return (
               <figure key={idx}>
                 <Image loader={() => img} objectFit="cover" alt={inspiration.name} src={img} layout="fill" />
