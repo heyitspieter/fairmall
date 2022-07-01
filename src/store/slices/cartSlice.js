@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   lineItems: [],
+  tax: null,
+  subTotal: 0,
+  total: 0,
 };
 
 const addLineItemReducer = (state, action) => {
@@ -35,6 +38,15 @@ const removeLineItemReducer = (state, action) => {
   }
 };
 
+const setCartTax = (state, action) => {
+  state.tax = action.payload;
+};
+
+const setCartSubTotal = (state, { payload }) => {
+  state.subTotal = payload.subTotal;
+  state.total = payload.total;
+};
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -42,6 +54,8 @@ export const cartSlice = createSlice({
     addLineItem: addLineItemReducer,
     decrementLineItemQuantity: decrementQuantityReducer,
     removeLineItem: removeLineItemReducer,
+    setTax: setCartTax,
+    setSubTotal: setCartSubTotal,
     resetCartState() {
       return initialState;
     },
@@ -49,6 +63,6 @@ export const cartSlice = createSlice({
 });
 
 // reducers/actions go in here in order to import them into components
-export const { addLineItem, decrementLineItemQuantity, removeLineItem, resetCartState } = cartSlice.actions;
+export const { addLineItem, decrementLineItemQuantity, removeLineItem, resetCartState, setTax, setSubTotal } = cartSlice.actions;
 
 export default cartSlice.reducer;

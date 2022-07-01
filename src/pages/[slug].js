@@ -30,7 +30,7 @@ export default function product() {
 
   return (
     <BaseLayout title="Product Name - Fairmall">
-      <Breadcrumb items={breadcrumb} />
+      {/* <Breadcrumb items={breadcrumb} /> */}
       <ProductDescription />
       <Recommendations title="You might also like" />
       <Inspirations />

@@ -6,8 +6,10 @@ import FormInput from "src/components/Form/FormInput/FormInput";
 import formStyles from "styles/modules/Form.module.scss";
 import styles from "src/containers/Checkout/Checkout.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
+import { useRouter } from "next/router";
 
 function Checkout() {
+  const router = useRouter();
   // Form state
   const [formControls, setFormControls] = useState({
     firstname: {
@@ -182,10 +184,7 @@ function Checkout() {
     const updatededFormControls = updateObject(formControls, {
       [formControlKey]: updateObject(formControls[formControlKey], {
         value: event.target.value,
-        valid: checkFormValidity(
-          event.target.value,
-          formControls[formControlKey].validation
-        ),
+        valid: checkFormValidity(event.target.value, formControls[formControlKey].validation),
         touched: true,
       }),
     });
@@ -257,25 +256,11 @@ function Checkout() {
             <div className={styles.formWrapper}>
               <div className={styles.formRadios}>
                 <div>
-                  <input
-                    onChange={() => setModeOfDelivery(0)}
-                    className={formStyles.radioBtn}
-                    checked={modeOfDelivery === 0}
-                    type="radio"
-                    name="mod"
-                    id="mod-1"
-                  />
+                  <input onChange={() => setModeOfDelivery(0)} className={formStyles.radioBtn} checked={modeOfDelivery === 0} type="radio" name="mod" id="mod-1" />
                   <label htmlFor="mod-1">Delivery</label>
                 </div>
                 <div>
-                  <input
-                    onChange={() => setModeOfDelivery(1)}
-                    className={formStyles.radioBtn}
-                    checked={modeOfDelivery === 1}
-                    type="radio"
-                    name="mod"
-                    id="mod-2"
-                  />
+                  <input onChange={() => setModeOfDelivery(1)} className={formStyles.radioBtn} checked={modeOfDelivery === 1} type="radio" name="mod" id="mod-2" />
                   <label htmlFor="mod-2">Pickup</label>
                 </div>
               </div>
@@ -303,12 +288,11 @@ function Checkout() {
               <p>201,000 NGN</p>
             </div>
           </div>
-          <button {...btnConfig} className={styles.btnCheckout}>
+          <button onClick={() => router.push("/order_confirm")} {...btnConfig} className={styles.btnCheckout}>
             Place Order
           </button>
           <p>
-            By placing an order, you agree to our company{" "}
-            <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
+            By placing an order, you agree to our company <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
           </p>
         </div>
       </form>

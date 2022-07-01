@@ -4,9 +4,17 @@ import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Categories from "src/components/Categories/Categories";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import Recommendations from "src/components/Recommendations/Recommendations";
-import { FetchWooCommerceProducts, FetchProductCategories, FetchInspirations } from "../utils/woo_commerce";
+import { FetchWooCommerceProducts, FetchProductCategories, FetchInspirations, FetchTaxes } from "../utils/woo_commerce";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setTax } from "src/store/slices/cartSlice";
 
-export default function shop({ products, categories, inspirations }) {
+export default function shop({ products, categories, inspirations, tax }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setTax(tax));
+  });
+
   return (
     <BaseLayout title="Shop - Fairmall">
       <ShopFeed products={products} />
@@ -18,7 +26,7 @@ export default function shop({ products, categories, inspirations }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // Fetch data from api server
   /** Fetch all products */
   const products = await FetchWooCommerceProducts().catch((error) => console.error(error));
@@ -26,11 +34,14 @@ export async function getStaticProps() {
   /** find inspiration category */
   const inspirationCategory = categories.find((category) => category.name === "Inspirations");
   const inspirations = await FetchInspirations(inspirationCategory.id).catch((error) => console.error(error));
+  const taxes = await FetchTaxes().catch((error) => console.error(error));
+  const vatID = taxes.find((tax) => tax.name === "V.A.T");
   return {
     props: {
       products: products,
       categories: categories,
       inspirations: inspirations,
+      tax: vatID,
     },
     // revalidate: 60 // regenerate page with new data fetch after 60 seconds
   };

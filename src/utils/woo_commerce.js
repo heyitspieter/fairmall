@@ -53,3 +53,21 @@ export async function FetchInspirations(id) {
     return error.message;
   }
 }
+
+export async function FetchTaxes() {
+  try {
+    const response = await api.get("taxes");
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchTax(id) {
+  try {
+    const response = await api.get(`taxes/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
