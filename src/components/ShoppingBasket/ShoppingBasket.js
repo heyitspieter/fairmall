@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import styles from "src/components/ShoppingBasket/ShoppingBasket.module.scss";
-import { addLineItem, decrementLineItemQuantity, removeLineItem } from "src/store/slices/cartSlice";
+import { addLineItem, cartSubTotal, decrementLineItemQuantity, removeLineItem } from "src/store/slices/cartSlice";
 import { TaxCalCulator } from "src/utils/tax_calculator";
 
 function ShoppingBasket() {
@@ -38,6 +38,15 @@ function ShoppingBasket() {
   useEffect(() => {
     setTotal(subTotal + taxAmount);
   });
+
+  useEffect(() => {
+    const cartAmount = {
+      subTotal: subTotal,
+      total: total,
+      rate: taxAmount,
+    };
+    dispatch(cartSubTotal(cartAmount));
+  }, [total, subTotal, taxAmount]);
 
   const handleIncrement = (product) => {
     dispatch(addLineItem(product));

@@ -5,6 +5,16 @@ const initialState = {
   tax: null,
   subTotal: 0,
   total: 0,
+  rate: 0,
+  shippingDetails: {
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    deliveryAddress: "",
+    country: "",
+    state: "",
+    city: "",
+  },
 };
 
 const addLineItemReducer = (state, action) => {
@@ -45,6 +55,11 @@ const setCartTax = (state, action) => {
 const setCartSubTotal = (state, { payload }) => {
   state.subTotal = payload.subTotal;
   state.total = payload.total;
+  state.rate = payload.rate;
+};
+
+const setShippingDetails = (state, { payload }) => {
+  state.shippingDetails = payload;
 };
 
 export const cartSlice = createSlice({
@@ -55,7 +70,8 @@ export const cartSlice = createSlice({
     decrementLineItemQuantity: decrementQuantityReducer,
     removeLineItem: removeLineItemReducer,
     setTax: setCartTax,
-    setSubTotal: setCartSubTotal,
+    cartSubTotal: setCartSubTotal,
+    shippingDetails: setShippingDetails,
     resetCartState() {
       return initialState;
     },
@@ -63,6 +79,6 @@ export const cartSlice = createSlice({
 });
 
 // reducers/actions go in here in order to import them into components
-export const { addLineItem, decrementLineItemQuantity, removeLineItem, resetCartState, setTax, setSubTotal } = cartSlice.actions;
+export const { addLineItem, decrementLineItemQuantity, removeLineItem, resetCartState, setTax, cartSubTotal, shippingDetails } = cartSlice.actions;
 
 export default cartSlice.reducer;
