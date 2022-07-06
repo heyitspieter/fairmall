@@ -1,17 +1,21 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
-const { useSelector } = require("react-redux");
+const { useSelector, useDispatch } = require("react-redux");
 import { updateObject, checkFormValidity } from "src/helpers";
 import FormInput from "src/components/Form/FormInput/FormInput";
 import worldMapData from "city-state-country";
+import { Country, State, City } from "country-state-city";
 
 import formStyles from "styles/modules/Form.module.scss";
 import styles from "src/containers/Checkout/Checkout.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import { useRouter } from "next/router";
+import { FORMAT_STATE_NAME } from "src/utils/statename_formatter";
+import { shippingDetails } from "src/store/slices/cartSlice";
 
 function Checkout() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { total, subTotal, rate, lineItems } = useSelector((state) => state.cart);
   const [countries, setCountries] = useState([]);
   const [countryCode, setCountryCode] = useState(null);
@@ -20,9 +24,10 @@ function Checkout() {
 
   useEffect(() => {
     let allCountries = [];
-    worldMapData.getAllCountries().map((country, idx) => {
+    const getCountries = Country.getAllCountries();
+    getCountries.map((country, idx) => {
       allCountries.push({
-        value: country.name,
+        value: country.isoCode,
         text: country.name,
       });
     });
@@ -315,20 +320,23 @@ function Checkout() {
 
   const handleCountryChange = (value) => {
     let allStates = [];
-    worldMapData.getAllStatesFromCountry(value).map((state, idx) => {
+    State.getStatesOfCountry(value).map((state, idx) => {
+      let stateName = state.name;
+      stateName = FORMAT_STATE_NAME(stateName);
       allStates.push({
-        value: state.name,
-        text: state.name,
+        value: state.isoCode,
+        text: stateName,
       });
     });
     allStates.unshift({ text: "Select a state", value: "" });
+    setCountryCode(value);
     setStates(allStates);
     formControls["state"].elementConfig.options = allStates.length > 0 ? allStates : "Loading";
   };
 
   const handleStateChange = (value) => {
     let allCities = [];
-    worldMapData.getAllCitiesFromState(value).map((state, idx) => {
+    City.getCitiesOfState(countryCode, value).map((state, idx) => {
       allCities.push({
         value: state.name,
         text: state.name,
@@ -352,9 +360,20 @@ function Checkout() {
       formData["modeOfDelivery"] = modeOfDelivery <= 0 ? "delivery" : "pickup";
 
       // Submit form here
-      console.log("====================================");
-      console.log(formControls);
-      console.log("====================================");
+      const data = {
+        first_name: formControls.firstname.value,
+        last_name: formControls.lastname.value,
+        email: formControls.email.value,
+        phone: formControls.phonenumber.value,
+        address1: formControls.address1.value,
+        address2: formControls.address2.value,
+        country: Country.getCountryByCode(formControls.country.value).name,
+        state: FORMAT_STATE_NAME(State.getStateByCode(formControls.state.value).name),
+        city: formControls.city.value,
+        postcode: formControls.postcode.value,
+      };
+      dispatch(shippingDetails(data));
+      router.push("/order_confirm");
     }
   };
 

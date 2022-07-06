@@ -20,7 +20,7 @@ export async function FetchWooCommerceProducts() {
 
 export async function FetchProductCategories() {
   try {
-    const response = await api.get("products/categories");
+    const response = await api.get("products/categories", { per_page: 50, parent: 0 });
     return response.data;
   } catch (error) {
     return error.message;
@@ -66,6 +66,15 @@ export async function FetchTaxes() {
 export async function FetchTax(id) {
   try {
     const response = await api.get(`taxes/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchPaymentGateways() {
+  try {
+    const response = await api.get("payment_gateways");
     return response.data;
   } catch (error) {
     return error.message;

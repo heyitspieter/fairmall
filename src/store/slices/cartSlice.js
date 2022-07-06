@@ -6,15 +6,7 @@ const initialState = {
   subTotal: 0,
   total: 0,
   rate: 0,
-  shippingDetails: {
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    deliveryAddress: "",
-    country: "",
-    state: "",
-    city: "",
-  },
+  shippingDetails: null,
 };
 
 const addLineItemReducer = (state, action) => {

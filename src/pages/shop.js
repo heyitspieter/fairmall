@@ -26,7 +26,7 @@ export default function shop({ products, categories, inspirations, tax }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   // Fetch data from api server
   /** Fetch all products */
   const products = await FetchWooCommerceProducts().catch((error) => console.error(error));

@@ -21,7 +21,9 @@ function ShoppingBasket() {
 
   useEffect(() => {
     /** calculate tax */
-    setTaxAmount(TaxCalCulator(subTotal, parseFloat(tax.rate)));
+    if (tax) {
+      setTaxAmount(TaxCalCulator(subTotal, parseFloat(tax.rate)));
+    }
   });
 
   useEffect(() => {
