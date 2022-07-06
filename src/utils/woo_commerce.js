@@ -18,6 +18,16 @@ export async function FetchWooCommerceProducts() {
   }
 }
 
+//fetch product by id
+export async function FetchProductById(id) {
+  try {
+    const response = await api.get(`products/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
 export async function FetchProductCategories() {
   try {
     const response = await api.get("products/categories", { per_page: 50, parent: 0 });

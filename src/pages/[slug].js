@@ -4,8 +4,19 @@ import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import Recommendations from "src/components/Recommendations/Recommendations";
 import ProductDescription from "src/components/ProductDescription/ProductDescription";
+import { FetchProductById } from "src/utils/woo_commerce";
+import { useRouter } from "next/router"
 
-export default function product() {
+
+export default function product({product}) {
+
+  const router = useRouter();
+const data = router.query;
+
+  
+
+  // console.log('product from slug', productsss);
+
   const breadcrumb = [
     {
       id: 1,
@@ -28,10 +39,12 @@ export default function product() {
     },
   ];
 
+
+
   return (
     <BaseLayout title="Product Name - Fairmall">
       {/* <Breadcrumb items={breadcrumb} /> */}
-      <ProductDescription />
+      <ProductDescription product={product} />
       <Recommendations title="You might also like" />
       <Inspirations />
       <NewsLetter />
@@ -48,10 +61,15 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   // Fetch data from api server
+  const id = context.params.id;
+  const product = await FetchProductById(id).catch((error) => console.error(error));
+
 
   return {
-    props: {},
+    props: {
+      product: product
+    },
   };
 }

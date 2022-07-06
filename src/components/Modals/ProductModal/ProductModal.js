@@ -1,4 +1,6 @@
-import { useRef } from "react";
+import { useRef } from "react"
+import { useRouter } from "next/router"
+import Link from "next/link";
 import Image from "next/image";
 import className from "classnames";
 import Svg from "src/components/Svg/Svg";
@@ -13,7 +15,10 @@ const animationTiming = {
 };
 
 function ProductModal({ show, close, product }) {
+  const router = useRouter();
   const ref = useRef();
+
+  console.log('<<<<', product)
 
   const carouselRef = useRef();
 
@@ -89,7 +94,7 @@ function ProductModal({ show, close, product }) {
                           return (
                             <div key={i} className={styles.slider__item}>
                               <figure>
-                                <Image loader={() => img} layout="fill" src={image} alt={product.name} />
+                                <Image width={400} height={700} loader={() => img} layout="fill" src={image} alt={product.name} />
                               </figure>
                             </div>
                           );
@@ -143,12 +148,36 @@ function ProductModal({ show, close, product }) {
                         }}
                       />
                     </div>
+                    {
+                      product?.attributes?.length > 0 ? product?.attributes.map((item, index) => (
+                        <select style={{ padding: 6, width: 150 }}>
+                          <option key={index}>{item.name}</option>
+                          {
+                            item.options.map((item, idx) => (
+                              <option key={idx}>{item}</option>
+                            ))
+                          }
+                        </select>
+
+                      )) : null
+                    }
                     <div className={styles.description__row}>
-                      <button>View More</button>
-                      <button>
+                    <button onClick={() => router.push(
+                      {
+                        pathname: `/${product.id}`,
+                        query: { product: product },
+                      }
+                    )}
+                    >View more</button>
+                      {
+                        product?.attributes?.length === 0 && (
+                          <button>
                         <Svg symbol="shopping-basket" />
                         <span>Add to Basket</span>
                       </button>
+                        )
+                      }
+                      
                     </div>
                   </div>
                 </div>

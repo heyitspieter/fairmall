@@ -16,6 +16,8 @@ function ShopFeed({ products }) {
   });
   const [viewProduct, setViewProduct] = useState(products[0]);
 
+  // console.log('===products===', products);
+
   const handleAddToCard = async (product) => {
     const lineItem = {
       product_id: product.id,
