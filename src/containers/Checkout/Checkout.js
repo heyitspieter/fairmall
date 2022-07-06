@@ -177,8 +177,8 @@ function Checkout() {
       validation: {
         required: false,
       },
-      valid: false,
-      touched: false,
+      valid: true,
+      touched: true,
       error: {
         message: "Address is required",
       },
@@ -365,8 +365,8 @@ function Checkout() {
         last_name: formControls.lastname.value,
         email: formControls.email.value,
         phone: formControls.phonenumber.value,
-        address1: formControls.address1.value,
-        address2: formControls.address2.value,
+        address_1: formControls.address1.value,
+        address_2: formControls.address2.value,
         country: Country.getCountryByCode(formControls.country.value).name,
         state: FORMAT_STATE_NAME(State.getStateByCode(formControls.state.value).name),
         city: formControls.city.value,

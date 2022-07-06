@@ -19,6 +19,7 @@ function ShopFeed({ products }) {
   const handleAddToCard = async (product) => {
     const lineItem = {
       product_id: product.id,
+      variation_id: product.vatiation ? product.variation.id : null,
       name: product.name,
       price: parseFloat(product.price),
       image: product.images[0].src,
