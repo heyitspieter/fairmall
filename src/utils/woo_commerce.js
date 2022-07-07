@@ -90,3 +90,12 @@ export async function FetchPaymentGateways() {
     return error.message;
   }
 }
+
+export async function CreateOrder(data) {
+  try {
+    const response = await api.post("orders", data);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}

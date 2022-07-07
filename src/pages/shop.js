@@ -10,6 +10,9 @@ import { useDispatch } from "react-redux";
 import { setTax } from "src/store/slices/cartSlice";
 
 export default function shop({ products, categories, inspirations, tax }) {
+  console.log("====================================");
+  console.log(products);
+  console.log("====================================");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setTax(tax));
