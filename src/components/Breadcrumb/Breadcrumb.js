@@ -4,6 +4,9 @@ import Svg from "src/components/Svg/Svg";
 import styles from "src/components/Breadcrumb/Breadcrumb.module.scss";
 
 const Breadcrumb = ({ item }) => {
+  console.log("====================================");
+  console.log(item);
+  console.log("====================================");
   return (
     <div className={styles.container}>
       <nav>

@@ -6,7 +6,6 @@ import { formatNumber } from "src/helpers";
 import ProductModal from "src/components/Modals/ProductModal/ProductModal";
 
 import styles from "src/containers/ShopFeed/ShopFeed.module.scss";
-import product from "src/pages/[slug]";
 import { addLineItem } from "src/store/slices/cartSlice";
 
 function ShopFeed({ products }) {

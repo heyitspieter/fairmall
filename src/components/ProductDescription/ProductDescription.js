@@ -4,7 +4,7 @@ import Svg from "src/components/Svg/Svg";
 import styles from "src/components/ProductDescription/ProductDescription.module.scss";
 
 function ProductDescription({ product }) {
-  console.log('des==', product)
+  console.log("des==", product);
   return (
     <div className={styles.container}>
       <div className={styles.boxGrid}>
@@ -12,7 +12,7 @@ function ProductDescription({ product }) {
           <div className={styles.gallery__left}>
             <Image
               // src="/images/product-cover.png"
-              // loader={() => process.env.APP_URL+product?.images[0].src}
+              loader={() => process.env.APP_URL + product?.images[0].src}
               src={`${process.env.APP_URL}${product?.images[0].src}`}
               alt="Product Name"
               objectFit="cover"
@@ -20,21 +20,14 @@ function ProductDescription({ product }) {
             />
           </div>
           <div className={styles.gallery__right}>
-            {
-              product?.images.map((image, index) => {
-                const img = `${process.env.APP_URL}${image.src}`;
-                return(
+            {product?.images.map((image, index) => {
+              const img = `${process.env.APP_URL}${image.src}`;
+              return (
                 <figure key={index}>
-                  <Image
-                  loader={() => img} 
-                    src={img}
-                    alt="Product Name"
-                    objectFit="cover"
-                    layout="fill"
-                  />
+                  <Image loader={() => img} src={img} alt="Product Name" objectFit="cover" layout="fill" />
                 </figure>
-              )})
-            }
+              );
+            })}
 
             {/* <figure>
               <Image
@@ -133,7 +126,6 @@ function ProductDescription({ product }) {
         <div className={styles.content__row}>
           <h3>Description:</h3>
           <p>{product?.description}</p>
-
         </div>
       </div>
     </div>

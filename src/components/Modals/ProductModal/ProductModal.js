@@ -1,5 +1,5 @@
-import { useRef } from "react"
-import { useRouter } from "next/router"
+import { useRef } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import className from "classnames";
@@ -18,7 +18,7 @@ function ProductModal({ show, close, product }) {
   const router = useRouter();
   const ref = useRef();
 
-  console.log('<<<<', product)
+  console.log("<<<<", product);
 
   const carouselRef = useRef();
 
@@ -148,36 +148,24 @@ function ProductModal({ show, close, product }) {
                         }}
                       />
                     </div>
-                    {
-                      product?.attributes?.length > 0 ? product?.attributes.map((item, index) => (
-                        <select style={{ padding: 6, width: 150 }}>
-                          <option key={index}>{item.name}</option>
-                          {
-                            item.options.map((item, idx) => (
+                    {product?.attributes?.length > 0
+                      ? product?.attributes.map((item, index) => (
+                          <select style={{ padding: 6, width: 150 }}>
+                            <option key={index}>{item.name}</option>
+                            {item.options.map((item, idx) => (
                               <option key={idx}>{item}</option>
-                            ))
-                          }
-                        </select>
-
-                      )) : null
-                    }
+                            ))}
+                          </select>
+                        ))
+                      : null}
                     <div className={styles.description__row}>
-                    <button onClick={() => router.push(
-                      {
-                        pathname: `/${product.id}`,
-                        query: { product: product },
-                      }
-                    )}
-                    >View more</button>
-                      {
-                        product?.attributes?.length === 0 && (
-                          <button>
-                        <Svg symbol="shopping-basket" />
-                        <span>Add to Basket</span>
-                      </button>
-                        )
-                      }
-                      
+                      <button onClick={() => router.push(`/${product.id}`)}>View more</button>
+                      {product?.attributes?.length === 0 && (
+                        <button>
+                          <Svg symbol="shopping-basket" />
+                          <span>Add to Basket</span>
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
