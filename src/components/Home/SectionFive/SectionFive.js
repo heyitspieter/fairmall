@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import styles from "src/components/Home/Home.module.scss";
 
-function SectionFive({ inspirations }) {
+function SectionFive({inspirations}) {
   const router = useRouter();
   const containerClass = className({
     [styles.container]: router.pathname !== "/",
@@ -20,10 +20,10 @@ function SectionFive({ inspirations }) {
       <div className={styles.section_5__grid}>
         {inspirations &&
           inspirations.map((inspiration, idx) => {
-            const img = `https://fairmall.azurewebsites.net${inspiration.images[0].src}`;
+            const img = `/images/inspo-2.png`;
             return (
               <figure key={idx}>
-                <Image loader={() => img} objectFit="cover" alt={inspiration.name} src={img} layout="fill" />
+                <Image loader={() => img} objectFit="cover" alt={inspiration.title} src={inspiration.image} layout="fill" />
               </figure>
             );
           })}

@@ -1,5 +1,4 @@
 import SidedrawerProvider from "src/context/SidedrawerContext";
-
 import "styles/global.scss";
 
 function MyApp({ Component, pageProps }) {

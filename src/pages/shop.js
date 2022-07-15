@@ -4,15 +4,37 @@ import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Categories from "src/components/Categories/Categories";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import Recommendations from "src/components/Recommendations/Recommendations";
-import { FetchWooCommerceProducts, FetchProductCategories, FetchInspirations } from "../utils/woo_commerce";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getProducts } from "src/store/slices/products";
+import { getCategories } from "src/store/slices/categories";
+import { getInspirations } from "src/store/slices/inspirations";
 
-export default function shop({ products, categories, inspirations }) {
-  console.log("====================================");
-  console.log(inspirations);
-  console.log("====================================");
+export default function shop() {
+  const dispatch = useDispatch()
+
+  //fetch products 
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch])
+  const {products } = useSelector((state) => state.products)
+
+  // fetch Categories
+  useEffect(() => {
+      dispatch(getCategories())
+    }, [dispatch])
+    const {  categories } = useSelector( (state) => state.categories)
+
+     // fetch inspirations
+  useEffect(() => {
+    dispatch(getInspirations())
+  }, [dispatch])
+  const {  inspirations } = useSelector( (state) => state.inspirations)
+
+
   return (
     <BaseLayout title="Shop - Fairmall">
-      <ShopFeed products={products} />
+      <ShopFeed  products={products}/>
       <Categories categories={categories} />
       {/* <Recommendations title="Featured Items" /> */}
       <Inspirations inspirations={inspirations} />
@@ -21,20 +43,9 @@ export default function shop({ products, categories, inspirations }) {
   );
 }
 
-export async function getStaticProps() {
-  // Fetch data from api server
-  /** Fetch all products */
-  const products = await FetchWooCommerceProducts().catch((error) => console.error(error));
-  const categories = await FetchProductCategories().catch((error) => console.error(error));
-  /** find inspiration category */
-  const inspirationCategory = categories.data.find((category) => category.name === "Inspirations");
-  const inspirations = await FetchInspirations(inspirationCategory.id).catch((error) => console.error(error));
-  return {
-    props: {
-      products: products.data,
-      categories: categories.data,
-      inspirations: inspirations.data,
-    },
-    // revalidate: 60 // regenerate page with new data fetch after 60 seconds
-  };
-}
+// export async function getStaticProps() {
+//   return {
+//     props: {
+//     },
+//   };
+// }

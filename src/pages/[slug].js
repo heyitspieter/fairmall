@@ -4,8 +4,22 @@ import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import Recommendations from "src/components/Recommendations/Recommendations";
 import ProductDescription from "src/components/ProductDescription/ProductDescription";
+import { useRouter } from "next/router"
+import { useEffect } from "react";
+import { getProduct } from "src/store/slices/products";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function product() {
+  const router = useRouter();
+  const dispatch = useDispatch()
+  const { query: { id }} = router
+
+  useEffect(() => {
+    dispatch(getProduct(id))
+  }, [dispatch, id])
+  const { data, loading } = useSelector((state) => state.products)
+
+
   const breadcrumb = [
     {
       id: 1,
@@ -29,12 +43,25 @@ export default function product() {
   ];
 
   return (
-    <BaseLayout title="Product Name - Fairmall">
-      <Breadcrumb items={breadcrumb} />
-      <ProductDescription />
-      <Recommendations title="You might also like" />
-      <Inspirations />
-      <NewsLetter />
+    <BaseLayout title={ data && data.name}>
+      {
+        !loading && (
+          <>
+            <Breadcrumb product={data} items={breadcrumb} />
+            {
+              data && (
+                <>
+                  <ProductDescription product={data} />
+                </>
+              )
+            }
+            <Recommendations title="You might also like" />
+            <Inspirations />
+            <NewsLetter />
+          </>
+        )
+      }
+
     </BaseLayout>
   );
 }
