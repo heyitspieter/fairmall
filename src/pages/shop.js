@@ -26,15 +26,15 @@ export default function shop() {
     const {  categories } = useSelector( (state) => state.categories)
 
      // fetch inspirations
-  useEffect(() => {
-    dispatch(getInspirations())
-  }, [dispatch])
-  const {  inspirations } = useSelector( (state) => state.inspirations)
-
+     useEffect(() => {
+      dispatch(getInspirations())
+    }, [dispatch])
+    const {  inspirations } = useSelector( (state) => state.inspirations)
+  
 
   return (
     <BaseLayout title="Shop - Fairmall">
-      <ShopFeed  products={products}/>
+      <ShopFeed products={products}/>
       <Categories categories={categories} />
       {/* <Recommendations title="Featured Items" /> */}
       <Inspirations inspirations={inspirations} />
@@ -43,9 +43,13 @@ export default function shop() {
   );
 }
 
-// export async function getStaticProps() {
-//   return {
-//     props: {
-//     },
-//   };
+// export async function getServerSideProps() {
+//   // Fetch data from external API
+//   const res = await fetch('https://fairmall-v1.herokuapp.com/api/v1/user/product')
+//   // const data = await res.json()
+
+//   // Pass data to the page via props
+//   return { props: { 
+//     products: await res.json(),
+//   } }
 // }

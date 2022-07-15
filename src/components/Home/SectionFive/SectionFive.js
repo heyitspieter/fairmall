@@ -19,7 +19,7 @@ function SectionFive({inspirations}) {
       </div>
       <div className={styles.section_5__grid}>
         {inspirations &&
-          inspirations.map((inspiration, idx) => {
+          inspirations.slice(0, 5).map((inspiration, idx) => {
             const img = `/images/inspo-2.png`;
             return (
               <figure key={idx}>
