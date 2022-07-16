@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Svg from "src/components/Svg/Svg";
-import { formatNumber } from "src/helpers";
 import ProductModal from "src/components/Modals/ProductModal/ProductModal";
 import styles from "src/containers/ShopFeed/ShopFeed.module.scss";
 import { useRouter } from "next/router";
+import formatToCurrency from "src/helpers/formatAmount";
 // import product from "src/pages/[slug]";
 
 function ShopFeed({products}) {
@@ -13,6 +13,7 @@ function ShopFeed({products}) {
   const [modal, setModal] = useState({
     visibility: false,
   });
+  const [selectedProduct, setSelectedProduct] = useState({})
 
   const toggleModalHandler = () => {
     setModal((prevState) => ({
@@ -30,7 +31,12 @@ function ShopFeed({products}) {
 
   return (
     <>
-      <ProductModal show={modal.visibility} close={toggleModalHandler} />
+    {
+      modal && (
+              <ProductModal product={selectedProduct} show={modal.visibility} close={toggleModalHandler} />
+
+      )
+    }
       <div className={styles.container}>
               <div className={styles.heading}>
                 <p>Popular Items</p>
@@ -50,8 +56,11 @@ function ShopFeed({products}) {
                             </button>
                             <button
                             //  onClick={toggleModalHandler}
-                            onClick={()=>singleProduct(product.id)}
-
+                            onClick={()=>{
+                              setSelectedProduct(product);
+                              toggleModalHandler();
+                              // singleProduct(product.id)
+                            }}
                              >
                               <span>Quick View</span>
                               <Svg symbol="eye" />
@@ -63,7 +72,7 @@ function ShopFeed({products}) {
                           </div>
                         </figure>
                         <h3>{product.name}</h3>
-                        <p>{formatNumber(product.price)} NGN</p>
+                        <p>{formatToCurrency(product.price)} NGN</p>
                       </div>
                     );
                   })}

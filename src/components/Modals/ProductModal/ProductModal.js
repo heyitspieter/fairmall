@@ -4,6 +4,7 @@ import className from "classnames";
 import Svg from "src/components/Svg/Svg";
 import Carousel from "react-elastic-carousel";
 import { CSSTransition } from "react-transition-group";
+import { useRouter } from "next/router";
 
 import styles from "src/components/Modals/ProductModal/ProductModal.module.scss";
 
@@ -12,8 +13,9 @@ const animationTiming = {
   enter: 400,
 };
 
-function ProductModal({ show, close }) {
+function ProductModal({ show, close, product }) {
   const ref = useRef();
+  const router = useRouter();
 
   const carouselRef = useRef();
 
@@ -21,6 +23,14 @@ function ProductModal({ show, close }) {
     [styles.overlay]: true,
     [styles.overlay__hidden]: !show,
   });
+
+  const singleProduct = () => {
+    let id = product?.id
+    router.push({
+      pathname: `${id}`,
+      query: { id: id },
+    })
+  }
 
   const modalConfig = {
     nodeRef: ref,
@@ -113,9 +123,9 @@ function ProductModal({ show, close }) {
                   <div className={styles.description}>
                     <div className={styles.description__row}>
                       <div className={styles.left}>
-                        <h4>Arts and Crafts</h4>
-                        <h3>Product name here</h3>
-                        <p>100,000 NGN</p>
+                        <h4>{product?.category?.name}</h4>
+                        <h3>{product?.name}</h3>
+                        <p>{product?.price} NGN</p>
                       </div>
                       <div className={styles.right}>
                         <div className={styles.rating}>
@@ -143,18 +153,10 @@ function ProductModal({ show, close }) {
                     </div>
                     <div className={styles.description__row}>
                       <h3>Description:</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Dictum fermentum, mauris viverra lobortis lorem vel. At
-                        amet in nulla ullamcorper diam amet, turpis orci dui.
-                        Ornare eget sollicitudin non semper facilisis dolor
-                        nisi, quam lacus. Velit pharetra, vitae sollicitudin
-                        nullam. Feugiat velit senectus in faucibus tempus
-                        malesuada....
-                      </p>
+                      <p>{product?.description}</p>
                     </div>
                     <div className={styles.description__row}>
-                      <button>View More</button>
+                      <button onClick={singleProduct}>View More</button>
                       <button>
                         <Svg symbol="shopping-basket" />
                         <span>Add to Basket</span>

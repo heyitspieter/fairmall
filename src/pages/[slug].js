@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 import { useEffect } from "react";
 import { getProduct } from "src/store/slices/products";
 import { useSelector, useDispatch } from "react-redux";
+import { getInspirations } from "src/store/slices/inspirations";
 
 export default function product() {
   const router = useRouter();
@@ -18,6 +19,13 @@ export default function product() {
     dispatch(getProduct(id))
   }, [dispatch, id])
   const { data, loading } = useSelector((state) => state.products)
+
+  useEffect(() => {
+    dispatch(getInspirations())
+  }, [dispatch])
+  const {  inspirations } = useSelector( (state) => state.inspirations)
+
+
 
 
   const breadcrumb = [
@@ -47,16 +55,10 @@ export default function product() {
       {
         !loading && (
           <>
-            <Breadcrumb product={data} items={breadcrumb} />
-            {
-              data && (
-                <>
-                  <ProductDescription product={data} />
-                </>
-              )
-            }
+            <Breadcrumb data={data} items={breadcrumb} />
+            <ProductDescription product={data} />
             <Recommendations title="You might also like" />
-            <Inspirations />
+            <Inspirations inspirations={inspirations} />
             <NewsLetter />
           </>
         )

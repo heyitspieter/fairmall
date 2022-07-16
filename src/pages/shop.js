@@ -45,11 +45,10 @@ export default function shop() {
 
 // export async function getServerSideProps() {
 //   // Fetch data from external API
-//   const res = await fetch('https://fairmall-v1.herokuapp.com/api/v1/user/product')
-//   // const data = await res.json()
+//   const products = await fetch('https://fairmall-v1.herokuapp.com/api/v1/user/product')
 
 //   // Pass data to the page via props
 //   return { props: { 
-//     products: await res.json(),
+//     products: await products.json(),
 //   } }
 // }

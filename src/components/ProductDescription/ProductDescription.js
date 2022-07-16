@@ -2,9 +2,10 @@ import Image from "next/image";
 import Svg from "src/components/Svg/Svg";
 
 import styles from "src/components/ProductDescription/ProductDescription.module.scss";
+import formatToCurrency from "src/helpers/formatAmount";
 
-function ProductDescription(product) {
-  // console.log('product single', product)
+function ProductDescription({product}) {
+  console.log('product single', product)
   return (
     <div className={styles.container}>
       <div className={styles.boxGrid}>
@@ -86,7 +87,7 @@ function ProductDescription(product) {
             </div>
           </div>
           <div className={styles.info__3}>
-            <p>{product.price} NGN</p>
+            <p>{formatToCurrency(product.price)} NGN</p>
           </div>
           <div className={styles.btnAdd}>
             <button>
@@ -108,17 +109,20 @@ function ProductDescription(product) {
         <div className={styles.content__row}>
           <h3>Description</h3>
           <div className={styles.content__html}>
-            <p>{product.description}</p>
+            <p>{product?.description}</p>
            
           </div>
         </div>
         <div className={styles.content__row}>
           <h3>In Stock:</h3>
-          <p>{product.inventory > 0 ? 'Yes' : 'Not available'}</p>
+          {
+            product?.inventory > 0 ? (<p> <b>{product?.inventory} </b> items available in Stock</p>) : 
+            <p>Not available</p>
+          }
         </div>
         <div className={styles.content__row}>
           <h3>Category:</h3>
-          <p>{product.category.name}</p>
+          <p>{product?.category?.name}</p>
         </div>
       </div>
     </div>
