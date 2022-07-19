@@ -1,4 +1,5 @@
 import SidedrawerProvider from "src/context/SidedrawerContext";
+import { Provider } from "react-redux";
 import "styles/global.scss";
 import store from "../store/store";
 import { PersistGate } from "redux-persist/integration/react";
