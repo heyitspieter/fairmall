@@ -1,10 +1,18 @@
 import SidedrawerProvider from "src/context/SidedrawerContext";
 import "styles/global.scss";
+import store from "../store/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+let persistor = persistStore(store);
 
 function MyApp({ Component, pageProps }) {
   return (
     <SidedrawerProvider>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Component {...pageProps} />
+        </PersistGate>
+      </Provider>
     </SidedrawerProvider>
   );
 }

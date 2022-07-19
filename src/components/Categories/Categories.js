@@ -16,7 +16,7 @@ function Categories({categories}) {
             <figure key={idx}>
               <div>
                 <p>{category.name}</p>
-                <button onClick={() => router.push("/category/furniture")}>shop now</button>
+                <button onClick={() => router.push(`/category/${category.id}`)}>shop now</button>
               </div>
               <Image src="/images/category_1.png" objectFit="cover" alt="Category 1" layout="fill" />
             </figure>

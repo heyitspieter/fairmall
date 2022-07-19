@@ -3,6 +3,7 @@ import Svg from "src/components/Svg/Svg";
 
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import styles from "src/components/OrderConfirmation/OrderConfirmation.module.scss";
+import PaystackPayButton from "../Paystack/PaystackButton";
 
 function OrderConfirmation() {
   return (
@@ -15,24 +16,15 @@ function OrderConfirmation() {
       </div>
       <div className={styles.grid}>
         <div className={styles.grid__col}>
-          <p>
-            Confirm your order <span>#12F78GQ</span> via WhatsApp or Chatbot for
-            delivery.
-          </p>
+          {/* <p>
+            Confirm your order <span>#12F78GQ</span> via WhatsApp or Chatbot for delivery.
+          </p> */}
         </div>
         <div className={styles.grid__col}>
           <div className={styles.barcode}>
-            <Image
-              src="/images/barcode.png"
-              objectFit="cover"
-              layout="fill"
-              alt="barcode"
-            />
+            <Image src="/images/barcode.png" objectFit="cover" layout="fill" alt="barcode" />
           </div>
-          <p>
-            You can also scan the QR code to continue and confirm for order for
-            delivery.
-          </p>
+          <p>You can also scan the QR code to continue and confirm for order for delivery.</p>
         </div>
         <div className={styles.separator}>
           <span></span>
@@ -48,10 +40,8 @@ function OrderConfirmation() {
             <Svg symbol="chatbot" />
             <span>Order Via Chatbot</span>
           </button>
-          <p>
-            After order confirmation by our representative, you will be directed
-            on payment details and procedure for delivery.
-          </p>
+          <PaystackPayButton />
+          <p>After order confirmation by our representative, you will be directed on payment details and procedure for delivery.</p>
         </div>
       </div>
       <div className={spiralRight}>

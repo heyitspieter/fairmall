@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import styles from "src/components/Home/Home.module.scss";
 
-function SectionFive({inspirations}) {
+function SectionFive({ inspirations }) {
   const router = useRouter();
   const containerClass = className({
     [styles.container]: router.pathname !== "/",
@@ -27,18 +27,6 @@ function SectionFive({inspirations}) {
               </figure>
             );
           })}
-        {/* <figure>
-          <Image src="/images/inspo-2.png" objectFit="cover" layout="fill" alt="Slide 1" />
-        </figure>
-        <figure>
-          <Image src="/images/inspo-3.png" objectFit="cover" layout="fill" alt="Slide 1" />
-        </figure>
-        <figure>
-          <Image src="/images/inspo-4.png" objectFit="cover" layout="fill" alt="Slide 1" />
-        </figure>
-        <figure>
-          <Image src="/images/inspo-5.png" objectFit="cover" layout="fill" alt="Slide 1" />
-        </figure> */}
       </div>
       <div className={styles.section_5__btn}>
         <button onClick={() => router.push("/inspirations")}>See More</button>
