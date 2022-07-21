@@ -11,30 +11,29 @@ import { getCategories } from "src/store/slices/categories";
 import { getInspirations } from "src/store/slices/inspirations";
 
 export default function shop() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  //fetch products 
+  //fetch products
   useEffect(() => {
-    dispatch(getProducts())
-  }, [dispatch])
-  const {products } = useSelector((state) => state.products)
+    dispatch(getProducts());
+  }, [dispatch]);
+  const { products } = useSelector((state) => state.products);
 
   // fetch Categories
   useEffect(() => {
-      dispatch(getCategories())
-    }, [dispatch])
-    const {  categories } = useSelector( (state) => state.categories)
+    dispatch(getCategories());
+  }, [dispatch]);
+  const { categories } = useSelector((state) => state.categories);
 
-     // fetch inspirations
-     useEffect(() => {
-      dispatch(getInspirations())
-    }, [dispatch])
-    const {  inspirations } = useSelector( (state) => state.inspirations)
-  
+  // fetch inspirations
+  useEffect(() => {
+    dispatch(getInspirations());
+  }, [dispatch]);
+  const { inspirations } = useSelector((state) => state.inspirations);
 
   return (
     <BaseLayout title="Shop - Fairmall">
-      <ShopFeed products={products}/>
+      <ShopFeed products={products} />
       <Categories categories={categories} />
       {/* <Recommendations title="Featured Items" /> */}
       <Inspirations inspirations={inspirations} />
@@ -48,7 +47,7 @@ export default function shop() {
 //   const products = await fetch('https://fairmall-v1.herokuapp.com/api/v1/user/product')
 
 //   // Pass data to the page via props
-//   return { props: { 
+//   return { props: {
 //     products: await products.json(),
 //   } }
 // }

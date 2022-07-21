@@ -4,7 +4,7 @@ import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import Recommendations from "src/components/Recommendations/Recommendations";
 import ProductDescription from "src/components/ProductDescription/ProductDescription";
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { getProduct } from "src/store/slices/products";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,21 +12,20 @@ import { getInspirations } from "src/store/slices/inspirations";
 
 export default function product() {
   const router = useRouter();
-  const dispatch = useDispatch()
-  const { query: { id }} = router
+  const dispatch = useDispatch();
+  const {
+    query: { id },
+  } = router;
 
   useEffect(() => {
-    dispatch(getProduct(id))
-  }, [dispatch, id])
-  const { data, loading } = useSelector((state) => state.products)
+    dispatch(getProduct(id));
+  }, [dispatch, id]);
+  const { data, loading } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(getInspirations())
-  }, [dispatch])
-  const {  inspirations } = useSelector( (state) => state.inspirations)
-
-
-
+    dispatch(getInspirations());
+  }, [dispatch]);
+  const { inspirations } = useSelector((state) => state.inspirations);
 
   const breadcrumb = [
     {
@@ -51,19 +50,16 @@ export default function product() {
   ];
 
   return (
-    <BaseLayout title={ data && data.name}>
-      {
-        !loading && (
-          <>
-            <Breadcrumb data={data} items={breadcrumb} />
-            <ProductDescription product={data} />
-            <Recommendations title="You might also like" />
-            <Inspirations inspirations={inspirations} />
-            <NewsLetter />
-          </>
-        )
-      }
-
+    <BaseLayout title={data && data.name}>
+      {!loading && (
+        <>
+          <Breadcrumb data={data} items={breadcrumb} />
+          <ProductDescription product={data} />
+          <Recommendations title="You might also like" />
+          <Inspirations inspirations={inspirations} />
+          <NewsLetter />
+        </>
+      )}
     </BaseLayout>
   );
 }
@@ -77,10 +73,14 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   // Fetch data from api server
+  const id = context.params.id;
+  const product = await FetchProductById(id).catch((error) => console.error(error));
 
   return {
-    props: {},
+    props: {
+      product: product,
+    },
   };
 }

@@ -12,7 +12,17 @@ const api = new WooCommerceRestApi({
 export async function FetchWooCommerceProducts() {
   try {
     const response = await api.get("products");
-    return response;
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+//fetch product by id
+export async function FetchProductById(id) {
+  try {
+    const response = await api.get(`products/${id}`);
+    return response.data;
   } catch (error) {
     return error.message;
   }
@@ -20,8 +30,26 @@ export async function FetchWooCommerceProducts() {
 
 export async function FetchProductCategories() {
   try {
-    const response = await api.get("products/categories");
-    return response;
+    const response = await api.get("products/categories", { per_page: 50, parent: 0 });
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchCategoryById(id) {
+  try {
+    const response = await api.get(`products/categories/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchProductByCategory(id) {
+  try {
+    const response = await api.get(`products`, { category: id, per_page: 10 });
+    return response.data;
   } catch (error) {
     return error.message;
   }
@@ -30,7 +58,43 @@ export async function FetchProductCategories() {
 export async function FetchInspirations(id) {
   try {
     const response = await api.get("products", { category: id });
-    return response;
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchTaxes() {
+  try {
+    const response = await api.get("taxes");
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchTax(id) {
+  try {
+    const response = await api.get(`taxes/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function FetchPaymentGateways() {
+  try {
+    const response = await api.get("payment_gateways");
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function CreateOrder(data) {
+  try {
+    const response = await api.post("orders", data);
+    return response.data;
   } catch (error) {
     return error.message;
   }

@@ -1,12 +1,66 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Svg from "src/components/Svg/Svg";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import styles from "src/components/ShoppingBasket/ShoppingBasket.module.scss";
+import { addLineItem, cartSubTotal, decrementLineItemQuantity, removeLineItem } from "src/store/slices/cartSlice";
+import { TaxCalCulator } from "src/utils/tax_calculator";
 
 function ShoppingBasket() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const [total, setTotal] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
+  const [taxAmount, setTaxAmount] = useState(0);
+  const [isValid, setIsValid] = useState(false);
+  /** Get user cart */
+  const { lineItems, tax } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    /** calculate tax */
+    if (tax) {
+      setTaxAmount(TaxCalCulator(subTotal, parseFloat(tax.rate)));
+    }
+  });
+
+  useEffect(() => {
+    if (lineItems.length > 0) {
+      const cartTotal = lineItems.reduce((total, obj) => obj.total + total, 0);
+      setSubTotal(cartTotal);
+      setIsValid(false);
+    } else {
+      setSubTotal(0);
+      setIsValid(true);
+    }
+  });
+
+  useEffect(() => {
+    setTotal(subTotal + taxAmount);
+  });
+
+  useEffect(() => {
+    const cartAmount = {
+      subTotal: subTotal,
+      total: total,
+      rate: taxAmount,
+    };
+    dispatch(cartSubTotal(cartAmount));
+  }, [total, subTotal, taxAmount]);
+
+  const handleIncrement = (product) => {
+    dispatch(addLineItem(product));
+  };
+
+  const handleDecrement = (product) => {
+    dispatch(decrementLineItemQuantity(product));
+  };
+
+  const handleRemoveItem = (product) => {
+    dispatch(removeLineItem(product));
+  };
 
   return (
     <div className={styles.container}>
@@ -29,80 +83,55 @@ function ShoppingBasket() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <figure>
-                    <Image
-                      src="/images/product-thumb.png"
-                      objectFit="cover"
-                      layout="fill"
-                      alt="Product"
-                    />
-                  </figure>
-                </td>
-                <td>
-                  <div className={styles.desc}>
-                    <h4>Keto Hand-made Vase</h4>
-                    <p>GH-23451</p>
-                  </div>
-                </td>
-                <td>
-                  <div className={styles.quantity}>
-                    <button>
-                      <Svg symbol="minus" />
-                    </button>
-                    <input onChange={() => {}} type="text" value="1" />
-                    <button>
-                      <Svg symbol="plus" />
-                    </button>
-                  </div>
-                </td>
-                <td>100,000 NGN</td>
-                <td>
-                  <div className={styles.action}>
-                    <button>
-                      <Svg symbol="bin" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <figure>
-                    <Image
-                      src="/images/product-thumb.png"
-                      objectFit="cover"
-                      layout="fill"
-                      alt="Product"
-                    />
-                  </figure>
-                </td>
-                <td>
-                  <div className={styles.desc}>
-                    <h4>Keto Hand-made Vase</h4>
-                    <p>GH-23451</p>
-                  </div>
-                </td>
-                <td>
-                  <div className={styles.quantity}>
-                    <button>
-                      <Svg symbol="minus" />
-                    </button>
-                    <input onChange={() => {}} type="text" value="1" />
-                    <button>
-                      <Svg symbol="plus" />
-                    </button>
-                  </div>
-                </td>
-                <td>100,000 NGN</td>
-                <td>
-                  <div className={styles.action}>
-                    <button>
-                      <Svg symbol="bin" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              {lineItems && lineItems.length > 0 ? (
+                lineItems.map((product, idx) => (
+                  <tr key={idx}>
+                    <td>
+                      <figure>
+                        <Image loader={() => `${process.env.APP_URL}${product.image}`} src={`${process.env.APP_URL}${product.image}`} objectFit="cover" alt="Slide 1" layout="fill" />
+                      </figure>
+                    </td>
+                    <td>
+                      <div className={styles.desc}>
+                        <h4>{product.name}</h4>
+                        {/* <p>GH-23451</p> */}
+                      </div>
+                    </td>
+                    <td>
+                      <div className={styles.quantity}>
+                        <button onClick={() => handleDecrement(product)}>
+                          <Svg symbol="minus" />
+                        </button>
+                        <input onChange={() => {}} type="text" value={product.quantity} />
+                        <button onClick={() => handleIncrement(product)}>
+                          <Svg symbol="plus" />
+                        </button>
+                      </div>
+                    </td>
+                    <td>{parseInt(product.price * product.quantity).toLocaleString("en-US")} NGN</td>
+                    <td>
+                      <div className={styles.action}>
+                        <button onClick={() => handleRemoveItem(product)}>
+                          <Svg symbol="bin" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tbody>
+                  <tr>
+                    <td>
+                      <p>No items in your cart</p>
+                      <p>
+                        <button onClick={() => router.push("/shop")} className={styles.btnCheckout}>
+                          Continue Shopping
+                        </button>
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              )}
             </tbody>
           </table>
         </div>
@@ -110,26 +139,23 @@ function ShoppingBasket() {
           <h3>Order Summary</h3>
           <div className={styles.summary}>
             <div className={styles.summary__item}>
-              <h4>Items (2)</h4>
-              <p>200,000 NGN</p>
+              <h4>Items ({lineItems.length})</h4>
+              <p>{subTotal.toLocaleString("en-US")} NGN</p>
             </div>
-            <div className={styles.summary__item}>
+            {/* <div className={styles.summary__item}>
               <h4>Delivery</h4>
               <p>1,000 NGN</p>
-            </div>
+            </div> */}
             <div className={styles.summary__item}>
               <h4>Taxes</h4>
-              <p>-</p>
+              <p>{taxAmount.toLocaleString("en-US")} NGN</p>
             </div>
             <div className={styles.summary__item}>
               <h4>Total</h4>
-              <p>201,000 NGN</p>
+              <p>{total.toLocaleString("en-US")} NGN</p>
             </div>
           </div>
-          <button
-            onClick={() => router.push("/checkout")}
-            className={styles.btnCheckout}
-          >
+          <button disabled={isValid} onClick={() => router.push("/checkout")} className={styles.btnCheckout}>
             Checkout
           </button>
         </div>

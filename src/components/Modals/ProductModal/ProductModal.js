@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import Image from "next/image";
 import className from "classnames";
 import Svg from "src/components/Svg/Svg";
@@ -17,6 +19,8 @@ function ProductModal({ show, close, product }) {
   const ref = useRef();
   const router = useRouter();
 
+  console.log("<<<<", product);
+
   const carouselRef = useRef();
 
   const modalOverlayClass = className({
@@ -25,12 +29,12 @@ function ProductModal({ show, close, product }) {
   });
 
   const singleProduct = () => {
-    let id = product?.id
+    let id = product?.id;
     router.push({
       pathname: `${id}`,
       query: { id: id },
-    })
-  }
+    });
+  };
 
   const modalConfig = {
     nodeRef: ref,
@@ -92,29 +96,18 @@ function ProductModal({ show, close, product }) {
                     <button onClick={gotoPrev} className={styles.sliderBtn}>
                       <Svg symbol="arrow" />
                     </button>
-                    <Carousel
-                      showEmptySlots
-                      itemsToShow={2}
-                      itemsToScroll={1}
-                      outerSpacing={20}
-                      ref={carouselRef}
-                      breakPoints={breakpoints}
-                      itemPadding={[0, 15, 0, 0]}
-                      className={styles.slider__flex}
-                    >
-                      {items.map((item, i) => {
-                        return (
-                          <div key={i} className={styles.slider__item}>
-                            <figure>
-                              <Image
-                                layout="fill"
-                                src={item.img}
-                                alt={item.title}
-                              />
-                            </figure>
-                          </div>
-                        );
-                      })}
+                    <Carousel showEmptySlots itemsToShow={2} itemsToScroll={1} outerSpacing={20} ref={carouselRef} breakPoints={breakpoints} itemPadding={[0, 15, 0, 0]} className={styles.slider__flex}>
+                      {product.images &&
+                        product.images.map((image, i) => {
+                          const img = `https://fairmall.azurewebsites.net${image.src}`;
+                          return (
+                            <div key={i} className={styles.slider__item}>
+                              <figure>
+                                <Image width={400} height={700} loader={() => img} layout="fill" src={image} alt={product.name} />
+                              </figure>
+                            </div>
+                          );
+                        })}
                     </Carousel>
                     <button onClick={gotoNext} className={styles.sliderBtn}>
                       <Svg symbol="arrow" />
@@ -155,6 +148,16 @@ function ProductModal({ show, close, product }) {
                       <h3>Description:</h3>
                       <p>{product?.description}</p>
                     </div>
+                    {product?.attributes?.length > 0
+                      ? product?.attributes.map((item, index) => (
+                          <select style={{ padding: 6, width: 150 }}>
+                            <option key={index}>{item.name}</option>
+                            {item.options.map((item, idx) => (
+                              <option key={idx}>{item}</option>
+                            ))}
+                          </select>
+                        ))
+                      : null}
                     <div className={styles.description__row}>
                       <button onClick={singleProduct}>View More</button>
                       <button>
