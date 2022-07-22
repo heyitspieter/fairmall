@@ -40,13 +40,3 @@ export default function shop() {
     </BaseLayout>
   );
 }
-
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const products = await fetch('https://fairmall-v1.herokuapp.com/api/v1/user/product')
-
-//   // Pass data to the page via props
-//   return { props: {
-//     products: await products.json(),
-//   } }
-// }
