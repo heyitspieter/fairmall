@@ -96,9 +96,9 @@ function ProductModal({ show, close, product }) {
                       <Svg symbol="arrow" />
                     </button>
                     <Carousel showEmptySlots itemsToShow={2} itemsToScroll={1} outerSpacing={20} ref={carouselRef} breakPoints={breakpoints} itemPadding={[0, 15, 0, 0]} className={styles.slider__flex}>
-                      {product.images &&
-                        product.images.map((image, i) => {
-                          const img = `https://fairmall.azurewebsites.net${image.src}`;
+                      {product.additional_images &&
+                        product.additional_images.map((image, i) => {
+                          const img = image;
                           return (
                             <div key={i} className={styles.slider__item}>
                               <figure>
@@ -159,10 +159,12 @@ function ProductModal({ show, close, product }) {
                       : null}
                     <div className={styles.description__row}>
                       <button onClick={singleProduct}>View More</button>
-                      <button>
-                        <Svg symbol="shopping-basket" />
-                        <span>Add to Basket</span>
-                      </button>
+                      {!product.variation && (
+                        <button>
+                          <Svg symbol="shopping-basket" />
+                          <span>Add to Basket</span>
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

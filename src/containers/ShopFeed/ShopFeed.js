@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import formatToCurrency from "src/helpers/formatAmount";
 import { useDispatch } from "react-redux";
 import { addLineItem } from "src/store/slices/cartSlice";
+import { MaxAmount, MinAmount } from "src/utils/variable_amount";
 // import product from "src/pages/[slug]";
 
 function ShopFeed({ products }) {
@@ -89,7 +90,13 @@ function ShopFeed({ products }) {
                     </div>
                   </figure>
                   <h3>{product.name}</h3>
-                  <p>{formatToCurrency(product.price)} NGN</p>
+                  {product.variation ? (
+                    <p>
+                      {formatToCurrency(MinAmount(product.variation))} - {formatToCurrency(MaxAmount(product.variation))}
+                    </p>
+                  ) : (
+                    <p>{formatToCurrency(product.price)}</p>
+                  )}
                 </div>
               );
             })}

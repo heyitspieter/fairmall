@@ -88,7 +88,7 @@ function ShoppingBasket() {
                   <tr key={idx}>
                     <td>
                       <figure>
-                        <Image loader={() => `${process.env.APP_URL}${product.image}`} src={`${process.env.APP_URL}${product.image}`} objectFit="cover" alt="Slide 1" layout="fill" />
+                        <Image loader={() => `${product.image}`} src={`${product.image}`} objectFit="cover" alt="Slide 1" layout="fill" />
                       </figure>
                     </td>
                     <td>
