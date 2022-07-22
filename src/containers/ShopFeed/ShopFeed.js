@@ -5,17 +5,21 @@ import ProductModal from "src/components/Modals/ProductModal/ProductModal";
 import styles from "src/containers/ShopFeed/ShopFeed.module.scss";
 import { useRouter } from "next/router";
 import formatToCurrency from "src/helpers/formatAmount";
+import { useDispatch } from "react-redux";
+import { addLineItem } from "src/store/slices/cartSlice";
 // import product from "src/pages/[slug]";
 
 function ShopFeed({ products }) {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [modal, setModal] = useState({
     visibility: false,
   });
   const [selectedProduct, setSelectedProduct] = useState({});
+  const [viewProduct, setViewProduct] = useState();
 
-  // console.log('===products===', products);
+  console.log("===products===", products);
 
   const handleAddToCard = async (product) => {
     const lineItem = {
@@ -23,7 +27,7 @@ function ShopFeed({ products }) {
       variation_id: product.vatiation ? product.variation.id : null,
       name: product.name,
       price: parseFloat(product.price),
-      image: product.images[0].src,
+      image: product.image,
       quantity: 1,
       total: product.price * 1,
     };
@@ -55,16 +59,18 @@ function ShopFeed({ products }) {
         <div className={styles.grid}>
           {products.length > 0 &&
             products.map((product, i) => {
-              const img = "https://www-konga-com-res.cloudinary.com/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/media/catalog/product/T/S/3516_1653297492.jpg";
+              const img = product.image;
               return (
                 <div key={i} className={styles.grid__item}>
                   <figure>
                     <Image loader={() => img} objectFit="cover" alt={product.name} src={img} layout="fill" />
                     <div className={styles.grid__item_options}>
-                      <button>
-                        <span>Add to Basket</span>
-                        <Svg symbol="shopping-basket" />
-                      </button>
+                      {!product.variation && (
+                        <button onClick={() => handleAddToCard(product)}>
+                          <span>Add to Basket</span>
+                          <Svg symbol="shopping-basket" />
+                        </button>
+                      )}
                       <button
                         //  onClick={toggleModalHandler}
                         onClick={() => {

@@ -6,7 +6,6 @@ import className from "classnames";
 import Svg from "src/components/Svg/Svg";
 import Carousel from "react-elastic-carousel";
 import { CSSTransition } from "react-transition-group";
-import { useRouter } from "next/router";
 
 import styles from "src/components/Modals/ProductModal/ProductModal.module.scss";
 

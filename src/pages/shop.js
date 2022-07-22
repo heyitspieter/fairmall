@@ -17,19 +17,18 @@ export default function shop() {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-  const { products } = useSelector((state) => state.products);
-
+  const { products } = useSelector((state) => state.product);
   // fetch Categories
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
-  const { categories } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.category);
 
   // fetch inspirations
   useEffect(() => {
     dispatch(getInspirations());
   }, [dispatch]);
-  const { inspirations } = useSelector((state) => state.inspirations);
+  const { inspirations } = useSelector((state) => state.inspiration);
 
   return (
     <BaseLayout title="Shop - Fairmall">
