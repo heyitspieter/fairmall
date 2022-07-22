@@ -151,7 +151,7 @@ function ProductModal({ show, close, product }) {
                       ? product?.attributes.map((item, index) => (
                           <select style={{ padding: 6, width: 150 }}>
                             <option key={index}>{item.name}</option>
-                            {item.options.map((item, idx) => (
+                            {item.terms.map((item, idx) => (
                               <option key={idx}>{item}</option>
                             ))}
                           </select>

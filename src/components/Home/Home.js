@@ -10,14 +10,14 @@ import styles from "src/components/Home/Home.module.scss";
 import { getInspirations } from "../../store/slices/inspirations";
 
 function Home() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // fetch inspirations
   useEffect(() => {
-    dispatch(getInspirations())
-  }, [dispatch])
+    dispatch(getInspirations());
+  }, [dispatch]);
 
-  const { inspirations } = useSelector((state) => state.inspirations)
+  const { inspirations } = useSelector((state) => state.inspiration);
 
   return (
     <div className={styles.container}>
