@@ -158,7 +158,7 @@ function ProductModal({ show, close, product }) {
                         ))
                       : null}
                     <div className={styles.description__row}>
-                      <button onClick={singleProduct}>View More</button>
+                      <button onClick={() => router.push(`/${product.id}`)}>View More</button>
                       {!product.variation && (
                         <button>
                           <Svg symbol="shopping-basket" />

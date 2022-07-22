@@ -10,17 +10,19 @@ import { getProduct } from "src/store/slices/products";
 import { useSelector, useDispatch } from "react-redux";
 import { getInspirations } from "src/store/slices/inspirations";
 
-export default function product() {
+export default function product({ cont }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const {
-    query: { id },
-  } = router;
+
+  console.log("====================================");
+  console.log(cont);
+  console.log("====================================");
 
   useEffect(() => {
     dispatch(getProduct(id));
   }, [dispatch, id]);
-  const { data, loading } = useSelector((state) => state.products);
+  // const { data, loading } = useSelector((state) => state.products);
+  const data = null;
 
   useEffect(() => {
     dispatch(getInspirations());
@@ -53,8 +55,8 @@ export default function product() {
     <BaseLayout title={data && data.name}>
       {!loading && (
         <>
-          <Breadcrumb data={data} items={breadcrumb} />
-          <ProductDescription product={data} />
+          {/* <Breadcrumb data={data} items={breadcrumb} /> */}
+          {/* <ProductDescription product={data} /> */}
           <Recommendations title="You might also like" />
           <Inspirations inspirations={inspirations} />
           <NewsLetter />
@@ -75,12 +77,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   // Fetch data from api server
-  const id = context.params.id;
-  const product = await FetchProductById(id).catch((error) => console.error(error));
+  const cont = context.id;
+  console.log("====================================");
+  console.log(id);
+  console.log("====================================");
 
   return {
     props: {
-      product: product,
+      cont: cont,
     },
   };
 }
