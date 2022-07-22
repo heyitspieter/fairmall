@@ -10,24 +10,19 @@ import { getProduct } from "src/store/slices/products";
 import { useSelector, useDispatch } from "react-redux";
 import { getInspirations } from "src/store/slices/inspirations";
 
-export default function product({ cont }) {
+export default function product({ id }) {
   const router = useRouter();
   const dispatch = useDispatch();
-
-  console.log("====================================");
-  console.log(cont);
-  console.log("====================================");
 
   useEffect(() => {
     dispatch(getProduct(id));
   }, [dispatch, id]);
-  // const { data, loading } = useSelector((state) => state.products);
-  const data = null;
+  const { data, loading } = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(getInspirations());
   }, [dispatch]);
-  const { inspirations } = useSelector((state) => state.inspirations);
+  const { inspirations } = useSelector((state) => state.inspiration);
 
   const breadcrumb = [
     {
@@ -55,9 +50,9 @@ export default function product({ cont }) {
     <BaseLayout title={data && data.name}>
       {!loading && (
         <>
-          {/* <Breadcrumb data={data} items={breadcrumb} /> */}
-          {/* <ProductDescription product={data} /> */}
-          <Recommendations title="You might also like" />
+          <Breadcrumb data={data} items={breadcrumb} />
+          <ProductDescription product={data} />
+          {/* <Recommendations title="You might also like" /> */}
           <Inspirations inspirations={inspirations} />
           <NewsLetter />
         </>
@@ -75,16 +70,13 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps({ params }) {
   // Fetch data from api server
-  const cont = context.id;
-  console.log("====================================");
-  console.log(id);
-  console.log("====================================");
+  const cont = params.id;
 
   return {
     props: {
-      cont: cont,
+      id: cont,
     },
   };
 }

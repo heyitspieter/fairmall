@@ -13,16 +13,16 @@ function ProductDescription({ product }) {
           <div className={styles.gallery__left}>
             <Image
               // src="/images/product-cover.png"
-              loader={() => process.env.APP_URL + product?.images[0].src}
-              src={`${process.env.APP_URL}${product?.images[0].src}`}
+              loader={() => product?.image}
+              src={`${product?.image}`}
               alt="Product Name"
               objectFit="cover"
               layout="fill"
             />
           </div>
           <div className={styles.gallery__right}>
-            {product?.images.map((image, index) => {
-              const img = `${process.env.APP_URL}${image.src}`;
+            {product?.additional_images.map((image, index) => {
+              const img = `${image}`;
               return (
                 <figure key={index}>
                   <Image loader={() => img} src={img} alt="Product Name" objectFit="cover" layout="fill" />
