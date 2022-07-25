@@ -53,11 +53,13 @@ const loginuser = createAsyncThunk(
 const getProfile = createAsyncThunk(
     "user/getProfile",
     async (_, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
         const config = {
             method: "get",
             url: url.getProfile,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
             },
         };
         try {
@@ -75,11 +77,13 @@ const getProfile = createAsyncThunk(
 const updateProfile = createAsyncThunk(
     "user/updateProfile",
     async (data, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
         const config = {
             method: "put",
             url: url.updateProfile,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
             },
             data,
         };
