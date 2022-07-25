@@ -8,6 +8,8 @@ import Carousel from "react-elastic-carousel";
 import { CSSTransition } from "react-transition-group";
 
 import styles from "src/components/Modals/ProductModal/ProductModal.module.scss";
+import { addToFavorites } from "src/store/slices/favorites";
+import { useDispatch } from "react-redux";
 
 const animationTiming = {
   exit: 400,
@@ -17,8 +19,10 @@ const animationTiming = {
 function ProductModal({ show, close, product }) {
   const ref = useRef();
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  console.log("<<<<", product);
+
+  // console.log("<<<<", product);
 
   const carouselRef = useRef();
 
@@ -69,6 +73,22 @@ function ProductModal({ show, close, product }) {
       img: "/images/inspo-9.png",
     },
   ];
+
+  const handleFavorite = (product) => {
+    let data = {
+      product_id: product.id
+    }
+    dispatch(addToFavorites(data))
+    .then(res => {
+      if(res.payload.status === 200) {
+        console.log("===add to favorites===", res.payload.data);
+      }else{
+        console.log("===did not add to favorites===", res.payload.message);
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   const gotoPrev = () => {
     if (carouselRef.current) {
@@ -138,7 +158,7 @@ function ProductModal({ show, close, product }) {
                           </button>
                         </div>
                         <a href="#">(20)</a>
-                        <button>
+                        <button onClick={()=>handleFavorite(product)}>
                           <Svg symbol="heart-outline" />
                         </button>
                       </div>

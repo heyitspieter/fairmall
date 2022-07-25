@@ -8,6 +8,7 @@ import formatToCurrency from "src/helpers/formatAmount";
 import { useDispatch } from "react-redux";
 import { addLineItem } from "src/store/slices/cartSlice";
 import { MaxAmount, MinAmount } from "src/utils/variable_amount";
+import { addToFavorites } from "src/store/slices/favorites";
 // import product from "src/pages/[slug]";
 
 function ShopFeed({ products }) {
@@ -20,7 +21,7 @@ function ShopFeed({ products }) {
   const [selectedProduct, setSelectedProduct] = useState({});
   const [viewProduct, setViewProduct] = useState();
 
-  console.log("===products===", products);
+  // console.log("===products===", products);
 
   const handleAddToCard = async (product) => {
     const lineItem = {
@@ -34,6 +35,22 @@ function ShopFeed({ products }) {
     };
     dispatch(addLineItem(lineItem));
   };
+
+  const handleFavorite = (product) => {
+    let data = {
+      product_id: product.id
+    }
+    dispatch(addToFavorites(data))
+    .then(res => {
+      if(res.payload.status === 200) {
+        console.log("===add to favorites===", res.payload.data);
+      }else{
+        console.log("===did not add to favorites===", res.payload.message);
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   const toggleModalHandler = (product) => {
     setViewProduct(product);
@@ -83,7 +100,7 @@ function ShopFeed({ products }) {
                         <span>Quick View</span>
                         <Svg symbol="eye" />
                       </button>
-                      <button>
+                      <button onClick={()=>handleFavorite(product)}>
                         <span>Save</span>
                         <Svg symbol="heart-outline" />
                       </button>

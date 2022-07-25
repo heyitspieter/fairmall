@@ -7,8 +7,14 @@ import FormInput from "src/components/Form/FormInput/FormInput";
 
 import styles from "src/containers/Signup/Signup.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
+import { useDispatch } from "react-redux";
+import { registerUser } from "src/store/slices/user";
 
 function Signup() {
+
+  const dispatch = useDispatch();
+  
+
   // Form state
   const [formControls, setFormControls] = useState({
     firstname: {
@@ -169,6 +175,10 @@ function Signup() {
       }
 
       // Submit form here
+
+      // dispatch(registerUser(data))
+      // .then()
+      // .catch()
     }
   };
 

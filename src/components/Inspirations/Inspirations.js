@@ -12,7 +12,7 @@ function Inspirations() {
   useEffect(() => {
     dispatch(getInspirations())
   }, [dispatch])
-  const { inspirations } = useSelector((state) => state.inspirations)
+  const { inspirations } = useSelector((state) => state.inspiration)
 
 
   return (

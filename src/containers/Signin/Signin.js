@@ -7,8 +7,12 @@ import FormInput from "src/components/Form/FormInput/FormInput";
 
 import styles from "src/containers/Signin/Signin.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
+import { useDispatch } from "react-redux";
+import { loginuser } from "src/store/slices/user";
 
 function Signin() {
+  const dispatch = useDispatch();
+
   // Form state
   const [formControls, setFormControls] = useState({
     email: {
@@ -121,6 +125,10 @@ function Signin() {
       }
 
       // Submit form here
+
+      // dispatch(loginuser(data))
+      // .then()
+      // .catch()
     }
   };
 

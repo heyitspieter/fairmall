@@ -3,6 +3,9 @@ import cartReducer from "./slices/cartSlice";
 import productsReducer from "./slices/products";
 import categoriesReducer from "./slices/categories";
 import inspirationsReducer from "./slices/inspirations";
+import favoritesReducer from "./slices/favorites";
+import UserReducer from "./slices/user";
+
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -12,6 +15,9 @@ const reducers = combineReducers({
   product: productsReducer,
   category: categoriesReducer,
   inspiration: inspirationsReducer,
+  favorites: favoritesReducer,
+  user: UserReducer,
+
 });
 
 const persistConfig = {

@@ -10,19 +10,19 @@ const Breadcrumb = ({ data }) => {
         <ol>
           <li>
             <Link href={""}>
-              <a>{data.category.name}</a>
+              <a>{data?.category?.name}</a>
             </Link>
             <Svg className={styles.iconChevronRight} symbol="chevron" />
           </li>
           <li>
             <Link href={""}>
-              <a>{data.subcategory.name}</a>
+              <a>{data?.subcategory?.name}</a>
             </Link>
             <Svg className={styles.iconChevronRight} symbol="chevron" />
           </li>
           <li>
             <a className={styles.current} href="#">
-              {data.name}
+              {data?.name}
             </a>
           </li>
         </ol>

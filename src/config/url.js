@@ -12,3 +12,15 @@ export const getCategory = (slug) => baseUrl + `/user/category/${slug}`
 // MANAGE INSPIRATIONS
 export const getInspirations= baseUrl + "/user/inspiration"
 // export const getInspiration = (slug) => baseUrl + `/user/inspiration/${slug}`
+
+// MANAGE FAVORITES
+export const addToFavorites= baseUrl + "/user/favourite"
+export const getFavorites = baseUrl + "/user/favourite"
+export const removeFromFavorite = baseUrl + "/user/favourite/remove"
+export const emptyFavorites = baseUrl + "/user/favourite/empty"
+
+//MANAGE USER
+export const registerUser= baseUrl + "/auth/register"
+export const loginuser = baseUrl + "/auth/login"
+export const getProfile = baseUrl + "/user/profile"
+export const updateProfile = baseUrl + "/user/profile"

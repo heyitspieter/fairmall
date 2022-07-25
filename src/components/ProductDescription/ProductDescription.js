@@ -21,7 +21,7 @@ function ProductDescription({ product }) {
             />
           </div>
           <div className={styles.gallery__right}>
-            {product?.additional_images.map((image, index) => {
+            {product?.additional_images?.map((image, index) => {
               const img = `${image}`;
               return (
                 <figure key={index}>
