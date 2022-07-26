@@ -7,11 +7,14 @@ import axios from "../../config/axios"
 const getOrdersData = createAsyncThunk(
     "orders/getOrdersData",
     async (_, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
+
         const config = {
             method: "get",
             url: url.getOrders,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
             },
         };
         try {
@@ -29,13 +32,16 @@ const getOrdersData = createAsyncThunk(
 const createOrder = createAsyncThunk(
     "orders/createOrder",
     async (data, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
+
         const config = {
             method: "post",
             url: url.createOrder,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
             },
-            data
+            data,
         };
         try {
             const response = await axios(config);
@@ -92,5 +98,5 @@ const slice = createSlice({
     },
 });
 
-export { getOrdersData, getCategory};
+export { getOrdersData, createOrder};
 export default slice.reducer;

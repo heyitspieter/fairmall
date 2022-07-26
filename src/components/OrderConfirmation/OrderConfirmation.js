@@ -4,8 +4,21 @@ import Svg from "src/components/Svg/Svg";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import styles from "src/components/OrderConfirmation/OrderConfirmation.module.scss";
 import PaystackPayButton from "../Paystack/PaystackButton";
+import { useEffect } from "react";
+import { getOrdersData } from "src/store/slices/orders";
+import { useDispatch, useSelector } from "react-redux";
 
 function OrderConfirmation() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrdersData());
+  }, [dispatch]);
+
+  // const { data } = useSelector((state) => state.orders);
+
+  // console.log('data', data)
+
   return (
     <div className={styles.container}>
       <div className={spiralLeft}>
