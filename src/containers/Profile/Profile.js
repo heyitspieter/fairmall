@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { updateObject, checkFormValidity } from "src/helpers";
 import FormInput from "src/components/Form/FormInput/FormInput";
@@ -7,8 +7,18 @@ import FormInput from "src/components/Form/FormInput/FormInput";
 import formStyles from "styles/modules/Form.module.scss";
 import styles from "src/containers/Profile/Profile.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "src/store/slices/user";
 
 function Profile() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProfile());
+  },[dispatch]);
+
+  // const { userData } = useSelector((state) => state.user);
+
   // Form state
   const [formControls, setFormControls] = useState({
     firstname: {

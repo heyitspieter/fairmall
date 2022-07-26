@@ -110,7 +110,7 @@ const slice = createSlice({
         status: false,
         loading: false,
         error: null,
-        user: {},
+        userData: {},
     },
 
     reducers: {},
@@ -121,9 +121,9 @@ const slice = createSlice({
             state.loading = true;
         },
         [registerUser.fulfilled]: (state, { payload }) => {
-            state.user = payload.data.user;
-            localStorage.setItem("user", payload.data.user);
-            localStorage.setItem("token", payload.data.token.token);
+            state.userData = payload.data.user;
+            // localStorage.setItem("user", payload.data.user);
+            // localStorage.setItem("token", payload.data.token.token);
             state.loading = false;
         },
         [registerUser.rejected]: (state, { payload }) => {
@@ -136,9 +136,7 @@ const slice = createSlice({
             state.loading = true;
         },
         [loginuser.fulfilled]: (state, { payload }) => {
-            state.user = payload.data.user;
-            localStorage.setItem("user", payload.data.user);
-            localStorage.setItem("token", payload.data.token.token);
+            state.userData = payload.data.user;
             state.loading = false;
         },
         [loginuser.rejected]: (state, { payload }) => {
@@ -151,7 +149,7 @@ const slice = createSlice({
             state.loading = true;
         },
         [getProfile.fulfilled]: (state, { payload }) => {
-            state.user = payload.data;
+            state.userData = payload.data;
             state.loading = false;
         },
         [getProfile.rejected]: (state, { payload }) => {

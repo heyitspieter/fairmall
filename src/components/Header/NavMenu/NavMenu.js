@@ -9,6 +9,7 @@ import styles from "src/components/Header/NavMenu/NavMenu.module.scss";
 
 function NavMenu() {
   const router = useRouter();
+  const user = localStorage.getItem("user");
 
   const sidedrawer = useContext(SidedrawerContext);
 
@@ -38,7 +39,7 @@ function NavMenu() {
           value=""
           type="text"
           onBlur={onBlur}
-          onChange={() => {}}
+          onChange={() => { }}
           placeholder="Search furniture, household items, art and craft"
         />
         <button onClick={onClickSearchBtn}>
@@ -47,29 +48,42 @@ function NavMenu() {
       </div>
       <button>
         <Svg symbol="person" />
-        <div className={styles.dropdown}>
-          <Link href="/account/profile">
-            <a>
-              <Svg symbol="person" />
-              <span>Profile</span>
-            </a>
-          </Link>
-          <Link href="/saved">
-            <a>
-              <Svg symbol="heart-outline" />
-              <span>Saved Items</span>
-            </a>
-          </Link>
-          <Link href="/orders">
-            <a>
-              <Svg symbol="bookmark" />
-              <span>Orders</span>
-            </a>
-          </Link>
-          <Link href="/signin">
-            <a>Sign In</a>
-          </Link>
-        </div>
+        {
+          user ? (
+            <div className={styles.dropdown}>
+              <Link href="/account/profile">
+                <a>
+                  <Svg symbol="person" />
+                  <span>Profile</span>
+                </a>
+              </Link>
+              <Link href="/saved">
+                <a>
+                  <Svg symbol="heart-outline" />
+                  <span>Saved Items</span>
+                </a>
+              </Link>
+              <Link href="/orders">
+                <a>
+                  <Svg symbol="bookmark" />
+                  <span>Orders</span>
+                </a>
+              </Link>
+              <Link href="/">
+                <a>Sign out</a>
+              </Link>
+
+            </div>
+          ) : (
+            <div className={styles.dropdown}>
+
+              <Link href="/signin">
+                <a>Sign In</a>
+              </Link>
+
+            </div>
+          )
+        }
       </button>
       <button onClick={() => router.push("/basket")}>
         <Svg symbol="shopping-basket" />

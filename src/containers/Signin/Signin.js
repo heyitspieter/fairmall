@@ -9,9 +9,14 @@ import styles from "src/containers/Signin/Signin.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import { useDispatch } from "react-redux";
 import { loginuser } from "src/store/slices/user";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+
 
 function Signin() {
   const dispatch = useDispatch();
+  const router = useRouter();
+
 
   // Form state
   const [formControls, setFormControls] = useState({
@@ -125,10 +130,24 @@ function Signin() {
       }
 
       // Submit form here
+      const data = {
+        email: formControls.email.value,
+        password: formControls.password.value,
+      };
 
-      // dispatch(loginuser(data))
-      // .then()
-      // .catch()
+      dispatch(loginuser(data))
+        .then((res) => {
+          if (res.payload.status === 200) {
+            localStorage.setItem("user", res.payload.data.user);
+            localStorage.setItem("token", res.payload.data.token.login.token);
+            router.push('/account/profile');
+          } else {
+            console.log(res.payload);
+            toast.error(res.payload.message);
+
+          }
+        })
+        .catch((err) => toast.error(err.message));
     }
   };
 

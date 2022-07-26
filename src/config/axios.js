@@ -5,20 +5,20 @@ const prompt_login = 'Please Login';
 axios.interceptors.request.use(
   async request => {
     console.log(request.url, request.method, JSON.stringify(request.data));
-    const token = await AsyncStorage.getItem('token');
+    const token =  localStorage.getItem("token");
 
     // console.log('token', token);
     if (!token && !request.url.includes('/auth')) {
       throw new Error(prompt_login);
     }
-    request.headers.Authorization = `x-access-token ${await localStorage.getItem(
+    request.headers.Authorization = `x-access-token ${localStorage.getItem(
       'token',
     )}`;
     return request;
   },
   error => {
     if (error.message === prompt_login) {
-      window.location.href = '/';
+      // window.location.href = '/';
       console.log('error from axios', error);
     }
     console.warn(error?.response?.data);
@@ -41,7 +41,7 @@ axios.interceptors.response.use(
     console.warn(error?.response?.data);
     if ([403, 401].includes(error?.response?.status)) {
       error.message = prompt_login;
-      window.location.href = '/';
+      // window.location.href = '/';
       console.log('error from axios', error);
 
     } else if (error?.response?.data) {

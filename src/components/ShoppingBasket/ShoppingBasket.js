@@ -102,7 +102,7 @@ function ShoppingBasket() {
                         <button onClick={() => handleDecrement(product)}>
                           <Svg symbol="minus" />
                         </button>
-                        <input onChange={() => {}} type="text" value={product.quantity} />
+                        <input onChange={() => { }} type="text" value={product.quantity} />
                         <button onClick={() => handleIncrement(product)}>
                           <Svg symbol="plus" />
                         </button>
@@ -155,7 +155,14 @@ function ShoppingBasket() {
               <p>{total.toLocaleString("en-US")} NGN</p>
             </div>
           </div>
-          <button disabled={isValid} onClick={() => router.push("/checkout")} className={styles.btnCheckout}>
+          <button disabled={isValid} onClick={() => {
+            router.push({
+              pathname: '/checkout',
+              query: { lineItems: lineItems },
+            });
+            // router.push("/checkout")
+          }
+          } className={styles.btnCheckout}>
             Checkout
           </button>
         </div>
