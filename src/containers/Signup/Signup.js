@@ -11,9 +11,7 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "src/store/slices/user";
 
 function Signup() {
-
   const dispatch = useDispatch();
-  
 
   // Form state
   const [formControls, setFormControls] = useState({
@@ -146,10 +144,7 @@ function Signup() {
     const updatededFormControls = updateObject(formControls, {
       [formControlKey]: updateObject(formControls[formControlKey], {
         value: event.target.value,
-        valid: checkFormValidity(
-          event.target.value,
-          formControls[formControlKey].validation
-        ),
+        valid: checkFormValidity(event.target.value, formControls[formControlKey].validation),
         touched: true,
       }),
     });
@@ -175,10 +170,16 @@ function Signup() {
       }
 
       // Submit form here
+      const data = {
+        firstname: formControls.firstname.value,
+        lastname: formControls.lastname.value,
+        email: formControls.email.value,
+        password: formControls.password.value,
+      };
 
-      // dispatch(registerUser(data))
-      // .then()
-      // .catch()
+      dispatch(registerUser(data))
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   };
 
@@ -205,10 +206,7 @@ function Signup() {
       onChange={(event) => inputChangeHandler(event, id)}
     >
       {config.elementConfig.id === "password" && (
-        <button
-          onClick={(e) => togglePassword(e)}
-          className={styles.btnVisibility}
-        >
+        <button onClick={(e) => togglePassword(e)} className={styles.btnVisibility}>
           <Svg symbol={passwordVisible ? "mask" : "unmask"} />
         </button>
       )}
@@ -232,10 +230,7 @@ function Signup() {
       <div className={styles.formPanel}>
         <h4>Create an account</h4>
         <p>Get access to previous orders, saved items and get the best of offers</p>
-        <form
-          onSubmit={(e) => onSubmitFormHandler(e)}
-          className={styles.formElement}
-        >
+        <form onSubmit={(e) => onSubmitFormHandler(e)} className={styles.formElement}>
           {formInputs}
           <div className={styles.formGroup}>
             <div className={styles.formCheckbox}>
