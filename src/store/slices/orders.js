@@ -60,10 +60,11 @@ const slice = createSlice({
     name: "orders",
 
     initialState: {
-        data: {},
+        data: null,
         status: false,
         loading: false,
         error: null,
+        checkoutData: null,
         orders: [],
     },
 
@@ -75,7 +76,8 @@ const slice = createSlice({
             state.loading = true;
         },
         [getOrdersData.fulfilled]: (state, { payload }) => {
-            state.data = payload.data;
+            console.log('getOrdersData===', payload.data)
+            state.checkoutData = payload.data;
             state.loading = false;
         },
         [getOrdersData.rejected]: (state, { payload }) => {

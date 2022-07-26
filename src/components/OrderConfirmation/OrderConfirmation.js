@@ -10,14 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 function OrderConfirmation() {
   const dispatch = useDispatch();
-
+const { checkoutData } = useSelector((state) => state.orders);
   useEffect(() => {
     dispatch(getOrdersData());
   }, [dispatch]);
 
-  // const { data } = useSelector((state) => state.orders);
+  
 
-  // console.log('data', data)
+  console.log('data', data)
 
   return (
     <div className={styles.container}>
