@@ -11,41 +11,37 @@ const initialState = {
 };
 
 const addLineItemReducer = (state, action) => {
-  const index = state.lineItems.findIndex((lineItem) => lineItem.product_id === action.payload.product_id);
+  const index = state.lineItems.findIndex((lineItem) => lineItem.product_id === action.payload.product_id && lineItem.variation_id === action.payload.variation_id);
   // if index === -1, id is not in lineItems array
   if (index === -1) {
     // add line item to lineItems array
     state.lineItems = [...state.lineItems, action.payload];
-    toast.success('Item has been added to cart')
-
+    toast.success("Item has been added to cart");
   } else {
     // update the lineItems[index] quantity
     state.lineItems[index].quantity += 1;
     state.lineItems[index].total = state.lineItems[index].price * state.lineItems[index].quantity;
-    toast.success('Item quantity has been updated in cart')
-
+    toast.success("Item quantity has been updated in cart");
   }
 };
 
 const decrementQuantityReducer = (state, action) => {
-  const index = state.lineItems.findIndex((lineItem) => lineItem.product_id === action.payload.product_id);
+  const index = state.lineItems.findIndex((lineItem) => lineItem.product_id === action.payload.product_id && lineItem.variation_id === action.payload.variation_id);
   // if index === -1, id is not in lineItems array
   if (index >= 0 && state.lineItems[index].quantity > 1) {
     // update the lineItems[index] quantity
     state.lineItems[index].quantity -= 1;
     state.lineItems[index].total = state.lineItems[index].price * state.lineItems[index].quantity;
-    toast.success('Item quantity has been reduced from cart')
-
+    toast.success("Item quantity has been reduced from cart");
   }
 };
 
 const removeLineItemReducer = (state, action) => {
-  const index = state.lineItems.findIndex((lineItem) => lineItem.product_id === action.payload.product_id);
+  const index = state.lineItems.findIndex((lineItem) => lineItem.product_id === action.payload.product_id && lineItem.variation_id === action.payload.variation_id);
   // if index === -1, id is not in lineItems array
   if (index >= 0) {
     state.lineItems.splice(index, 1);
-    toast.success('Item has been removed from cart')
-
+    toast.success("Item has been removed from cart");
   }
 };
 

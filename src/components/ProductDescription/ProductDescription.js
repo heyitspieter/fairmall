@@ -1,23 +1,49 @@
 import Image from "next/image";
 import Svg from "src/components/Svg/Svg";
 import { useState } from "react";
-
+import { MaxAmount, MinAmount } from "src/utils/variable_amount";
+import { useDispatch } from "react-redux";
+import { addLineItem } from "src/store/slices/cartSlice";
 import styles from "src/components/ProductDescription/ProductDescription.module.scss";
 import formatToCurrency from "src/helpers/formatAmount";
 
 function ProductDescription({ product, variations }) {
-  // console.log("product single", variations);
+  const dispatch = useDispatch();
   const [productVariations, setProductVariations] = useState(variations);
-  const [selectedAttribute, setSelectedAttribute] = useState(null);
-  const [attributeTerms, setAttributeTerms] = useState([]);
+  const [selectedVariation, setSelectedVariation] = useState(null);
+  const [addToVariationCard, setAddToVariationCard] = useState(true);
 
-  const handleAttributeChange = (e) => {
-    const { name, value } = e.target;
-    if (value !== "") {
-      setSelectedAttribute(value);
-    } else {
-      setSelectedAttribute(null);
-    }
+  const handleSelectedVariation = (variation) => {
+    setSelectedVariation(variation);
+    setAddToVariationCard(false);
+  };
+
+  const handleAddToCard = (product) => {
+    const lineItem = {
+      product_id: product.id,
+      variation_id: null,
+      name: product.name,
+      price: parseFloat(product.price),
+      variation: null,
+      image: product.image,
+      quantity: 1,
+      total: product.price * 1,
+    };
+    dispatch(addLineItem(lineItem));
+  };
+
+  const handleAddToCardWithVariation = (product, variation) => {
+    const lineItem = {
+      product_id: product.id,
+      variation_id: variation.id,
+      name: product.name,
+      price: parseFloat(variation.price),
+      variation: variation,
+      image: variation.image,
+      quantity: 1,
+      total: variation.price * 1,
+    };
+    dispatch(addLineItem(lineItem));
   };
   return (
     <div className={styles.container}>
@@ -42,31 +68,6 @@ function ProductDescription({ product, variations }) {
                 </figure>
               );
             })}
-
-            {/* <figure>
-              <Image
-                src="/images/product-thumb.png"
-                alt="Product Name"
-                objectFit="cover"
-                layout="fill"
-              />
-            </figure>
-            <figure>
-              <Image
-                src="/images/product-thumb.png"
-                alt="Product Name"
-                objectFit="cover"
-                layout="fill"
-              />
-            </figure>
-            <figure>
-              <Image
-                src="/images/product-thumb.png"
-                alt="Product Name"
-                objectFit="cover"
-                layout="fill"
-              />
-            </figure> */}
           </div>
         </div>
         <div className={styles.info}>
@@ -104,35 +105,38 @@ function ProductDescription({ product, variations }) {
           </div>
           {variations.variations && (
             <div className={styles.info__2}>
-              <div className={styles.info__3}>
-                <select onChange={handleAttributeChange}>
-                  <option value="">Select Size</option>
-                  {product.attributes.map((attribute, idx) => {
-                    return (
-                      <option key={idx} value={attribute.name}>
-                        {attribute.name}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-              {selectedAttribute && (
-                <div className={styles.info__3}>
-                  <select>
-                    <option>Select {selectedAttribute}</option>
-                  </select>
+              {product.variation.map((variation, idx) => (
+                <div className={styles.btnAdd} key={idx}>
+                  <button onClick={() => handleSelectedVariation(variation)} style={{ marginRight: "5px" }}>
+                    <p>
+                      {variation.attribute}: {variation.term}
+                    </p>
+                  </button>
                 </div>
-              )}
+              ))}
             </div>
           )}
           <div className={styles.info__3}>
-            <p>{formatToCurrency(product.price)} NGN</p>
+            {product && product.variation ? (
+              <p>
+                {formatToCurrency(MinAmount(product?.variation))} - {formatToCurrency(MaxAmount(product?.variation))}
+              </p>
+            ) : (
+              <p>{formatToCurrency(product?.price)}</p>
+            )}
           </div>
           <div className={styles.btnAdd}>
-            <button>
-              <Svg symbol="shopping-basket" />
-              <span>Add to Basket</span>
-            </button>
+            {product.variation ? (
+              <button onClick={() => handleAddToCardWithVariation(product, selectedVariation)} disabled={addToVariationCard}>
+                <Svg symbol="shopping-basket" />
+                <span>Add to Basket</span>
+              </button>
+            ) : (
+              <button onClick={() => handleAddToCard(product)}>
+                <Svg symbol="shopping-basket" />
+                <span>Add to Basket</span>
+              </button>
+            )}
           </div>
         </div>
         <div className={styles.actions}>

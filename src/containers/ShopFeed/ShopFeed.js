@@ -39,22 +39,22 @@ function ShopFeed({ products }) {
 
   const handleFavorite = (product) => {
     let data = {
-      product_id: product.id
-    }
+      product_id: product.id,
+    };
     dispatch(addToFavorites(data))
-    .then(res => {
-      if(res.payload.status === 200) {
-        console.log("===add to favorites===", res.payload.data);
-       
-      }else{
-        console.log("===did not add to favorites===", res.payload.message);
-        toast.error(res.payload.message)
-      }
-    }).catch(err => {
-      console.log(err)
-      toast.error(err.message)
-    })
-  }
+      .then((res) => {
+        if (res.payload.status === 200) {
+          console.log("===add to favorites===", res.payload.data);
+        } else {
+          console.log("===did not add to favorites===", res.payload.message);
+          toast.error(res.payload.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.message);
+      });
+  };
 
   const toggleModalHandler = (product) => {
     setViewProduct(product);
@@ -104,7 +104,7 @@ function ShopFeed({ products }) {
                         <span>Quick View</span>
                         <Svg symbol="eye" />
                       </button>
-                      <button onClick={()=>handleFavorite(product)}>
+                      <button onClick={() => handleFavorite(product)}>
                         <span>Save</span>
                         <Svg symbol="heart-outline" />
                       </button>

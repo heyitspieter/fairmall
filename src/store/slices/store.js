@@ -1,12 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "./slices/cartSlice";
-import productsReducer from "./slices/products";
-import categoriesReducer from "./slices/categories";
-import inspirationsReducer from "./slices/inspirations";
-import favoritesReducer from "./slices/favorites";
-import UserReducer from "./slices/user";
-import ordersReducer from "./slices/orders";
-
+import cartReducer from "./cartSlice";
+import productsReducer from "./products";
+import categoriesReducer from "./categories";
+import inspirationsReducer from "./inspirations";
+import favoritesReducer from "./favorites";
+import UserReducer from "./user";
+import ordersReducer from "./orders";
 
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
@@ -20,7 +19,6 @@ const reducers = combineReducers({
   favorites: favoritesReducer,
   user: UserReducer,
   orders: ordersReducer,
-
 });
 
 const persistConfig = {
@@ -31,7 +29,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: reducers,
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
       serializableCheck: false,

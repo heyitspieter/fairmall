@@ -48,7 +48,7 @@ export default function product({ id }) {
 
   return (
     <BaseLayout title={data && data.name}>
-      {!loading && (
+      {!loading && data && (
         <>
           <Breadcrumb data={data} items={breadcrumb} />
           <ProductDescription product={data.product} variations={data} />

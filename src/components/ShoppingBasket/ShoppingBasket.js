@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import styles from "src/components/ShoppingBasket/ShoppingBasket.module.scss";
 import { addLineItem, cartSubTotal, decrementLineItemQuantity, removeLineItem } from "src/store/slices/cartSlice";
+import { getGeneral } from "src/store/slices/general";
 import { TaxCalCulator } from "src/utils/tax_calculator";
 
 function ShoppingBasket() {
@@ -20,9 +21,15 @@ function ShoppingBasket() {
   const { lineItems, tax } = useSelector((state) => state.cart);
 
   useEffect(() => {
+    dispatch(getGeneral());
+  }, [dispatch]);
+
+  const { general } = useSelector((state) => state.general);
+
+  useEffect(() => {
     /** calculate tax */
     if (tax) {
-      setTaxAmount(TaxCalCulator(subTotal, parseFloat(tax.rate)));
+      setTaxAmount(TaxCalCulator(subTotal, parseFloat(general.tax)));
     }
   });
 
@@ -94,7 +101,7 @@ function ShoppingBasket() {
                     <td>
                       <div className={styles.desc}>
                         <h4>{product.name}</h4>
-                        {/* <p>GH-23451</p> */}
+                        {product.variation && <p>{product.variation.term.toUpperCase()}</p>}
                       </div>
                     </td>
                     <td>
@@ -102,7 +109,7 @@ function ShoppingBasket() {
                         <button onClick={() => handleDecrement(product)}>
                           <Svg symbol="minus" />
                         </button>
-                        <input onChange={() => { }} type="text" value={product.quantity} />
+                        <input onChange={() => {}} type="text" value={product.quantity} />
                         <button onClick={() => handleIncrement(product)}>
                           <Svg symbol="plus" />
                         </button>
@@ -155,14 +162,17 @@ function ShoppingBasket() {
               <p>{total.toLocaleString("en-US")} NGN</p>
             </div>
           </div>
-          <button disabled={isValid} onClick={() => {
-            router.push({
-              pathname: '/checkout',
-              query: { lineItems: lineItems },
-            });
-            // router.push("/checkout")
-          }
-          } className={styles.btnCheckout}>
+          <button
+            disabled={isValid}
+            onClick={() => {
+              router.push({
+                pathname: "/checkout",
+                query: { lineItems: lineItems },
+              });
+              // router.push("/checkout")
+            }}
+            className={styles.btnCheckout}
+          >
             Checkout
           </button>
         </div>
