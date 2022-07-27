@@ -72,7 +72,7 @@ const slice = createSlice({
       state.loading = true;
     },
     [getProduct.fulfilled]: (state, { payload }) => {
-      state.data = payload.data.product;
+      state.data = payload.data;
       state.loading = false;
     },
     [getProduct.rejected]: (state, { payload }) => {

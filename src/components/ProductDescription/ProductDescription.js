@@ -1,11 +1,24 @@
 import Image from "next/image";
 import Svg from "src/components/Svg/Svg";
+import { useState } from "react";
 
 import styles from "src/components/ProductDescription/ProductDescription.module.scss";
 import formatToCurrency from "src/helpers/formatAmount";
 
-function ProductDescription({ product }) {
-  console.log("product single", product);
+function ProductDescription({ product, variations }) {
+  // console.log("product single", variations);
+  const [productVariations, setProductVariations] = useState(variations);
+  const [selectedAttribute, setSelectedAttribute] = useState(null);
+  const [attributeTerms, setAttributeTerms] = useState([]);
+
+  const handleAttributeChange = (e) => {
+    const { name, value } = e.target;
+    if (value !== "") {
+      setSelectedAttribute(value);
+    } else {
+      setSelectedAttribute(null);
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.boxGrid}>
@@ -89,6 +102,29 @@ function ProductDescription({ product }) {
               <button>Submit a review</button>
             </div>
           </div>
+          {variations.variations && (
+            <div className={styles.info__2}>
+              <div className={styles.info__3}>
+                <select onChange={handleAttributeChange}>
+                  <option value="">Select Size</option>
+                  {product.attributes.map((attribute, idx) => {
+                    return (
+                      <option key={idx} value={attribute.name}>
+                        {attribute.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              {selectedAttribute && (
+                <div className={styles.info__3}>
+                  <select>
+                    <option>Select {selectedAttribute}</option>
+                  </select>
+                </div>
+              )}
+            </div>
+          )}
           <div className={styles.info__3}>
             <p>{formatToCurrency(product.price)} NGN</p>
           </div>
