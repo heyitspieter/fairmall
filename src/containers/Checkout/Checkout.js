@@ -360,7 +360,7 @@ function Checkout() {
       formData["modeOfDelivery"] = modeOfDelivery <= 0 ? "delivery" : "pickup";
 
       // Submit form here
-      const data = {
+      const checkoutData = {
         first_name: formControls.firstname.value,
         last_name: formControls.lastname.value,
         email: formControls.email.value,
@@ -371,9 +371,16 @@ function Checkout() {
         state: FORMAT_STATE_NAME(State.getStateByCode(formControls.state.value).name),
         city: formControls.city.value,
         postcode: formControls.postcode.value,
+        product: lineItems
       };
-      dispatch(shippingDetails(data));
-      router.push("/order_confirm");
+
+      router.push({
+        pathname: '/order_confirm',
+        query: { checkoutData: checkoutData },
+      });
+
+      // dispatch(shippingDetails(data));
+      // router.push("/order_confirm");
     }
   };
 

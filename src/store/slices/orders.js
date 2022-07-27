@@ -4,14 +4,17 @@ import * as url from "../../config/url"
 import axios from "../../config/axios"
 
 
-const getCategories = createAsyncThunk(
-    "categories/getCategories",
+const getOrdersData = createAsyncThunk(
+    "orders/getOrdersData",
     async (_, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
+
         const config = {
             method: "get",
-            url: url.getCategories,
+            url: url.getOrders,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
             },
         };
         try {
@@ -26,15 +29,19 @@ const getCategories = createAsyncThunk(
     }
 );
 
-const getCategory = createAsyncThunk(
-    "categories/getCategory",
-    async (id, { rejectWithValue }) => {
+const createOrder = createAsyncThunk(
+    "orders/createOrder",
+    async (data, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
+
         const config = {
-            method: "get",
-            url: url.getCategory(id),
+            method: "post",
+            url: url.createOrder,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
             },
+            data,
         };
         try {
             const response = await axios(config);
@@ -50,46 +57,48 @@ const getCategory = createAsyncThunk(
 
 
 const slice = createSlice({
-    name: "categories",
+    name: "orders",
 
     initialState: {
-        data: {},
+        data: null,
         status: false,
         loading: false,
         error: null,
-        categories: [],
+        checkoutData: null,
+        orders: [],
     },
 
     reducers: {},
 
     extraReducers: {
-        //get categories
-        [getCategories.pending]: (state) => {
+        //get order data
+        [getOrdersData.pending]: (state) => {
             state.loading = true;
         },
-        [getCategories.fulfilled]: (state, { payload }) => {
-            state.categories = payload.data.categories;
+        [getOrdersData.fulfilled]: (state, { payload }) => {
+            console.log('getOrdersData===', payload.data)
+            state.checkoutData = payload.data;
             state.loading = false;
         },
-        [getCategories.rejected]: (state, { payload }) => {
+        [getOrdersData.rejected]: (state, { payload }) => {
             state.error = true;
             state.loading = false;
         },
 
-        //get category
-        [getCategory.pending]: (state) => {
+        //create order
+        [createOrder.pending]: (state) => {
             state.loading = true;
         },
-        [getCategory.fulfilled]: (state, { payload }) => {
+        [createOrder.fulfilled]: (state, { payload }) => {
             state.data = payload.data;
             state.loading = false;
         },
-        [getCategory.rejected]: (state, { payload }) => {
+        [createOrder.rejected]: (state, { payload }) => {
             state.error = true;
             state.loading = false;
         },
     },
 });
 
-export { getCategories, getCategory};
+export { getOrdersData, createOrder};
 export default slice.reducer;

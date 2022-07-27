@@ -9,9 +9,12 @@ import styles from "src/containers/Signup/Signup.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import { useDispatch } from "react-redux";
 import { registerUser } from "src/store/slices/user";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 function Signup() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // Form state
   const [formControls, setFormControls] = useState({
@@ -178,8 +181,19 @@ function Signup() {
       };
 
       dispatch(registerUser(data))
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          // console.log(res);
+          if (res.payload.status === 201) {
+            console.log(res.payload.data);
+            localStorage.setItem("user", res.payload.data.user);
+            localStorage.setItem("token", res.payload.data.token.login.token);
+            router.push('/account/profile');
+          } else {
+            console.log(res.payload);
+            toast.error(res.payload.message);
+          }
+        })
+        .catch((err) => toast.error(err.message));
     }
   };
 

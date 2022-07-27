@@ -10,6 +10,7 @@ import { CSSTransition } from "react-transition-group";
 import styles from "src/components/Modals/ProductModal/ProductModal.module.scss";
 import { addToFavorites } from "src/store/slices/favorites";
 import { useDispatch } from "react-redux";
+import { addLineItem } from "src/store/slices/cartSlice";
 
 const animationTiming = {
   exit: 400,
@@ -37,6 +38,19 @@ function ProductModal({ show, close, product }) {
       pathname: `${id}`,
       query: { id: id },
     });
+  };
+
+  const handleAddToCard = async (product) => {
+    const lineItem = {
+      product_id: product.id,
+      variation_id: product.vatiation ? product.variation.id : null,
+      name: product.name,
+      price: parseFloat(product.price),
+      image: product.image,
+      quantity: 1,
+      total: product.price * 1,
+    };
+    dispatch(addLineItem(lineItem));
   };
 
   const modalConfig = {
@@ -167,7 +181,7 @@ function ProductModal({ show, close, product }) {
                       <h3>Description:</h3>
                       <p>{product?.description}</p>
                     </div>
-                    {product?.attributes?.length > 0
+                    {/* {product?.attributes?.length > 0
                       ? product?.attributes.map((item, index) => (
                           <select style={{ padding: 6, width: 150 }}>
                             <option key={index}>{item.name}</option>
@@ -176,13 +190,13 @@ function ProductModal({ show, close, product }) {
                             ))}
                           </select>
                         ))
-                      : null}
+                      : null} */}
                     <div className={styles.description__row}>
                       <Link href="/[id]" as={`/${product.id}`}>
                         <button>View More</button>
                       </Link>
                       {!product.variation && (
-                        <button>
+                        <button onClick={()=>{handleAddToCard(product)}}>
                           <Svg symbol="shopping-basket" />
                           <span>Add to Basket</span>
                         </button>

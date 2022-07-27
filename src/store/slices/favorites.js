@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import * as url from "../../config/url"
-import axios from 'axios'
+// import axios from 'axios'
+import axios from "../../config/axios"
+
 
 
 const addToFavorites = createAsyncThunk(
@@ -31,11 +33,14 @@ const addToFavorites = createAsyncThunk(
 const getFavorites = createAsyncThunk(
     "favorites/getFavorites",
     async (_, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
+
         const config = {
             method: "get",
             url: url.getFavorites,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
             },
         };
         try {
@@ -53,11 +58,15 @@ const getFavorites = createAsyncThunk(
 const removeFromFavorite = createAsyncThunk(
     "favorites/removeFromFavorite",
     async (data, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
+
         const config = {
             method: "post",
             url: url.removeFromFavorite,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
+
             },
             data,
         };
@@ -76,11 +85,14 @@ const removeFromFavorite = createAsyncThunk(
 const emptyFavorites = createAsyncThunk(
     "favorites/emptyFavorites",
     async (_, { rejectWithValue }) => {
+        const token = localStorage.getItem("token");
         const config = {
             method: "post",
             url: url.emptyFavorites,
             headers: {
                 "Content-Type": "application/json",
+                "x-access-token": `${token}`,
+
             },
         };
         try {
@@ -105,7 +117,7 @@ const slice = createSlice({
         status: false,
         loading: false,
         error: null,
-        favorites: [],
+        favoritesData: [],
     },
 
     reducers: {},
@@ -129,7 +141,7 @@ const slice = createSlice({
             state.loading = true;
         },
         [getFavorites.fulfilled]: (state, { payload }) => {
-            state.favorites = payload.data.favourite.products;
+            state.favoritesData = payload.data.favourite.products;
             state.loading = false;
         },
         [getFavorites.rejected]: (state, { payload }) => {

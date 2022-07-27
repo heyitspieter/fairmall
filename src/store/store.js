@@ -5,6 +5,8 @@ import categoriesReducer from "./slices/categories";
 import inspirationsReducer from "./slices/inspirations";
 import favoritesReducer from "./slices/favorites";
 import UserReducer from "./slices/user";
+import ordersReducer from "./slices/orders";
+
 
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
@@ -17,6 +19,7 @@ const reducers = combineReducers({
   inspiration: inspirationsReducer,
   favorites: favoritesReducer,
   user: UserReducer,
+  orders: ordersReducer,
 
 });
 

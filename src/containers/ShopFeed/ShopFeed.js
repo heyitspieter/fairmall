@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addLineItem } from "src/store/slices/cartSlice";
 import { MaxAmount, MinAmount } from "src/utils/variable_amount";
 import { addToFavorites } from "src/store/slices/favorites";
+import { toast } from "react-toastify";
 // import product from "src/pages/[slug]";
 
 function ShopFeed({ products }) {
@@ -44,11 +45,14 @@ function ShopFeed({ products }) {
     .then(res => {
       if(res.payload.status === 200) {
         console.log("===add to favorites===", res.payload.data);
+       
       }else{
         console.log("===did not add to favorites===", res.payload.message);
+        toast.error(res.payload.message)
       }
     }).catch(err => {
       console.log(err)
+      toast.error(err.message)
     })
   }
 

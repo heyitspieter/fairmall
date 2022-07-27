@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const initialState = {
   lineItems: [],
@@ -15,10 +16,14 @@ const addLineItemReducer = (state, action) => {
   if (index === -1) {
     // add line item to lineItems array
     state.lineItems = [...state.lineItems, action.payload];
+    toast.success('Item has been added to cart')
+
   } else {
     // update the lineItems[index] quantity
     state.lineItems[index].quantity += 1;
     state.lineItems[index].total = state.lineItems[index].price * state.lineItems[index].quantity;
+    toast.success('Item quantity has been updated in cart')
+
   }
 };
 
@@ -29,6 +34,8 @@ const decrementQuantityReducer = (state, action) => {
     // update the lineItems[index] quantity
     state.lineItems[index].quantity -= 1;
     state.lineItems[index].total = state.lineItems[index].price * state.lineItems[index].quantity;
+    toast.success('Item quantity has been reduced from cart')
+
   }
 };
 
@@ -37,6 +44,8 @@ const removeLineItemReducer = (state, action) => {
   // if index === -1, id is not in lineItems array
   if (index >= 0) {
     state.lineItems.splice(index, 1);
+    toast.success('Item has been removed from cart')
+
   }
 };
 
