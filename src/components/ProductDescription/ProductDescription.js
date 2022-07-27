@@ -109,12 +109,8 @@ function ProductDescription({ product, variations }) {
           {variations.variations && (
             <div className={styles.info__2}>
               {product.variation.map((variation, idx) => (
-                <div className={styles.btnAdd} key={idx}>
-                  <button onClick={() => handleSelectedVariation(variation)} style={{ marginRight: "5px" }}>
-                    <span>
-                      {variation.attribute}: {variation.term}
-                    </span>
-                  </button>
+                <div onClick={() => handleSelectedVariation(variation)} key={idx} style={{paddingTop: 8, paddingBottom: 8, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'red', backgroundColor: selectedVariation && selectedVariation.id === variation.id ? "#e11493" : '#828282', marginRight: 5, borderRadius: 30, marginTop: 10}}>
+                  <p style={{color: "white", fontSize: 12}}>{variation.attribute}: {variation.term}</p>
                 </div>
               ))}
             </div>

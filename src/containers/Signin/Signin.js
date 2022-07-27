@@ -135,15 +135,17 @@ function Signin() {
         password: formControls.password.value,
       };
 
+    
       dispatch(loginuser(data))
         .then((res) => {
+          console.log(res)
           if (res.payload.status === 200) {
             localStorage.setItem("user", res.payload.data.user);
             localStorage.setItem("token", res.payload.data.token.login.token);
             router.push('/account/profile');
           } else {
             console.log(res.payload);
-            toast.error(res.payload.message);
+            toast.error(res.payload.message || res.payload || res.error.message);
 
           }
         })

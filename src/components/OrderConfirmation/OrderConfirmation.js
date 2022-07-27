@@ -14,6 +14,8 @@ function OrderConfirmation() {
   const { general } = useSelector((state) => state.general);
   const { shippingDetails, total, lineItems, rate } = useSelector((state) => state.cart);
 
+  console.log('general',general)
+
   useEffect(() => {
     dispatch(getOrdersData());
   }, [dispatch]);
@@ -88,7 +90,7 @@ function OrderConfirmation() {
           <span></span>
         </div>
         <div className={styles.grid__col}>
-          {general.payment_methods.map((method) => (
+          {general?.payment_methods?.map((method) => (
             <button onClick={() => handleCreateOrder(method)} className={styles.btnChatbot}>
               {/* <Svg symbol="whatsapp" /> */}
               <span>{method.text}</span>

@@ -62,9 +62,11 @@ function NavMenu() {
                 <span>Orders</span>
               </a>
             </Link>
-            <Link href="/">
+            <Link href="/" onClick={()=>{localStorage.removeItem('token');localStorage.removeItem('user')}}>
               <a>Sign out</a>
             </Link>
+
+           
           </div>
         ) : (
           <div className={styles.dropdown}>
