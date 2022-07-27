@@ -12,9 +12,11 @@ function ProductDescription({ product, variations }) {
   const [productVariations, setProductVariations] = useState(variations);
   const [selectedVariation, setSelectedVariation] = useState(null);
   const [addToVariationCard, setAddToVariationCard] = useState(true);
+  const [variationPrice, setVariationPrice] = useState("Please select a variation");
 
   const handleSelectedVariation = (variation) => {
     setSelectedVariation(variation);
+    setVariationPrice(formatToCurrency(variation.price));
     setAddToVariationCard(false);
   };
 
@@ -25,6 +27,7 @@ function ProductDescription({ product, variations }) {
       name: product.name,
       price: parseFloat(product.price),
       variation: null,
+
       image: product.image,
       quantity: 1,
       total: product.price * 1,
@@ -108,23 +111,15 @@ function ProductDescription({ product, variations }) {
               {product.variation.map((variation, idx) => (
                 <div className={styles.btnAdd} key={idx}>
                   <button onClick={() => handleSelectedVariation(variation)} style={{ marginRight: "5px" }}>
-                    <p>
+                    <span>
                       {variation.attribute}: {variation.term}
-                    </p>
+                    </span>
                   </button>
                 </div>
               ))}
             </div>
           )}
-          <div className={styles.info__3}>
-            {product && product.variation ? (
-              <p>
-                {formatToCurrency(MinAmount(product?.variation))} - {formatToCurrency(MaxAmount(product?.variation))}
-              </p>
-            ) : (
-              <p>{formatToCurrency(product?.price)}</p>
-            )}
-          </div>
+          <div className={styles.info__3}>{product && product.variation ? <p>{variationPrice}</p> : <p>{formatToCurrency(product?.price)}</p>}</div>
           <div className={styles.btnAdd}>
             {product.variation ? (
               <button onClick={() => handleAddToCardWithVariation(product, selectedVariation)} disabled={addToVariationCard}>
