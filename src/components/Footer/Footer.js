@@ -2,6 +2,7 @@ import Image from "next/image";
 import Svg from "src/components/Svg/Svg";
 
 import styles from "src/components/Footer/Footer.module.scss";
+import Link from "next/link";
 
 function Footer() {
   return (
@@ -16,12 +17,13 @@ function Footer() {
           </span>
         </div>
         <p>
-          Creating an ecosystem of considerate and conscious commerce, ensuring
-          fairness to all.
+          . We ensure that
+          producers receive premium value for their wares thereby improving their livelihoods
+          and stimulating economic growth in their communities.
         </p>
         <p>
-          Be sure to take a look at our <a href="#">Terms of Use</a> and{" "}
-          <a href="#">Privacy Policy</a>
+          Be sure to take a look at our <Link href="/about-us">Terms of Use</Link> and{" "}
+          <Link href="/about-us">Privacy Policy</Link>
         </p>
         <div className={styles.socials}>
           <h4>Stay In Touch</h4>

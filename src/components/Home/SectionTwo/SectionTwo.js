@@ -13,16 +13,17 @@ function SectionTwo() {
           fair<span>mall</span>
         </h2>
         <p>
-          Fairmall is your one stop e-commerce platform dedicated to providing a
-          wide variety of locally made products ranging from household items,
-          furniture, food, arts, crafts, fashion and agricultural products to
-          urbanized working-age customers in Nigeria and diasporan markets who
-          are interested in sustainable, eco-friendly consumerism and
-          environmentally concious.
+         Fair Mall is a source aggregator which connects producers of indigenous Nigerian
+          commodities with premium markets and opportunities, enabled by trade. Our goal is
+          to help individuals and businesses easily discover quality locally-produced goods
+          while providing indigenous producers with access to a wider customer network and
+          business support, all at a fair rate for producers and consumers. We ensure that
+          producers receive premium value for their wares thereby improving their livelihoods
+          and stimulating economic growth in their communities.
         </p>
-        <span>
+        {/* <span>
           <em>“It makes sense ethically, it should make sense financially”</em>
-        </span>
+        </span> */}
       </div>
       <div className={styles.section_2__right}>
         <Image src="/svgs/spiral.svg" layout="fill" alt="Spiral" />
