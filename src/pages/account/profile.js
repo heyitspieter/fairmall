@@ -1,11 +1,15 @@
 import Profile from "src/containers/Profile/Profile";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
+import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 
 export default function profile() {
   return (
-    <BaseLayout title="Profile - Fairmall">
-      <Profile />
-    </BaseLayout>
+    <PrivateRoute>
+      <BaseLayout title="Profile - Fairmall">
+        <Profile />
+      </BaseLayout>
+    </PrivateRoute>
+
   );
 }
 

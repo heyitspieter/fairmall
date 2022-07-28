@@ -9,7 +9,9 @@ import styles from "src/components/Header/NavMenu/NavMenu.module.scss";
 
 function NavMenu() {
   const router = useRouter();
-  const user = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
+
+  console.log('token',token)
 
   const sidedrawer = useContext(SidedrawerContext);
 
@@ -24,6 +26,15 @@ function NavMenu() {
 
   const onFocus = () => setInputFocused(true);
 
+  const handleLogout = (e) => {
+    e.preventDefault();
+    console.log('getting here')
+   localStorage.removeItem("token");
+   localStorage.removeItem("user");
+   window.localStorage.clear();
+   router.push('/')
+  }
+
   const onClickSearchBtn = () => {
     if (!inputFocused) {
       return onFocus();
@@ -35,14 +46,14 @@ function NavMenu() {
   return (
     <div role="navigation" className={styles.container}>
       <div className={searchClass}>
-        <input value="" type="text" onBlur={onBlur} onChange={() => {}} placeholder="Search furniture, household items, art and craft" />
+        <input value="" type="text" onBlur={onBlur} onChange={() => { }} placeholder="Search furniture, household items, art and craft" />
         <button onClick={onClickSearchBtn}>
           <Svg symbol="search" />
         </button>
       </div>
       <button>
         <Svg symbol="person" />
-        {user ? (
+        {token ? (
           <div className={styles.dropdown}>
             <Link href="/account/profile">
               <a>
@@ -62,11 +73,9 @@ function NavMenu() {
                 <span>Orders</span>
               </a>
             </Link>
-            <Link href="/" onClick={()=>{localStorage.removeItem('token');localStorage.removeItem('user')}}>
+            <a href="" onClick={(e) => handleLogout(e)}>
               <a>Sign out</a>
-            </Link>
-
-           
+            </a>
           </div>
         ) : (
           <div className={styles.dropdown}>

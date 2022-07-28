@@ -32,11 +32,11 @@ export default function shop() {
 
   return (
     <BaseLayout title="Shop - Fairmall">
-      <ShopFeed products={products} />
-      <Categories categories={categories} />
-      {/* <Recommendations title="Featured Items" /> */}
-      <Inspirations inspirations={inspirations} />
-      <NewsLetter />
+        <ShopFeed products={products} />
+        <Categories categories={categories} />
+        {/* <Recommendations title="Featured Items" /> */}
+        <Inspirations inspirations={inspirations} />
+        <NewsLetter />
     </BaseLayout>
   );
 }

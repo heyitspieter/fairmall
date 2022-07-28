@@ -9,15 +9,26 @@ import styles from "src/containers/Profile/Profile.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "src/store/slices/user";
+import LoadingOverlay from "react-loading-overlay";
 
 function Profile() {
   const dispatch = useDispatch();
+  const router = useRouter()
 
   useEffect(() => {
-    dispatch(getProfile());
-  },[dispatch]);
+    dispatch(getProfile())
+    // .then(res => {
+    //   if(res.payload.status === 401){
+    //     router.push('/signin')
+    //   }
+    // })
+    // .catch()
+    // ;
+  }, [dispatch]);
 
-  // const { userData } = useSelector((state) => state.user);
+  const { userData, loading } = useSelector((state) => state.user);
+
+  console.log(userData)
 
   // Form state
   const [formControls, setFormControls] = useState({
@@ -178,7 +189,6 @@ function Profile() {
 
   const [formValidity, setFormValidity] = useState(false);
 
-  const router = useRouter();
 
   let formElementsArray = [];
 
@@ -248,48 +258,52 @@ function Profile() {
   };
 
   return (
+
     <div className={styles.container}>
-      <div className={spiralLeft}>
-        <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
-      </div>
-      <div className={styles.heading}>
-        <p>Profile</p>
-      </div>
-      <div className={styles.formPanel}>
-        <form
-          onSubmit={(e) => onSubmitFormHandler(e)}
-          className={styles.formElement}
-        >
-          <div className={styles.col}>
-            <h3>Account Details</h3>
-            <div className={styles.col__grid}>{formInputs.slice(0, 4)}</div>
-          </div>
-          <div className={styles.col}>
-            <h3>Address Book</h3>
-            <div className={styles.col__grid}>{formInputs.slice(4)}</div>
-          </div>
-          <div className={styles.col}>
-            <div className={styles.col__grid}>
-              <button {...btnConfig} className={styles.btnSubmit}>
-                Save Changes
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  router.push("/account/password");
-                }}
-                className={styles.btnChange}
-              >
-                Change Password
-              </button>
+      <LoadingOverlay active={loading}  spinner text={'Loading...'}>
+        <div className={spiralLeft}>
+          <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
+        </div>
+        <div className={styles.heading}>
+          <p>Profile</p>
+        </div>
+        <div className={styles.formPanel}>
+          <form
+            onSubmit={(e) => onSubmitFormHandler(e)}
+            className={styles.formElement}
+          >
+            <div className={styles.col}>
+              <h3>Account Details</h3>
+              <div className={styles.col__grid}>{formInputs.slice(0, 4)}</div>
             </div>
-          </div>
-        </form>
-      </div>
-      <div className={spiralRight}>
-        <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
-      </div>
+            <div className={styles.col}>
+              <h3>Address Book</h3>
+              <div className={styles.col__grid}>{formInputs.slice(4)}</div>
+            </div>
+            <div className={styles.col}>
+              <div className={styles.col__grid}>
+                <button {...btnConfig} className={styles.btnSubmit}>
+                  Save Changes
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push("/account/password");
+                  }}
+                  className={styles.btnChange}
+                >
+                  Change Password
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div className={spiralRight}>
+          <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
+        </div>
+      </LoadingOverlay>
     </div>
+
   );
 }
 

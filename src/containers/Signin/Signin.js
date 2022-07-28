@@ -139,7 +139,7 @@ function Signin() {
       dispatch(loginuser(data))
         .then((res) => {
           console.log(res)
-          if (res.payload.status === 200) {
+          if (res?.payload?.status === 200) {
             localStorage.setItem("user", res.payload.data.user);
             localStorage.setItem("token", res.payload.data.token.login.token);
             router.push('/account/profile');

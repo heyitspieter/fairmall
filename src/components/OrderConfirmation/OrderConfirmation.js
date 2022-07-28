@@ -90,8 +90,8 @@ function OrderConfirmation() {
           <span></span>
         </div>
         <div className={styles.grid__col}>
-          {general?.payment_methods?.map((method) => (
-            <button onClick={() => handleCreateOrder(method)} className={styles.btnChatbot}>
+          {general?.payment_methods?.map((method, idx) => (
+            <button key={idx} onClick={() => handleCreateOrder(method)} className={styles.btnChatbot}>
               {/* <Svg symbol="whatsapp" /> */}
               <span>{method.text}</span>
             </button>

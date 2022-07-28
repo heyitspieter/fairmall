@@ -65,6 +65,7 @@ const getProfile = createAsyncThunk(
         };
         try {
             const response = await axios(config);
+            console.log('res', response);
             return response;
         } catch (err) {
             if (!err.response) {
@@ -149,6 +150,7 @@ const slice = createSlice({
             state.loading = true;
         },
         [getProfile.fulfilled]: (state, { payload }) => {
+            console.log('getProfile===', payload.data)
             state.userData = payload.data;
             state.loading = false;
         },
