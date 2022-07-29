@@ -11,17 +11,16 @@ export default function saved() {
 
   useEffect(() => {
     dispatch(getFavorites());
-  }, [dispatch])
+  }, [dispatch]);
 
-  const { favoritesData } = useSelector((state) => state.favorites);
+  const { favoritesData, loading } = useSelector((state) => state.favorites);
 
   return (
     <BaseLayout title="Saved Items - Fairmall">
       <PrivateRoute>
-        <SavedItems favoritesData={favoritesData} />
-        <Recommendations title="Recommended Items" />
+        <SavedItems favorites={favoritesData} loading={loading} />
+        {/* <Recommendations title="Recommended Items" /> */}
       </PrivateRoute>
-
     </BaseLayout>
   );
 }

@@ -8,6 +8,28 @@ const getOrdersData = createAsyncThunk("orders/getOrdersData", async (_, { rejec
 
   const config = {
     method: "get",
+    url: url.getOrdersData,
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": `${token}`,
+    },
+  };
+  try {
+    const response = await axios(config);
+    return response;
+  } catch (err) {
+    if (!err.response) {
+      throw err;
+    }
+    return rejectWithValue(err.response.data);
+  }
+});
+
+const getOrders = createAsyncThunk("orders/getOrders", async (_, { rejectWithValue }) => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    method: "get",
     url: url.getOrders,
     headers: {
       "Content-Type": "application/json",
@@ -76,6 +98,19 @@ const slice = createSlice({
       state.loading = false;
     },
 
+    /** get orders */
+    [getOrders.pending]: (state) => {
+      state.loading = true;
+    },
+    [getOrders.fulfilled]: (state, { payload }) => {
+      state.orders = payload.data.orders;
+      state.loading = false;
+    },
+    [getOrders.rejected]: (state, { payload }) => {
+      state.error = true;
+      state.loading = false;
+    },
+
     //create order
     [createOrder.pending]: (state) => {
       state.loading = true;
@@ -91,5 +126,5 @@ const slice = createSlice({
   },
 });
 
-export { getOrdersData, createOrder };
+export { getOrdersData, createOrder, getOrders };
 export default slice.reducer;

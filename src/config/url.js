@@ -22,8 +22,9 @@ export const removeFromFavorite = baseUrl + "/user/favourite/remove";
 export const emptyFavorites = baseUrl + "/user/favourite/empty";
 
 // MANAGE ORDERS
-export const getOrders = baseUrl + "/user/order/checkout/data";
+export const getOrdersData = baseUrl + "/user/order/checkout/data";
 export const createOrder = baseUrl + "/user/order";
+export const getOrders = baseUrl + "/user/order";
 
 //MANAGE USER
 export const registerUser = baseUrl + "/auth/register";

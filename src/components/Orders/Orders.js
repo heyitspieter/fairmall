@@ -4,8 +4,11 @@ import { useRouter } from "next/router";
 import styles from "src/components/Orders/Orders.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 
-function Orders() {
+function Orders({ orders }) {
   const router = useRouter();
+  console.log("====================================");
+  console.log(orders);
+  console.log("====================================");
 
   return (
     <div className={styles.container}>
@@ -27,44 +30,28 @@ function Orders() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                <div className={styles.orderNo}>
-                  <p>#12F78GQ</p>
-                </div>
-              </td>
-              <td>25th December, 2021</td>
-              <td>28th December, 2021</td>
-              <td>
-                <div className={styles.action}>
-                  <button onClick={() => router.push("/order/12F78GQ")}>
-                    View
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>
-                <div className={styles.orderNo}>
-                  <p>#12F78GQ</p>
-                </div>
-              </td>
-              <td>25th December, 2021</td>
-              <td>
-                <div className={styles.orderStatus}>
-                  <button>Pending</button>
-                </div>
-              </td>
-              <td>
-                <div className={styles.action}>
-                  <button onClick={() => router.push("/order/12F78GQ")}>
-                    View
-                  </button>
-                </div>
-              </td>
-            </tr>
+            {orders?.length > 0 &&
+              orders.map((order, idx) => (
+                <tr key={idx}>
+                  <td>{idx + 1}</td>
+                  <td>
+                    <div className={styles.orderNo}>
+                      <p>{order?.order_id}</p>
+                    </div>
+                  </td>
+                  <td>{order?.createdAt}</td>
+                  <td>
+                    <div className={styles.orderStatus}>
+                      <button>{order?.status}</button>
+                    </div>
+                  </td>
+                  <td>
+                    <div className={styles.action}>
+                      <button onClick={() => router.push("/order/12F78GQ")}>View</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
