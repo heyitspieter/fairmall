@@ -19,7 +19,7 @@ function Footer() {
         <p>
           . We ensure that
           producers receive premium value for their wares thereby improving their livelihoods
-          and stimulating economic growth in their communities.
+          and stimulating economic growth in their communities. 
         </p>
         <p>
           Be sure to take a look at our <Link href="/about-us">Terms of Use</Link> and{" "}

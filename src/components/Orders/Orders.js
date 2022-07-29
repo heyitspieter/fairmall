@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import styles from "src/components/Orders/Orders.module.scss";
@@ -47,7 +48,16 @@ function Orders({ orders }) {
                   </td>
                   <td>
                     <div className={styles.action}>
-                      <button onClick={() => router.push("/order/12F78GQ")}>View</button>
+                      {/* <Link href={`/orders`} as={`/order/${order?.order_id}`}>
+                        <a>View</a>
+                      </Link> */}
+                      <button onClick={() => {
+                        // router.push("/order/12F78GQ")
+                        router.push({
+                          pathname: `/order/${order?.id}`,
+                          query: { order: order },
+                        });
+                    }}>View</button>
                     </div>
                   </td>
                 </tr>

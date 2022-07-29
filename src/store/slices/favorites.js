@@ -47,7 +47,8 @@ const getFavorites = createAsyncThunk("favorites/getFavorites", async (_, { reje
   }
 });
 
-const removeFromFavorite = createAsyncThunk("favorites/removeFromFavorite", async (data, { rejectWithValue }) => {
+const removeFromFavorite = createAsyncThunk("favorites/removeFromFavorite",
+ async (data, { rejectWithValue }) => {
   const token = localStorage.getItem("token");
 
   const config = {

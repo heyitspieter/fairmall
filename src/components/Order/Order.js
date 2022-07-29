@@ -3,8 +3,34 @@ import Svg from "src/components/Svg/Svg";
 
 import styles from "src/components/Order/Order.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getOrder } from "src/store/slices/orders";
+import formatToCurrency from "src/helpers/formatAmount";
+import moment from 'moment'
 
 function Order() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { id } = router.query
+
+  console.log(router.query);
+  useEffect(() => {
+    if (id) {
+      dispatch(getOrder(id))
+    } else {
+      router.push("/orders")
+    }
+  }, [dispatch]);
+
+  const { data } = useSelector((state) => state.orders);
+
+  if (data) {
+    console.log('data===', data)
+  }
+
+
   return (
     <div className={styles.container}>
       <div className={spiralLeft}>
@@ -24,10 +50,10 @@ function Order() {
         </div>
         <div>
           <p>
-            Order No: <span>#12F78GQ</span>
+            Order No: <span>{data.order_id}</span>
           </p>
           <p>
-            Order Confirmed: <span>25th December, 2021</span>
+            Order Confirmed: <span>{moment(data.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</span>
           </p>
           <p>
             Order Delivered: <span>28th December, 2021</span>
@@ -42,61 +68,44 @@ function Order() {
                 <th>Product</th>
                 <th>Description</th>
                 <th>Quantity</th>
-                <th>Price</th>
+                {/* <th>Price</th> */}
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <figure>
-                    <Image
-                      src="/images/product-thumb.png"
-                      objectFit="cover"
-                      layout="fill"
-                      alt="Product"
-                    />
-                  </figure>
-                </td>
-                <td>
-                  <div className={styles.desc}>
-                    <h4>Keto Hand-made Vase</h4>
-                    <p>GH-23451</p>
-                  </div>
-                </td>
-                <td>1</td>
-                <td>100,000 NGN</td>
-                <td>
-                  <div className={styles.action}>
-                    <button>Give Review</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <figure>
-                    <Image
-                      src="/images/product-thumb.png"
-                      objectFit="cover"
-                      layout="fill"
-                      alt="Product"
-                    />
-                  </figure>
-                </td>
-                <td>
-                  <div className={styles.desc}>
-                    <h4>Keto Hand-made Vase</h4>
-                    <p>GH-23451</p>
-                  </div>
-                </td>
-                <td>1</td>
-                <td>100,000 NGN</td>
-                <td>
-                  <div className={styles.action}>
-                    <button>Give Review</button>
-                  </div>
-                </td>
-              </tr>
+              {
+                data.products.map((product, index) =>{ 
+                  const img = product.image;
+                  
+                  return (
+                  <tr key={index}>
+                    <td>
+                      <figure>
+                        <Image
+                        loader={() => img} 
+                          src={product?.image}
+                          objectFit="cover"
+                          layout="fill"
+                          alt="Product"
+                        />
+                      </figure>
+                    </td>
+                    <td>
+                      <div className={styles.desc}>
+                        <h4>{product.name}</h4>
+                        {/* <p>GH-23451</p> */}
+                      </div>
+                    </td>
+                    <td>{product.quantity}</td>
+                    {/* <td>{formatToCurrency(product.amount)} NGN</td> */}
+                    <td>
+                      <div className={styles.action}>
+                        <button>Give Review</button>
+                      </div>
+                    </td>
+                  </tr>
+                )})}
+
             </tbody>
           </table>
         </div>
@@ -104,20 +113,20 @@ function Order() {
           <h3>Order Summary</h3>
           <div className={styles.summary}>
             <div className={styles.summary__item}>
-              <h4>Items (2)</h4>
-              <p>200,000 NGN</p>
+              <h4>Items ({data.products.length})</h4>
+              {/* <p>200,000 </p> */}
             </div>
             <div className={styles.summary__item}>
               <h4>Delivery</h4>
-              <p>1,000 NGN</p>
+              <p>{formatToCurrency(data.shipping_cost)} </p>
             </div>
             <div className={styles.summary__item}>
               <h4>Taxes</h4>
-              <p>-</p>
+              <p>{formatToCurrency(data.tax) || '-'}</p>
             </div>
             <div className={styles.summary__item}>
               <h4>Total</h4>
-              <p>201,000 NGN</p>
+              <p>{formatToCurrency(data.total)} </p>
             </div>
           </div>
         </div>

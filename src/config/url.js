@@ -25,6 +25,9 @@ export const emptyFavorites = baseUrl + "/user/favourite/empty";
 export const getOrdersData = baseUrl + "/user/order/checkout/data";
 export const createOrder = baseUrl + "/user/order";
 export const getOrders = baseUrl + "/user/order";
+export const getOrder = (id) => baseUrl + `/user/order/${id}`;
+
+
 
 //MANAGE USER
 export const registerUser = baseUrl + "/auth/register";

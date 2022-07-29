@@ -140,12 +140,12 @@ const slice = createSlice({
           lastname: user.lastname,
           email: user.email,
           phone: user.phone,
-          address1: address.address1,
-          address2: address.address2,
-          country: address.country,
-          state: address.state,
-          city: address.city,
-          postcode: address.postcode,
+          address1: address?.address1 || "",
+          address2: address?.address2 || "",
+          country: address?.country || "",
+          state: address?.state || "",
+          city: address?.city || "",
+          postcode: address?.postcode || "",
         },
       };
       state.userData = getUser;

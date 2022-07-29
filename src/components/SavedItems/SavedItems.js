@@ -4,9 +4,32 @@ import Svg from "src/components/Svg/Svg";
 import styles from "src/components/SavedItems/SavedItems.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import { container } from "src/components/Recommendations/Recommendations.module.scss";
-import products from "src/store/slices/products";
+import { useDispatch } from "react-redux";
+import { removeFromFavorite } from "src/store/slices/favorites";
+import { toast } from "react-toastify";
 
-function SavedItems({ favorites, loading }) {
+function SavedItems({ favorites }) {
+  const dispatch = useDispatch();
+
+  const handleRemoveItem = (id) => {
+    let data = {
+      product_id: id,
+    }
+    dispatch(removeFromFavorite(data))
+      .then((res) => {
+        console.log(res);
+        if (res.payload.status === 200) {
+          toast.success(res.payload.data.message);
+        } else {
+          toast.error(res.payload.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.message);
+      });
+  }
+
   return (
     <>
       <div className={styles.container}>
@@ -15,11 +38,11 @@ function SavedItems({ favorites, loading }) {
         </div>
         <div className={styles.heading}>
           <p>
-            {favorites.products.length === 0 && "No"}
+            {favorites?.products?.length === 0 && "No"}
             Saved Items
           </p>
         </div>
-        {favorites?.products?.length > 0 && (
+        {favorites?.products?.length > 0 ? (
           <div className={styles.tableWrapper}>
             <table className={styles.table}>
               <thead>
@@ -70,7 +93,7 @@ function SavedItems({ favorites, loading }) {
                         <button>
                           <Svg symbol="shopping-basket" />
                         </button>
-                        <button>
+                        <button onClick={()=>handleRemoveItem(item.id)}>
                           <Svg symbol="bin" />
                         </button>
                       </div>
@@ -79,6 +102,12 @@ function SavedItems({ favorites, loading }) {
                 ))}
               </tbody>
             </table>
+          </div>
+        ) : (
+          <div className={styles.heading} style={{marginTop: 100, marginBottom: 100}}>
+            <p>
+              No item saved
+            </p>
           </div>
         )}
 

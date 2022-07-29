@@ -70,6 +70,32 @@ const createOrder = createAsyncThunk("orders/createOrder", async (data, { reject
   }
 });
 
+const getOrder = createAsyncThunk("orders/getOrder", 
+  async (id, { rejectWithValue }) => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    method: "get",
+    url: url.getOrder(id),
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": `${token}`,
+    },
+  };
+  try {
+    const response = await axios(config);
+    return response;
+  } catch (err) {
+    if (!err.response) {
+      throw err;
+    }
+    return rejectWithValue(err.response.data);
+  }
+});
+
+
+
+
 const slice = createSlice({
   name: "orders",
 
@@ -123,8 +149,21 @@ const slice = createSlice({
       state.error = true;
       state.loading = false;
     },
+
+    [getOrder.pending]: (state) => {
+      state.loading = true;
+    },
+    [getOrder.fulfilled]: (state, { payload }) => {
+      state.data = payload.data.order;
+      state.loading = false;
+    },
+    [getOrder.rejected]: (state, { payload }) => {
+      state.error = true;
+      state.loading = false;
+    },
+    
   },
 });
 
-export { getOrdersData, createOrder, getOrders };
+export { getOrdersData, createOrder, getOrders, getOrder };
 export default slice.reducer;
