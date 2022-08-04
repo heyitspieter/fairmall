@@ -1,19 +1,17 @@
 export const MinAmount = (array) => {
-  const res = Math.min.apply(
+  return Math.min.apply(
     Math,
-    array.map(function (o) {
+    array?.map(function (o) {
       return o.price;
     })
   );
-  return res;
 };
 
 export const MaxAmount = (array) => {
-  const res = Math.max.apply(
+  return Math.max.apply(
     Math,
-    array.map(function (o) {
+    array?.map(function (o) {
       return o.price;
     })
   );
-  return res;
 };

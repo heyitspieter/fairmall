@@ -101,6 +101,7 @@ const slice = createSlice({
     loading: false,
     error: null,
     favoritesData: [],
+    favoriteProducts: []
   },
 
   reducers: {},
@@ -125,6 +126,7 @@ const slice = createSlice({
     },
     [getFavorites.fulfilled]: (state, { payload }) => {
       state.favoritesData = payload.data.favourite;
+      state.favoriteProducts = payload.data.favourite.products;
       state.loading = false;
     },
     [getFavorites.rejected]: (state, { payload }) => {
@@ -138,6 +140,7 @@ const slice = createSlice({
     },
     [removeFromFavorite.fulfilled]: (state, { payload }) => {
       state.data = payload.data;
+      state.favoriteProducts = payload.data.favourite.products;
       state.loading = false;
     },
     [removeFromFavorite.rejected]: (state, { payload }) => {
@@ -151,6 +154,7 @@ const slice = createSlice({
     },
     [emptyFavorites.fulfilled]: (state, { payload }) => {
       state.data = payload.data;
+      state.favoriteProducts = payload.data.favourite.products;
       state.loading = false;
     },
     [emptyFavorites.rejected]: (state, { payload }) => {

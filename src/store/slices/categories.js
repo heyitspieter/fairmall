@@ -58,6 +58,7 @@ const slice = createSlice({
         loading: false,
         error: null,
         categories: [],
+        categoryProducts: [],
     },
 
     reducers: {},
@@ -79,9 +80,12 @@ const slice = createSlice({
         //get category
         [getCategory.pending]: (state) => {
             state.loading = true;
+            state.categoryProducts = []
         },
         [getCategory.fulfilled]: (state, { payload }) => {
             state.data = payload.data;
+            state.categoryProducts = payload.data.products;
+            console.log(payload.data.products)
             state.loading = false;
         },
         [getCategory.rejected]: (state, { payload }) => {

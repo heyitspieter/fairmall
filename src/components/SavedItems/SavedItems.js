@@ -7,6 +7,8 @@ import { container } from "src/components/Recommendations/Recommendations.module
 import { useDispatch } from "react-redux";
 import { removeFromFavorite } from "src/store/slices/favorites";
 import { toast } from "react-toastify";
+import formatToCurrency from "../../helpers/formatAmount";
+import {MaxAmount, MinAmount} from "../../utils/variable_amount";
 
 function SavedItems({ favorites }) {
   const dispatch = useDispatch();
@@ -38,11 +40,11 @@ function SavedItems({ favorites }) {
         </div>
         <div className={styles.heading}>
           <p>
-            {favorites?.products?.length === 0 && "No"}
+            {favorites?.length === 0 && "No"}
             Saved Items
           </p>
         </div>
-        {favorites?.products?.length > 0 ? (
+        {favorites?.length > 0 ? (
           <div className={styles.tableWrapper}>
             <table className={styles.table}>
               <thead>
@@ -55,7 +57,7 @@ function SavedItems({ favorites }) {
                 </tr>
               </thead>
               <tbody>
-                {favorites?.products?.map((item, index) => (
+                {favorites?.map((item, index) => (
                   <tr key={index}>
                     <td>
                       <figure>
@@ -68,31 +70,23 @@ function SavedItems({ favorites }) {
                         {/* <p>GH-23451</p> */}
                       </div>
                     </td>
-                    {/* <td>
-                      <div className={styles.rating}>
-                        <button>
-                          <Svg symbol="star" />
-                        </button>
-                        <button>
-                          <Svg symbol="star" />
-                        </button>
-                        <button>
-                          <Svg symbol="star" />
-                        </button>
-                        <button>
-                          <Svg symbol="star" />
-                        </button>
-                        <button>
-                          <Svg symbol="star" />
-                        </button>
-                      </div>
-                    </td> */}
-                    <td>{item.price} NGN</td>
+                    {item?.variation === false ? (
+                        <td>{formatToCurrency(item.price)}</td>
+                    ) : (
+                      <td>
+                        {formatToCurrency(MinAmount(item.variation))} - {formatToCurrency(MaxAmount(item.variation))}
+                      </td>
+                    )}
+
                     <td>
                       <div className={styles.action}>
-                        <button>
-                          <Svg symbol="shopping-basket" />
-                        </button>
+                        {
+                          item.variation === false && (
+                            <button>
+                              <Svg symbol="shopping-basket" />
+                            </button>
+                          )
+                        }
                         <button onClick={()=>handleRemoveItem(item.id)}>
                           <Svg symbol="bin" />
                         </button>

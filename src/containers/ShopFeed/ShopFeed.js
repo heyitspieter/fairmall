@@ -38,19 +38,14 @@ function ShopFeed({ products }) {
   };
 
   const handleFavorite = (product) => {
-    console.log("====================================");
-    console.log(product);
-    console.log("====================================");
     let data = {
       product_id: product.id,
     };
     dispatch(addToFavorites(data))
       .then((res) => {
         if (res.payload.status === 200) {
-          console.log("===add to favorites===", res.payload.data);
           toast.success(res.payload.data.message);
         } else {
-          console.log("===did not add to favorites===", res.payload.message);
           toast.error(res.payload.message);
         }
       })

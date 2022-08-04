@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "src/components/Categories/Categories.module.scss";
+import Link from "next/link";
 
 function Categories({categories}) {
 
@@ -16,7 +17,9 @@ function Categories({categories}) {
             <figure key={idx}>
               <div>
                 <p>{category.name}</p>
-                <button onClick={() => router.push(`/category/${category.id}`)}>shop now</button>
+                <Link href="category/[slug]" as={`category/${category.slug}`}>
+                  <button>shop now</button>
+                </Link>
               </div>
               <Image src="/images/category_1.png" objectFit="cover" alt="Category 1" layout="fill" />
             </figure>
