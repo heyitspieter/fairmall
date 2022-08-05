@@ -22,11 +22,11 @@ function ShopFeed({ products }) {
   const [selectedProduct, setSelectedProduct] = useState({});
   const [viewProduct, setViewProduct] = useState();
 
-  const sortProducts = [...products]
+  const sortProducts = [...products];
 
   sortProducts.sort((a, b) => {
     return b.count - a.count;
-  })
+  });
 
   const handleAddToCard = async (product) => {
     const lineItem = {
@@ -83,7 +83,7 @@ function ShopFeed({ products }) {
         </div>
         <div className={styles.grid}>
           {products.length > 0 &&
-            sortProducts.map((product, i) => {
+            sortProducts.slice(0).map((product, i) => {
               const img = product?.product.image;
               return (
                 <div key={i} className={styles.grid__item}>
@@ -123,7 +123,7 @@ function ShopFeed({ products }) {
                   )}
                 </div>
               );
-            }).sort((a, b) => b.count - a.count)}
+            })}
         </div>
       </div>
     </>
