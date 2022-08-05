@@ -4,8 +4,16 @@ import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "src/store/slices/orders";
+import {useRouter} from "next/router";
 
 export default function orders() {
+  const router = useRouter()
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/signin");
+    }
+  }, []);
   const dispatch = useDispatch();
   const { orders } = useSelector((state) => state.orders);
 
@@ -14,9 +22,9 @@ export default function orders() {
   }, [dispatch]);
   return (
     <BaseLayout title="My Orders - Fairmall">
-      <PrivateRoute>
+      {/*<PrivateRoute>*/}
         <Orders orders={orders} />
-      </PrivateRoute>
+      {/*</PrivateRoute>*/}
     </BaseLayout>
   );
 }

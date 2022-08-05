@@ -66,8 +66,8 @@ function Profile() {
       validation: {
         required: true,
       },
-      valid: userData?.user?.firstname ? true : false,
-      touched: userData?.user?.firstname ? true : false,
+      valid: !!userData?.user?.firstname,
+      touched: !!userData?.user?.firstname,
       error: {
         message: "First name is required",
       },
@@ -90,8 +90,8 @@ function Profile() {
       validation: {
         required: true,
       },
-      valid: userData?.user?.lastname ? true : false,
-      touched: userData?.user?.lastname ? true : false,
+      valid: !!userData?.user?.lastname,
+      touched: !!userData?.user?.lastname,
       error: {
         message: "Last name is required",
       },
@@ -114,8 +114,8 @@ function Profile() {
       validation: {
         required: true,
       },
-      valid: userData?.user?.email ? true : false,
-      touched: userData?.user?.email ? true : false,
+      valid: !!userData?.user?.email,
+      touched: !!userData?.user?.email,
       error: {
         message: "E-Mail is required",
       },
@@ -139,8 +139,8 @@ function Profile() {
         required: true,
         isMobile: true,
       },
-      valid: userData?.user?.phone ? true : false,
-      touched: userData?.user?.phone ? true : false,
+      valid: !!userData?.user?.phone,
+      touched: !!userData?.user?.phone,
       error: {
         message: "Phone number is required",
       },
@@ -163,8 +163,8 @@ function Profile() {
       validation: {
         required: true,
       },
-      valid: userData?.user?.address1 ? true : false,
-      touched: userData?.user?.address1 ? true : false,
+      valid: !!userData?.user?.address1,
+      touched: !!userData?.user?.address1,
       error: {
         message: "Address is required",
       },
@@ -211,8 +211,8 @@ function Profile() {
       validation: {
         required: true,
       },
-      valid: userData?.user?.country ? true : false,
-      touched: userData?.user?.country ? true : false,
+      valid: !!userData?.user?.country,
+      touched: !!userData?.user?.country,
       error: {
         message: "Country is required",
       },
@@ -234,8 +234,8 @@ function Profile() {
       validation: {
         required: true,
       },
-      valid: userData?.user?.state ? true : false,
-      touched: userData?.user?.state ? true : false,
+      valid: !!userData?.user?.state,
+      touched: !!userData?.user?.state,
       error: {
         message: "State is required",
       },
@@ -257,8 +257,8 @@ function Profile() {
       validation: {
         required: true,
       },
-      valid: userData?.user?.city ? true : false,
-      touched: userData?.user?.city ? true : false,
+      valid: !!userData?.user?.city,
+      touched: !!userData?.user?.city,
       error: {
         message: "City is required",
       },
@@ -281,8 +281,8 @@ function Profile() {
       validation: {
         required: true,
       },
-      valid: userData?.user?.postcode ? true : false,
-      touched: userData?.user?.postcode ? true : false,
+      valid: !!userData?.user?.postcode,
+      touched: !!userData?.user?.postcode,
       error: {
         message: "Postcode is required",
       },

@@ -1,7 +1,16 @@
 import Order from "src/components/Order/Order";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
+import {useEffect} from "react";
+import {useRouter} from "next/router";
 
 export default function order() {
+  const router = useRouter()
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/signin");
+    }
+  }, []);
   return (
     <BaseLayout title="Order 12F78GQ - Fairmall">
       <Order />
