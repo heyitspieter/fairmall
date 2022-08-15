@@ -1,7 +1,7 @@
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import Inspirations from "src/components/Inspirations/Inspirations";
 
-export default function orders() {
+export default function Orders() {
   return (
     <BaseLayout title="Inspirations - Fairmall">
       <Inspirations />

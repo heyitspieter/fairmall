@@ -10,7 +10,7 @@ import { getProduct } from "src/store/slices/products";
 import { useSelector, useDispatch } from "react-redux";
 import { getInspirations } from "src/store/slices/inspirations";
 
-export default function product({ id }) {
+export default function Product({ id }) {
   const router = useRouter();
   const dispatch = useDispatch();
 

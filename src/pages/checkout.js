@@ -3,7 +3,7 @@ import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
 
-export default function checkout() {
+export default function Checkout() {
   const router = useRouter()
   useEffect(() => {
     const token = localStorage.getItem("token");

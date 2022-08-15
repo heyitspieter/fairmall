@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "src/store/slices/orders";
 import {useRouter} from "next/router";
 
-export default function orders() {
+export default function Orders() {
   const router = useRouter()
   useEffect(() => {
     const token = localStorage.getItem("token");
