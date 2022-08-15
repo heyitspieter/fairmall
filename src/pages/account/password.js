@@ -2,7 +2,7 @@ import Password from "src/containers/Password/Password";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 
-export default function password() {
+export default function Password() {
   return (
     <PrivateRoute>
       <BaseLayout title="Change Password - Fairmall">
