@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import * as url from "../../config/url"
-// import axios from 'axios'
 import axios from "../../config/axios"
 
 
