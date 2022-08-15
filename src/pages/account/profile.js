@@ -1,4 +1,4 @@
-import Profile from "src/containers/Profile/Profile";
+import * as ProfileComponent from "src/containers/Profile/Profile";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 import {useEffect} from "react";
@@ -15,7 +15,7 @@ export default function Profile() {
   return (
     // <PrivateRoute>
       <BaseLayout title="Profile - Fairmall">
-        <Profile />
+        <ProfileComponent />
       </BaseLayout>
     // </PrivateRoute>
 

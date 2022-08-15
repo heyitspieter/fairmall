@@ -1,4 +1,4 @@
-import Order from "src/components/Order/Order";
+import * as OrderComponent from "src/components/Order/Order";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import {useEffect} from "react";
 import {useRouter} from "next/router";
@@ -13,7 +13,7 @@ export default function Order() {
   }, []);
   return (
     <BaseLayout title="Order 12F78GQ - Fairmall">
-      <Order />
+      <OrderComponent />
     </BaseLayout>
   );
 }
