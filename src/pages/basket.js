@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import ShoppingBasket from "src/components/ShoppingBasket/ShoppingBasket";
 
-export default function basket() {
-
+export default function Basket() {
   return (
     <BaseLayout title="My Basket - Fairmall">
       <ShoppingBasket />

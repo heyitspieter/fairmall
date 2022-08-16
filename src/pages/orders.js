@@ -1,4 +1,4 @@
-import Orders from "src/components/Orders/Orders";
+import * as OrdersComponent from "src/components/Orders/Orders";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 import { useEffect } from "react";
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "src/store/slices/orders";
 import {useRouter} from "next/router";
 
-export default function orders() {
+export default function Orders() {
   const router = useRouter()
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,7 +23,7 @@ export default function orders() {
   return (
     <BaseLayout title="My Orders - Fairmall">
       {/*<PrivateRoute>*/}
-        <Orders orders={orders} />
+        <OrdersComponent orders={orders} />
       {/*</PrivateRoute>*/}
     </BaseLayout>
   );

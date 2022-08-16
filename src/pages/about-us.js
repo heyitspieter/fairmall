@@ -3,7 +3,7 @@ import AboutUs from "src/components/AboutUs/AboutUs";
 import Contact from "src/containers/Contact/Contact";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 
-export default function about() {
+export default function About() {
   return (
     <BaseLayout title="About Us - Fairmall">
       <AboutUs />

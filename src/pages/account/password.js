@@ -1,12 +1,13 @@
-import Password from "src/containers/Password/Password";
+// import Password from "src/containers/Password/Password";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
+import PasswordComponent from "src/containers/Password/Password";
 
-export default function password() {
+export default function Password() {
   return (
     <PrivateRoute>
       <BaseLayout title="Change Password - Fairmall">
-        <Password />
+        <PasswordComponent />
       </BaseLayout>
     </PrivateRoute>
 

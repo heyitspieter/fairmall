@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 import {useRouter} from "next/router";
 
-export default function saved() {
+export default function Saved() {
   const dispatch = useDispatch();
   const router = useRouter()
   useEffect(() => {

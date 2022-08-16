@@ -8,7 +8,7 @@ import formStyles from "styles/modules/Form.module.scss";
 import styles from "src/containers/Password/Password.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 
-function Password() {
+function PasswordComponent() {
   // Form state
   const [formControls, setFormControls] = useState({
     currentPassowrd: {
@@ -189,4 +189,4 @@ function Password() {
   );
 }
 
-export default Password;
+export default PasswordComponent;

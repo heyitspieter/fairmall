@@ -9,7 +9,7 @@ import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import { FetchCategoryById, FetchProductByCategory, FetchInspirations, FetchProductCategories } from "src/utils/woo_commerce";
 import {getCategory} from "../../store/slices/categories";
 
-export default function category({slug}) {
+export default function Category({slug}) {
 
   const dispatch = useDispatch();
 

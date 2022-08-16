@@ -1,10 +1,10 @@
-import Profile from "src/containers/Profile/Profile";
+import * as ProfileComponent from "src/containers/Profile/Profile";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 import {useEffect} from "react";
 import { useRouter } from 'next/router';
 
-export default function profile() {
+export default function Profile() {
   const router = useRouter()
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,7 +15,7 @@ export default function profile() {
   return (
     // <PrivateRoute>
       <BaseLayout title="Profile - Fairmall">
-        <Profile />
+        <ProfileComponent />
       </BaseLayout>
     // </PrivateRoute>
 

@@ -2,7 +2,7 @@ import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import OrderConfirmation from "src/components/OrderConfirmation/OrderConfirmation";
 import { FetchPaymentGateways } from "src/utils/woo_commerce";
 
-export default function orderConfirm() {
+export default function OrderConfirm() {
   return (
     <BaseLayout title="Order Confirmation - Fairmall">
       <OrderConfirmation />

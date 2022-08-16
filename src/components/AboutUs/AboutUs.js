@@ -77,7 +77,7 @@ function AboutUs() {
           but we do not issue refunds or accept returns. No exceptions.</p>
         <p>To begin the exchange process please contact us via email: Ewere@fairmall.ng</p>
         <p>Shipping charges and delivery fees are not reimbursed for exchanged purchases.
-          Shipping charges and delivery fees are the customer's responsibility</p>
+          Shipping charges and delivery fees are the customer&apos;s responsibility</p>
       </div>
 
       <div className={styles.heading}>

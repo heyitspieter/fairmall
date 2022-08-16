@@ -10,7 +10,7 @@ import { getProducts } from "src/store/slices/products";
 import { getCategories } from "src/store/slices/categories";
 import { getInspirations } from "src/store/slices/inspirations";
 
-export default function shop() {
+export default function Shop() {
   const dispatch = useDispatch();
 
   //fetch products
