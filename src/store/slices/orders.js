@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import * as url from "../../config/url";
 // import axios from 'axios'
 import axios from "../../config/axios";
@@ -60,8 +60,7 @@ const createOrder = createAsyncThunk("orders/createOrder", async (data, { reject
     data,
   };
   try {
-    const response = await axios(config);
-    return response;
+    return await axios(config);
   } catch (err) {
     if (!err.response) {
       throw err;
@@ -83,8 +82,7 @@ const getOrder = createAsyncThunk("orders/getOrder",
     },
   };
   try {
-    const response = await axios(config);
-    return response;
+    return await axios(config);
   } catch (err) {
     if (!err.response) {
       throw err;

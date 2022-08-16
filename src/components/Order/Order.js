@@ -15,7 +15,6 @@ function Order() {
   const dispatch = useDispatch();
   const { id } = router.query
 
-  console.log(router.query);
   useEffect(() => {
     if (id) {
       dispatch(getOrder(id))
@@ -74,15 +73,15 @@ function Order() {
             </thead>
             <tbody>
               {
-                data.products.map((product, index) =>{ 
+                data.products.map((product, index) =>{
                   const img = product.image;
-                  
+
                   return (
                   <tr key={index}>
                     <td>
                       <figure>
                         <Image
-                        loader={() => img} 
+                        loader={() => img}
                           src={product?.image}
                           objectFit="cover"
                           layout="fill"

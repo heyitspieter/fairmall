@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Svg from "src/components/Svg/Svg";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { MaxAmount, MinAmount } from "src/utils/variable_amount";
 import { useDispatch } from "react-redux";
 import { addLineItem } from "src/store/slices/cartSlice";
@@ -13,12 +13,38 @@ function ProductDescription({ product, variations }) {
   const [selectedVariation, setSelectedVariation] = useState(null);
   const [addToVariationCard, setAddToVariationCard] = useState(true);
   const [variationPrice, setVariationPrice] = useState("Please select a variation");
+  const [variationTerm, setVariationTerm] = useState([]);
+
+
+  useEffect(() => {
+    if(product.variations) {
+      const variation_data = product.variations.map((variation, idx) => {
+        const variation_term_key = Object.keys(variation.term)
+        return (
+          <div onClick={() => handleSelectedVariation(variation)} key={idx} style={{paddingTop: 8, paddingBottom: 8, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'red', backgroundColor: selectedVariation && selectedVariation.id === variation.id ? "#e11493" : '#828282', marginRight: 5, borderRadius: 30, marginTop: 10, cursor: 'pointer'}}>
+            {/*<p style={{color: "white", fontSize: 12}}></p>*/}
+            <div>
+              {
+                variation_term_key.map((term, idx) => (
+                  <span key={idx} style={{color: "white", fontSize: 12, marginRight: 5}}>{variation.term[term]}</span>
+                ))
+              }
+            </div>
+          </div>
+        )
+      })
+      setVariationTerm(variation_data);
+    }
+  }, [selectedVariation])
+
 
   const handleSelectedVariation = (variation) => {
+    console.log(variation)
     setSelectedVariation(variation);
     setVariationPrice(formatToCurrency(variation.price));
     setAddToVariationCard(false);
   };
+
 
   const handleAddToCard = (product) => {
     const lineItem = {
@@ -27,7 +53,6 @@ function ProductDescription({ product, variations }) {
       name: product.name,
       price: parseFloat(product.price),
       variation: null,
-
       image: product.image,
       quantity: 1,
       total: product.price * 1,
@@ -42,7 +67,7 @@ function ProductDescription({ product, variations }) {
       name: product.name,
       price: parseFloat(variation.price),
       variation: variation,
-      image: variation.image,
+      image: product.image,
       quantity: 1,
       total: variation.price * 1,
     };
@@ -55,19 +80,20 @@ function ProductDescription({ product, variations }) {
           <div className={styles.gallery__left}>
             <Image
               // src="/images/product-cover.png"
-              loader={() => product?.image}
-              src={`${product?.image}`}
+              loader={() => product?.product?.image}
+              src={`${product?.product?.image}`}
+              unoptimized={true}
               alt="Product Name"
               objectFit="cover"
               layout="fill"
             />
           </div>
           <div className={styles.gallery__right}>
-            {product?.additional_images?.map((image, index) => {
+            {product?.product?.additional_images?.map((image, index) => {
               const img = `${image}`;
               return (
                 <figure key={index}>
-                  <Image loader={() => img} src={img} alt="Product Name" objectFit="cover" layout="fill" />
+                  <Image unoptimized={true} loader={() => img} src={img} alt="Product Name" objectFit="cover" layout="fill" />
                 </figure>
               );
             })}
@@ -75,8 +101,8 @@ function ProductDescription({ product, variations }) {
         </div>
         <div className={styles.info}>
           <div className={styles.info__1}>
-            <h4>{product?.category?.name}</h4>
-            <h3>{product?.name}</h3>
+            <h4>{product?.product?.category?.name}</h4>
+            <h3>{product?.product?.name}</h3>
             <p>
               by <span>FAIRMALL</span>
             </p>
@@ -100,30 +126,29 @@ function ProductDescription({ product, variations }) {
               </button>
             </div>
             <div className={styles.rating_count}>
-              <button>({product?.average_rating})</button>
+              {/*<button>({product?.average_rating})</button>*/}
             </div>
             <div className={styles.rating_btn}>
               <button>Submit a review</button>
             </div>
           </div>
-          {variations.variations && (
+          {product.variations && (
             <div className={styles.info__2}>
-              {product.variation.map((variation, idx) => (
-                <div onClick={() => handleSelectedVariation(variation)} key={idx} style={{paddingTop: 8, paddingBottom: 8, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'red', backgroundColor: selectedVariation && selectedVariation.id === variation.id ? "#e11493" : '#828282', marginRight: 5, borderRadius: 30, marginTop: 10, cursor: 'pointer'}}>
-                  <p style={{color: "white", fontSize: 12}}>{variation.attribute}: {variation.term}</p>
-                </div>
-              ))}
+              {variationTerm}
+              {/*{product.variations.map((variation, idx) => (*/}
+              {/*  */}
+              {/*))}*/}
             </div>
           )}
-          <div className={styles.info__3}>{product && product.variation ? <p>{variationPrice}</p> : <p>{formatToCurrency(product?.price)}</p>}</div>
+          <div className={styles.info__3}>{product.variations ? <p>{variationPrice}</p> : <p>{formatToCurrency(product?.product?.price)}</p>}</div>
           <div className={styles.btnAdd}>
-            {product.variation ? (
-              <button onClick={() => handleAddToCardWithVariation(product, selectedVariation)} disabled={addToVariationCard}>
+            {product.variations ? (
+              <button onClick={() => handleAddToCardWithVariation(product.product, selectedVariation)} disabled={addToVariationCard} style={{backgroundColor: addToVariationCard ? "#CCC" : "#e11493"}}>
                 <Svg symbol="shopping-basket" />
                 <span>Add to Basket</span>
               </button>
             ) : (
-              <button onClick={() => handleAddToCard(product)}>
+              <button onClick={() => handleAddToCard(product.product)}>
                 <Svg symbol="shopping-basket" />
                 <span>Add to Basket</span>
               </button>
@@ -143,15 +168,15 @@ function ProductDescription({ product, variations }) {
         <div className={styles.content__row}>
           <h3>Description</h3>
           <div className={styles.content__html}>
-            <p>{product?.description}</p>
+            <p>{product?.product?.description}</p>
           </div>
         </div>
         <div className={styles.content__row}>
           <h3>In Stock:</h3>
-          {product?.inventory > 0 ? (
+          {product?.product?.inventory > 0 ? (
             <p>
               {" "}
-              <b>{product?.inventory} </b> items available in Stock
+              <b>{product?.product?.inventory} </b> items available in Stock
             </p>
           ) : (
             <p>Not available</p>
@@ -159,7 +184,7 @@ function ProductDescription({ product, variations }) {
         </div>
         <div className={styles.content__row}>
           <h3>Category:</h3>
-          <p>{product?.category?.name}</p>
+          <p>{product?.product?.category?.name}</p>
         </div>
       </div>
     </div>

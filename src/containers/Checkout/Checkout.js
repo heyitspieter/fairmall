@@ -374,13 +374,13 @@ function Checkout() {
         product: lineItems
       };
 
-      router.push({
-        pathname: '/order_confirm',
-        query: { checkoutData: checkoutData },
-      });
+      // router.push({
+      //   pathname: '/order_confirm',
+      //   query: { checkoutData: checkoutData },
+      // });
 
-      // dispatch(shippingDetails(data));
-      // router.push("/order_confirm");
+      dispatch(shippingDetails(checkoutData));
+      router.push("/order_confirm");
     }
   };
 

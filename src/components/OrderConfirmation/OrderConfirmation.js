@@ -4,17 +4,16 @@ import { toast } from "react-toastify";
 
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import styles from "src/components/OrderConfirmation/OrderConfirmation.module.scss";
-import PaystackPayButton from "../Paystack/PaystackButton";
 import { useEffect } from "react";
 import { getOrdersData, createOrder } from "src/store/slices/orders";
 import { useDispatch, useSelector } from "react-redux";
+import {resetCartState} from "../../store/slices/cartSlice";
 
 function OrderConfirmation() {
   const dispatch = useDispatch();
   const { general } = useSelector((state) => state.general);
   const { shippingDetails, total, lineItems, rate } = useSelector((state) => state.cart);
 
-  console.log('general',general)
 
   useEffect(() => {
     dispatch(getOrdersData());
@@ -56,6 +55,7 @@ function OrderConfirmation() {
           window.location = res.payload.data.data.authorization_url;
         } else {
           toast.success(res.payload.data.data.message);
+          dispatch(resetCartState());
           setTimeout(() => {
             window.location.href = "/shop";
           }, 3000);

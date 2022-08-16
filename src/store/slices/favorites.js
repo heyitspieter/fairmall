@@ -126,7 +126,7 @@ const slice = createSlice({
     },
     [getFavorites.fulfilled]: (state, { payload }) => {
       state.favoritesData = payload.data.favourite;
-      state.favoriteProducts = payload.data.favourite.products;
+      state.favoriteProducts = payload.data.favourite?.products;
       state.loading = false;
     },
     [getFavorites.rejected]: (state, { payload }) => {

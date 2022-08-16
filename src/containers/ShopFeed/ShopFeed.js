@@ -84,16 +84,17 @@ function ShopFeed({ products }) {
           <p>Popular Items</p>
         </div>
         <div className={styles.grid}>
-          {!!products && products.length > 0 &&
-            sortProducts.slice(0).map((product, i) => {
+          {!!products && products.length > 0 ? (
+            sortProducts.map((product, i) => {
               // console.log(product)
-              const img = product.product.image;
+              const popularProduct = product.product
+              const img = popularProduct.image;
               return (
                 <div key={i} className={styles.grid__item}>
                   <figure>
-                    <Image loader={() => img} objectFit="cover" alt={product.name} src={img} layout="fill" />
+                    <Image loader={() => img} objectFit="cover" alt={popularProduct.name} src={img} layout="fill" />
                     <div className={styles.grid__item_options}>
-                      {!product?.product?.variation && (
+                      {!popularProduct?.variation && (
                         <button onClick={() => handleAddToCard(product)}>
                           <span>Add to Basket</span>
                           <Svg symbol="shopping-basket" />
@@ -102,7 +103,7 @@ function ShopFeed({ products }) {
                       <button
                         //  onClick={toggleModalHandler}
                         onClick={() => {
-                          setSelectedProduct(product?.product);
+                          setSelectedProduct(popularProduct);
                           toggleModalHandler();
                           // singleProduct(product.id)
                         }}
@@ -112,7 +113,7 @@ function ShopFeed({ products }) {
                       </button>
                       {
                         token !== null && (
-                          <button onClick={() => handleFavorite(product)}>
+                          <button onClick={() => handleFavorite(popularProduct)}>
                             <span>Save</span>
                             <Svg symbol="heart-outline" />
                           </button>
@@ -121,17 +122,25 @@ function ShopFeed({ products }) {
 
                     </div>
                   </figure>
-                  <h3>{product?.product?.name}</h3>
-                  {product?.product?.variation ? (
+                  <h3>{popularProduct?.name}</h3>
+                  {popularProduct?.variation ? (
                     <p>
-                      {formatToCurrency(MinAmount(product?.product?.variation))} - {formatToCurrency(MaxAmount(product?.product?.variation))}
+                      {formatToCurrency(MinAmount(popularProduct?.variation))} - {formatToCurrency(MaxAmount(popularProduct?.variation))}
                     </p>
                   ) : (
-                    <p>{formatToCurrency(product?.product?.price)}</p>
+                    <p>{formatToCurrency(popularProduct?.price)}</p>
                   )}
                 </div>
               );
-            })}
+            })
+          ): (
+            <div className={styles.heading} style={{marginTop: 100, marginBottom: 100}}>
+              <p>
+                No products found
+              </p>
+            </div>
+          )
+          }
         </div>
       </div>
     </>

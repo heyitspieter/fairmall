@@ -4,15 +4,76 @@ import className from "classnames";
 import Svg from "src/components/Svg/Svg";
 import ReactPaginate from "react-paginate";
 import styles from "src/containers/CategoryFeed/CategoryFeed.module.scss";
+import shopStyles from "src/containers/ShopFeed/ShopFeed.module.scss";
+import formatToCurrency from "../../helpers/formatAmount";
+import {MaxAmount, MinAmount} from "../../utils/variable_amount";
+import {addLineItem} from "../../store/slices/cartSlice";
+import {addToFavorites} from "../../store/slices/favorites";
+import {toast} from "react-toastify";
+import {useRouter} from "next/router";
+import {useDispatch} from "react-redux";
+import ProductModal from "../../components/Modals/ProductModal/ProductModal";
 
 function CategoryFeed({ category, products }) {
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [sortFocus, setSortFocus] = useState(false);
+  const token = localStorage.getItem("token");
+
+  const [modal, setModal] = useState({
+    visibility: false,
+  });
+  const [selectedProduct, setSelectedProduct] = useState({});
+  const [viewProduct, setViewProduct] = useState();
+
+  console.log(selectedProduct)
+
+  const handleAddToCard = async (product) => {
+    const lineItem = {
+      product_id: product.id,
+      variation_id: product.vatiation ? product.variation.id : null,
+      name: product.name,
+      price: parseFloat(product.price),
+      image: product.image,
+      quantity: 1,
+      total: product.price * 1,
+    };
+    dispatch(addLineItem(lineItem));
+  };
+
+  const handleFavorite = (product) => {
+    let data = {
+      product_id: product.id,
+    };
+    dispatch(addToFavorites(data))
+      .then((res) => {
+        if (res.payload.status === 200) {
+          toast.success(res.payload.data.message);
+        } else {
+          toast.error(res.payload.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.message);
+      });
+  };
+
+  const toggleModalHandler = (product) => {
+    setViewProduct(product);
+    setModal((prevState) => ({
+      ...prevState,
+      visibility: !prevState.visibility,
+    }));
+  };
 
   const onBlur = () => setSortFocus(false);
 
   const onFocus = () => setSortFocus(true);
 
   return (
+    <>
+    {modal && <ProductModal product={selectedProduct} show={modal.visibility} close={toggleModalHandler} />}
     <div className={styles.container}>
       <div className={styles.heading}>
         <p>{category?.name}</p>
@@ -51,15 +112,53 @@ function CategoryFeed({ category, products }) {
       </div>
       <div className={styles.grid}>
         {products && products?.length > 0 ? (
-          products.map((product, idx) => (
-            <div key={idx} className={styles.grid__item}>
-              <figure>
-                <Image loader={() => product.image} objectFit="cover" alt={product.name} src={product.image} layout="fill" />
-              </figure>
-              <h3>{product.name}</h3>
-              <p>{product.price} NGN</p>
-            </div>
-          ))
+          products.map((product, i) => {
+            // console.log(product)
+            const img = product.image;
+            return (
+              <div key={i} className={shopStyles.grid__item}>
+                <figure>
+                  <Image loader={() => img} objectFit="cover" alt={product.name} src={img} layout="fill" />
+                  <div className={shopStyles.grid__item_options}>
+                    {!product?.variation && (
+                      <button onClick={() => handleAddToCard(product)}>
+                        <span>Add to Basket</span>
+                        <Svg symbol="shopping-basket" />
+                      </button>
+                    )}
+                    <button
+                      //  onClick={toggleModalHandler}
+                      onClick={() => {
+                        setSelectedProduct(product);
+                        toggleModalHandler();
+                        // singleProduct(product.id)
+                      }}
+                    >
+                      <span>Quick View</span>
+                      <Svg symbol="eye" />
+                    </button>
+                    {
+                      token !== null && (
+                        <button onClick={() => handleFavorite(product)}>
+                          <span>Save</span>
+                          <Svg symbol="heart-outline" />
+                        </button>
+                      )
+                    }
+
+                  </div>
+                </figure>
+                <h3>{product?.name}</h3>
+                {product?.variation ? (
+                  <p>
+                    {formatToCurrency(MinAmount(product?.variation))} - {formatToCurrency(MaxAmount(product?.variation))}
+                  </p>
+                ) : (
+                  <p>{formatToCurrency(product?.price)}</p>
+                )}
+              </div>
+            );
+          })
         ) : (
           <div className={styles.heading} style={{marginTop: 100, marginBottom: 100}}>
             <p>
@@ -112,6 +211,7 @@ function CategoryFeed({ category, products }) {
       {/*  <button>Last</button> *!/*/}
       {/*</div>*/}
     </div>
+    </>
   );
 }
 

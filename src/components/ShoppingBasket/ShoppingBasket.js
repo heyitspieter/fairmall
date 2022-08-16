@@ -28,10 +28,8 @@ function ShoppingBasket() {
 
   useEffect(() => {
     /** calculate tax */
-    if (tax) {
-      setTaxAmount(TaxCalCulator(subTotal, parseFloat(general.tax)));
-    }
-  });
+    setTaxAmount(TaxCalCulator(subTotal, parseFloat(general.tax)));
+  }, [subTotal, general.tax] );
 
   useEffect(() => {
     if (lineItems.length > 0) {
@@ -42,11 +40,11 @@ function ShoppingBasket() {
       setSubTotal(0);
       setIsValid(true);
     }
-  });
+  }, [lineItems], );
 
   useEffect(() => {
     setTotal(subTotal + taxAmount);
-  });
+  }, [subTotal, taxAmount], );
 
   useEffect(() => {
     const cartAmount = {
@@ -95,13 +93,12 @@ function ShoppingBasket() {
                   <tr key={idx}>
                     <td>
                       <figure>
-                        <Image loader={() => `${product.image}`} src={`${product.image}`} objectFit="cover" alt="Slide 1" layout="fill" />
+                        <Image unoptimized={true} loader={() => `${product.image}`} src={`${product.image}`} objectFit="cover" alt="Slide 1" layout="fill" />
                       </figure>
                     </td>
                     <td>
                       <div className={styles.desc}>
                         <h4>{product.name}</h4>
-                        {product.variation && <p>{product.variation.term.toUpperCase()}</p>}
                       </div>
                     </td>
                     <td>

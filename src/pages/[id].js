@@ -51,7 +51,7 @@ export default function product({ id }) {
       {!loading && data && (
         <>
           {/*<Breadcrumb data={data} items={breadcrumb} />*/}
-          <ProductDescription product={data.product} variations={data} />
+          <ProductDescription product={data} variations={data.variation} />
           {/* <Recommendations title="You might also like" /> */}
           <Inspirations inspirations={inspirations} />
           <NewsLetter />

@@ -127,8 +127,8 @@ console.log(product)
                       <Svg symbol="arrow" />
                     </button>
                     <Carousel showEmptySlots itemsToShow={2} itemsToScroll={1} outerSpacing={20} ref={carouselRef} breakPoints={breakpoints} itemPadding={[0, 15, 0, 0]} className={styles.slider__flex}>
-                      {!!product?.product?.additional_images &&
-                        product?.product?.additional_images.map((image, i) => {
+                      {!!product?.additional_images &&
+                        product?.additional_images.map((image, i) => {
                           const img = image;
                           return (
                             <div key={i} className={styles.slider__item}>
@@ -146,9 +146,9 @@ console.log(product)
                   <div className={styles.description}>
                     <div className={styles.description__row}>
                       <div className={styles.left}>
-                        <h4>{product?.product?.category?.name}</h4>
-                        <h3>{product?.product?.name}</h3>
-                        <p>{product?.product?.price} NGN</p>
+                        <h4>{product?.category?.name}</h4>
+                        <h3>{product?.name}</h3>
+                        <p>{product?.price} NGN</p>
                       </div>
                       <div className={styles.right}>
                         <div className={styles.rating}>
@@ -169,14 +169,14 @@ console.log(product)
                           </button>
                         </div>
                         <a href="#">(20)</a>
-                        <button onClick={()=>handleFavorite(product?.product)}>
+                        <button onClick={()=>handleFavorite(product)}>
                           <Svg symbol="heart-outline" />
                         </button>
                       </div>
                     </div>
                     <div className={styles.description__row}>
                       <h3>Description:</h3>
-                      <p>{product?.product?.description}</p>
+                      <p>{product?.description}</p>
                     </div>
                     {/* {product?.attributes?.length > 0
                       ? product?.attributes.map((item, index) => (
@@ -189,11 +189,11 @@ console.log(product)
                         ))
                       : null} */}
                     <div className={styles.description__row}>
-                      <Link href="/[id]" as={`/${product?.product?.id}`}>
+                      <Link href="/[id]" as={`/${product?.id}`}>
                         <button>View More</button>
                       </Link>
-                      {!product?.product?.variation && (
-                        <button onClick={()=>{handleAddToCard(product?.product)}}>
+                      {!product?.variation && (
+                        <button onClick={()=>{handleAddToCard(product)}}>
                           <Svg symbol="shopping-basket" />
                           <span>Add to Basket</span>
                         </button>
