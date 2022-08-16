@@ -9,7 +9,8 @@ const Breadcrumb = ({ item }) => {
       <nav>
         <ol>
           <li>
-            <Link href={item.route}>
+            {/* <Link href={item.route}> */}
+            <Link href={'/shop'} >
               <a>Shop</a>
             </Link>
             <Svg className={styles.iconChevronRight} symbol="chevron" />

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Svg from "src/components/Svg/Svg";
 import ProductModal from "src/components/Modals/ProductModal/ProductModal";
 import styles from "src/containers/ShopFeed/ShopFeed.module.scss";
@@ -15,6 +15,8 @@ import { toast } from "react-toastify";
 function ShopFeed({ products }) {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const token = localStorage.getItem("token");
 
   const [modal, setModal] = useState({
     visibility: false,
@@ -82,9 +84,10 @@ function ShopFeed({ products }) {
           <p>Popular Items</p>
         </div>
         <div className={styles.grid}>
-          {products.length > 0 &&
+          {!!products && products.length > 0 &&
             sortProducts.slice(0).map((product, i) => {
-              const img = product?.product.image;
+              // console.log(product)
+              const img = product.product.image;
               return (
                 <div key={i} className={styles.grid__item}>
                   <figure>
@@ -107,10 +110,15 @@ function ShopFeed({ products }) {
                         <span>Quick View</span>
                         <Svg symbol="eye" />
                       </button>
-                      <button onClick={() => handleFavorite(product)}>
-                        <span>Save</span>
-                        <Svg symbol="heart-outline" />
-                      </button>
+                      {
+                        token !== null && (
+                          <button onClick={() => handleFavorite(product)}>
+                            <span>Save</span>
+                            <Svg symbol="heart-outline" />
+                          </button>
+                        )
+                      }
+
                     </div>
                   </figure>
                   <h3>{product?.product?.name}</h3>

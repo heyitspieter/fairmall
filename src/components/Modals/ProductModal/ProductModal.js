@@ -21,10 +21,7 @@ function ProductModal({ show, close, product }) {
   const ref = useRef();
   const router = useRouter();
   const dispatch = useDispatch();
-
-
-  // console.log("<<<<", product);
-
+console.log(product)
   const carouselRef = useRef();
 
   const modalOverlayClass = className({
@@ -130,8 +127,8 @@ function ProductModal({ show, close, product }) {
                       <Svg symbol="arrow" />
                     </button>
                     <Carousel showEmptySlots itemsToShow={2} itemsToScroll={1} outerSpacing={20} ref={carouselRef} breakPoints={breakpoints} itemPadding={[0, 15, 0, 0]} className={styles.slider__flex}>
-                      {product.additional_images &&
-                        product.additional_images.map((image, i) => {
+                      {!!product?.product?.additional_images &&
+                        product?.product?.additional_images.map((image, i) => {
                           const img = image;
                           return (
                             <div key={i} className={styles.slider__item}>
@@ -149,9 +146,9 @@ function ProductModal({ show, close, product }) {
                   <div className={styles.description}>
                     <div className={styles.description__row}>
                       <div className={styles.left}>
-                        <h4>{product?.category?.name}</h4>
-                        <h3>{product?.name}</h3>
-                        <p>{product?.price} NGN</p>
+                        <h4>{product?.product?.category?.name}</h4>
+                        <h3>{product?.product?.name}</h3>
+                        <p>{product?.product?.price} NGN</p>
                       </div>
                       <div className={styles.right}>
                         <div className={styles.rating}>
@@ -172,14 +169,14 @@ function ProductModal({ show, close, product }) {
                           </button>
                         </div>
                         <a href="#">(20)</a>
-                        <button onClick={()=>handleFavorite(product)}>
+                        <button onClick={()=>handleFavorite(product?.product)}>
                           <Svg symbol="heart-outline" />
                         </button>
                       </div>
                     </div>
                     <div className={styles.description__row}>
                       <h3>Description:</h3>
-                      <p>{product?.description}</p>
+                      <p>{product?.product?.description}</p>
                     </div>
                     {/* {product?.attributes?.length > 0
                       ? product?.attributes.map((item, index) => (
@@ -192,11 +189,11 @@ function ProductModal({ show, close, product }) {
                         ))
                       : null} */}
                     <div className={styles.description__row}>
-                      <Link href="/[id]" as={`/${product.id}`}>
+                      <Link href="/[id]" as={`/${product?.product?.id}`}>
                         <button>View More</button>
                       </Link>
-                      {!product.variation && (
-                        <button onClick={()=>{handleAddToCard(product)}}>
+                      {!product?.product?.variation && (
+                        <button onClick={()=>{handleAddToCard(product?.product)}}>
                           <Svg symbol="shopping-basket" />
                           <span>Add to Basket</span>
                         </button>
