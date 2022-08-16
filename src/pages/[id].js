@@ -50,7 +50,7 @@ export default function product({ id }) {
     <BaseLayout title={data && data.name}>
       {!loading && data && (
         <>
-          <Breadcrumb data={data} items={breadcrumb} />
+          {/*<Breadcrumb data={data} items={breadcrumb} />*/}
           <ProductDescription product={data.product} variations={data} />
           {/* <Recommendations title="You might also like" /> */}
           <Inspirations inspirations={inspirations} />

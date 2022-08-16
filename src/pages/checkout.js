@@ -5,12 +5,12 @@ import {useRouter} from "next/router";
 
 export default function checkout() {
   const router = useRouter()
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/signin");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     router.push("/signin");
+  //   }
+  // }, []);
   return (
     <BaseLayout title="Checkout - Fairmall">
       <Checkout />

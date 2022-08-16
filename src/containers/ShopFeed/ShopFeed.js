@@ -99,7 +99,7 @@ function ShopFeed({ products }) {
                       <button
                         //  onClick={toggleModalHandler}
                         onClick={() => {
-                          setSelectedProduct(product);
+                          setSelectedProduct(product?.product);
                           toggleModalHandler();
                           // singleProduct(product.id)
                         }}
