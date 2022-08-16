@@ -1,0 +1,144 @@
+.container {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    padding: 3rem 13rem 10rem;
+
+    @media screen and (max-width: 72em) {
+        padding: 3rem 5rem 10rem;
+    }
+
+    @media screen and (max-width: 50em) {
+        padding: 3rem 1.5rem 5rem;
+    }
+}
+
+.heading {
+    z-index: 4;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+
+    p {
+        font-size: 1.8rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+}
+
+.tableWrapper {
+    width: 100%;
+    display: block;
+    padding: 0 10rem;
+    overflow-x: auto;
+    margin-top: 10rem;
+
+    @media screen and (max-width: 72em) {
+        padding: 0;
+    }
+
+    @media screen and (max-width: 50em) {
+        margin-top: 2rem;
+    }
+
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #ffffff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        background-color: #cccccc;
+        border: 3px solid #cccccc;
+    }
+}
+
+.table {
+    width: 100%;
+    display: table;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    thead,
+    tbody {
+        vertical-align: top;
+        display: table-header-group;
+    }
+
+    thead,
+    tbody {
+        tr {
+            display: table-row;
+
+            th {
+                color: #828282;
+                text-align: left;
+                font-weight: 400;
+                font-size: 1.45rem;
+                white-space: nowrap;
+                padding: 0 1.8rem 0.7rem 1.8rem;
+
+                @media screen and (max-width: 50em) {
+                    padding: 0 1.5rem 0.7rem 1.5rem;
+                }
+            }
+
+            td {
+                font-size: 1.45rem;
+                white-space: nowrap;
+                padding: 2rem 1.8rem 2rem;
+                border-top: 1px solid #f2f2f2;
+
+                @media screen and (max-width: 50em) {
+                    padding: 2rem 1.5rem 2rem;
+                }
+            }
+        }
+    }
+
+    .orderNo {
+        p {
+            color: #0d8f84;
+            text-decoration: underline;
+        }
+    }
+
+    .orderStatus {
+        button {
+            color: #f2994a;
+            font-size: 1.45rem;
+            font-family: inherit;
+            padding: 0.6rem 4rem;
+            border-radius: 0.3rem;
+            background-color: rgba(242, 152, 74, 0.274);
+        }
+    }
+
+    .action {
+        display: flex;
+        align-items: center;
+
+        & > *:first-child {
+            svg {
+                fill: #212121;
+            }
+        }
+
+        & > *:not(:last-child) {
+            margin-right: 1.5rem;
+        }
+
+        button {
+            color: #e11493;
+            font-size: 1.45rem;
+            font-family: inherit;
+            text-decoration: underline;
+        }
+    }
+}

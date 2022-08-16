@@ -1,0 +1,85 @@
+.container {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    padding: 3rem 13rem 10rem;
+
+    @media screen and (max-width: 72em) {
+        padding: 3rem 5rem 10rem;
+    }
+
+    @media screen and (max-width: 50em) {
+        padding: 3rem 1.5rem 5rem;
+    }
+}
+
+.heading {
+    z-index: 4;
+    display: flex;
+    margin: 3rem auto 0;
+    flex-direction: column;
+
+    p {
+        font-size: 1.8rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+}
+
+.emblem {
+    z-index: 4;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+
+    div {
+        width: 4.4rem;
+        height: 4.4rem;
+    }
+
+    div + span {
+        display: flex;
+        font-size: 4rem;
+        font-weight: 300;
+        color: #e11493;
+        max-height: 100%;
+        margin-left: 1rem;
+        padding-top: 0.4rem;
+
+        span {
+            font-weight: 700;
+        }
+    }
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    min-width: 70rem;
+    max-width: 70rem;
+    margin-top: 3rem;
+    align-self: center;
+    flex-direction: column;
+
+    @media screen and (max-width: 50em) {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    p {
+        text-align: center;
+        font-size: 1.45rem;
+
+        + p {
+            padding: 3rem 0;
+            font-style: italic;
+        }
+
+        &:last-of-type {
+            padding-top: 0;
+            font-style: normal;
+        }
+    }
+}

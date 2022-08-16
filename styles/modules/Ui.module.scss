@@ -1,0 +1,20 @@
+.spiralLeft {
+    top: 15%;
+    left: -8.8rem;
+    position: absolute;
+
+    @media screen and (max-width: 50em) {
+        display: none;
+    }
+}
+
+.spiralRight {
+    top: 15%;
+    right: -9rem;
+    position: absolute;
+    transform: rotate(180deg);
+
+    @media screen and (max-width: 50em) {
+        display: none;
+    }
+}

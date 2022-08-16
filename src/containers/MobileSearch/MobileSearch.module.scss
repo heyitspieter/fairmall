@@ -1,0 +1,42 @@
+.container {
+    grid-column: 1 / -1;
+    padding: 2rem 1.5rem 0;
+    background-color: #ffffff;
+
+    &.bg__pink {
+        background-color: #fdf3fa;
+    }
+
+    @media screen and (min-width: 50em) {
+        display: none;
+    }
+}
+
+.wrapper {
+    display: flex;
+    padding-left: 0.8rem;
+    border: 1px solid #cccccc;
+
+    input[type="text"] {
+        border: 0;
+        width: 100%;
+        outline: none;
+        cursor: pointer;
+        background: none;
+        font-size: 1.37rem;
+        font-family: inherit;
+    }
+
+    button {
+        border: 0;
+        display: flex;
+        cursor: pointer;
+        padding: 1rem 0.8rem;
+
+        svg {
+            width: 2.2rem;
+            height: 2.2rem;
+            fill: #212121;
+        }
+    }
+}

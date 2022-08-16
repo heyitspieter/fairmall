@@ -1,0 +1,119 @@
+.container {
+    height: 50rem;
+    overflow: hidden;
+    position: relative;
+    grid-column: 1 / -1;
+    background-color: #e11493;
+
+    @media screen and (max-width: 50em) {
+        height: 100%;
+    }
+}
+
+.spiralLeft {
+    top: 15%;
+    left: -8.8rem;
+    position: absolute;
+
+    @media screen and (max-width: 50em) {
+        display: none;
+    }
+}
+
+.spiralRight {
+    top: 15%;
+    right: -9rem;
+    position: absolute;
+    transform: rotate(180deg);
+
+    @media screen and (max-width: 50em) {
+        display: none;
+    }
+}
+
+.content {
+    top: 50%;
+    left: 50%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    flex-direction: column;
+    transform: translate(-50%, -50%);
+
+    @media screen and (max-width: 50em) {
+        top: 0;
+        left: 0;
+        display: flex;
+        padding: 4rem;
+        position: initial;
+        flex-direction: column;
+        transform: translate(0, 0);
+    }
+
+    h2 {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 3.9rem;
+        text-align: center;
+
+        @media screen and (max-width: 50em) {
+            font-weight: 700;
+            font-size: 1.7rem;
+        }
+    }
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
+
+    @media screen and (max-width: 50em) {
+        margin-top: 1.5rem;
+    }
+
+    label {
+        display: none;
+    }
+
+    input {
+        border: 0;
+        width: 25vw;
+        outline: none;
+        color: #ffffff;
+        background: none;
+        padding: 1.4rem 0;
+        text-align: center;
+        align-self: center;
+        font-size: 1.45rem;
+        font-family: inherit;
+        border-bottom: 1px solid #ffffff;
+
+        &::-webkit-input-placeholder {
+            color: #ffffff;
+        }
+
+        @media screen and (max-width: 50em) {
+            width: 100%;
+        }
+    }
+
+    button {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 1.5rem;
+        align-self: center;
+        padding: 2rem 4rem;
+        margin-top: 3.8rem;
+        font-family: inherit;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        background-color: #212121;
+
+        @media screen and (max-width: 50em) {
+            font-size: 1.4rem;
+            padding: 1.6rem 3rem;
+        }
+    }
+}
