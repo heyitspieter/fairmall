@@ -4,14 +4,12 @@ import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import Recommendations from "src/components/Recommendations/Recommendations";
 import ProductDescription from "src/components/ProductDescription/ProductDescription";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { getProduct } from "src/store/slices/products";
 import { useSelector, useDispatch } from "react-redux";
 import { getInspirations } from "src/store/slices/inspirations";
 
 export default function Product({ id }) {
-  const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {

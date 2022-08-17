@@ -1,10 +1,10 @@
-import * as SignupComponent from "src/containers/Signup/Signup";
+import SignupPage from "src/containers/Signup/Signup";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 
 export default function Signup() {
   return (
     <BaseLayout title="Sign Up - Fairmall">
-      <SignupComponent />
+      <SignupPage />
     </BaseLayout>
   );
 }

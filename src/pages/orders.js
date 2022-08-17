@@ -1,4 +1,4 @@
-import * as OrdersComponent from "src/components/Orders/Orders";
+import OrdersPage from "src/components/Orders/Orders";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 import { useEffect } from "react";
@@ -23,7 +23,7 @@ export default function Orders() {
   return (
     <BaseLayout title="My Orders - Fairmall">
       {/*<PrivateRoute>*/}
-        <OrdersComponent orders={orders} />
+        <OrdersPage orders={orders} />
       {/*</PrivateRoute>*/}
     </BaseLayout>
   );
