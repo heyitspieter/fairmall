@@ -88,7 +88,7 @@ function Checkout() {
     },
     email: {
       label: {
-        title: "E-Mail",
+        title: "Registered E-Mail / Guest E-mail",
         htmlFor: "email",
         classes: [],
       },

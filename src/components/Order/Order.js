@@ -5,24 +5,40 @@ import styles from "src/components/Order/Order.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { getOrder } from "src/store/slices/orders";
 import formatToCurrency from "src/helpers/formatAmount";
 import moment from 'moment'
+import { toast } from "react-toastify";
 
 function Order() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { id } = router.query
 
+  console.log('id ====', id)
+
   useEffect(() => {
     if (id) {
       dispatch(getOrder(id))
-    } else {
-      router.push("/orders")
-    }
+      // .then(res => console.log(res))
+      // .catch(err => toast.error(err.message))
+    } 
+    // else {
+    //   router.push("/orders")
+    // }
   }, [dispatch]);
 
+  useCallback(() => {
+    if (id) {
+      dispatch(getOrder(id))
+      .then(res => console.log(res))
+      .catch(err => toast.error(err.message))
+    } 
+    // else {
+    //   router.push("/orders")
+    // }
+  }, [dispatch]);
   const { data } = useSelector((state) => state.orders);
 
   if (data) {
@@ -49,13 +65,13 @@ function Order() {
         </div>
         <div>
           <p>
-            Order No: <span>{data.order_id}</span>
+            Order No: <span>{data?.order_id}</span>
           </p>
           <p>
-            Order Confirmed: <span>{moment(data.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</span>
+            Order Confirmed: <span>{moment(data?.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</span>
           </p>
           <p>
-            Order Delivered: <span>28th December, 2021</span>
+            Order Delivered: <span>-</span>
           </p>
         </div>
       </div>
@@ -73,7 +89,7 @@ function Order() {
             </thead>
             <tbody>
               {
-                data.products.map((product, index) =>{
+               !!data.products && data.products.map((product, index) =>{
                   const img = product.image;
 
                   return (
@@ -91,12 +107,10 @@ function Order() {
                     </td>
                     <td>
                       <div className={styles.desc}>
-                        <h4>{product.name}</h4>
-                        {/* <p>GH-23451</p> */}
+                        <h4>{product?.name}</h4>
                       </div>
                     </td>
-                    <td>{product.quantity}</td>
-                    {/* <td>{formatToCurrency(product.amount)} NGN</td> */}
+                    <td>{product?.quantity}</td>
                     <td>
                       <div className={styles.action}>
                         <button>Give Review</button>
@@ -112,8 +126,7 @@ function Order() {
           <h3>Order Summary</h3>
           <div className={styles.summary}>
             <div className={styles.summary__item}>
-              <h4>Items ({data.products.length})</h4>
-              {/* <p>200,000 </p> */}
+              <h4>Items ({data?.products?.length})</h4>
             </div>
             <div className={styles.summary__item}>
               <h4>Delivery</h4>

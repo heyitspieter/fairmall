@@ -9,6 +9,7 @@ import { removeFromFavorite } from "src/store/slices/favorites";
 import { toast } from "react-toastify";
 import formatToCurrency from "../../helpers/formatAmount";
 import {MaxAmount, MinAmount} from "../../utils/variable_amount";
+import Link from "next/link";
 
 function SavedItems({ favorites }) {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function SavedItems({ favorites }) {
         toast.error(err.message);
       });
   }
+
 
   return (
     <>
@@ -82,9 +84,12 @@ function SavedItems({ favorites }) {
                       <div className={styles.action}>
                         {
                           item.variation === false && (
+                            <Link href="/[id]" as={`/${item?.id}`}>
                             <button>
-                              <Svg symbol="shopping-basket" />
+                              <Svg symbol="eye" />
                             </button>
+                            </Link>
+                           
                           )
                         }
                         <button onClick={()=>handleRemoveItem(item.id)}>

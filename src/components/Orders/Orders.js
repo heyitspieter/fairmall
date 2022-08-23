@@ -51,13 +51,16 @@ function Orders({ orders }) {
                       {/* <Link href={`/orders`} as={`/order/${order?.order_id}`}>
                         <a>View</a>
                       </Link> */}
-                      <button onClick={() => {
+                      {/* <button onClick={() => {
                         // router.push("/order/12F78GQ")
                         router.push({
                           pathname: `/order/${order?.id}`,
                           query: { order: order },
                         });
-                    }}>View</button>
+                    }}>View</button> */}
+                    <Link href="/order/[id]" as={`order/${order?.id}`}>
+                    <button>View</button>
+                    </Link>
                     </div>
                   </td>
                 </tr>

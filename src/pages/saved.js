@@ -6,6 +6,8 @@ import { getFavorites } from "src/store/slices/favorites";
 import { useDispatch, useSelector } from "react-redux";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
 import {useRouter} from "next/router";
+import { getInspirations } from "src/store/slices/inspirations";
+import SectionFive from "src/components/Home/SectionFive/SectionFive";
 
 export default function Saved() {
   const dispatch = useDispatch();
@@ -21,6 +23,12 @@ export default function Saved() {
     dispatch(getFavorites());
   }, [dispatch]);
 
+    // fetch inspirations
+    useEffect(() => {
+      dispatch(getInspirations());
+    }, [dispatch]);
+    const { inspirations } = useSelector((state) => state.inspiration);
+  
 
   const { favoritesData, favoriteProducts, loading } = useSelector((state) => state.favorites);
 
@@ -29,6 +37,8 @@ export default function Saved() {
       {/*<PrivateRoute>*/}
         <SavedItems favorites={favoriteProducts} loading={loading} />
         {/* <Recommendations title="Recommended Items" /> */}
+        <SectionFive inspirations={inspirations} />
+
       {/*</PrivateRoute>*/}
     </BaseLayout>
   );
