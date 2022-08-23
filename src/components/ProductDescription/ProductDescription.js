@@ -22,7 +22,6 @@ function ProductDescription({ product, variations }) {
         const variation_term_key = Object.keys(variation.term)
         return (
           <div onClick={() => handleSelectedVariation(variation)} key={idx} style={{paddingTop: 8, paddingBottom: 8, paddingLeft: 10, paddingRight: 10, borderWidth: 1, borderColor: 'red', backgroundColor: selectedVariation && selectedVariation.id === variation.id ? "#e11493" : '#828282', marginRight: 5, borderRadius: 30, marginTop: 10, cursor: 'pointer'}}>
-            {/*<p style={{color: "white", fontSize: 12}}></p>*/}
             <div>
               {
                 variation_term_key.map((term, idx) => (
@@ -39,7 +38,6 @@ function ProductDescription({ product, variations }) {
 
 
   const handleSelectedVariation = (variation) => {
-    console.log(variation)
     setSelectedVariation(variation);
     setVariationPrice(formatToCurrency(variation.price));
     setAddToVariationCard(false);
@@ -135,9 +133,6 @@ function ProductDescription({ product, variations }) {
           {product.variations && (
             <div className={styles.info__2}>
               {variationTerm}
-              {/*{product.variations.map((variation, idx) => (*/}
-              {/*  */}
-              {/*))}*/}
             </div>
           )}
           <div className={styles.info__3}>{product.variations ? <p>{variationPrice}</p> : <p>{formatToCurrency(product?.product?.price)}</p>}</div>

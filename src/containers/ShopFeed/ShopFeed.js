@@ -32,13 +32,13 @@ function ShopFeed({ products }) {
 
   const handleAddToCard = async (product) => {
     const lineItem = {
-      product_id: product.id,
-      variation_id: product.vatiation ? product.variation.id : null,
-      name: product.name,
-      price: parseFloat(product.price),
-      image: product.image,
+      product_id: product.product.id,
+      variation_id: product.product.variation ? product.product.variation.id : null,
+      name: product.product.name,
+      price: parseFloat(product.product.price),
+      image: product.product.image,
       quantity: 1,
-      total: product.price * 1,
+      total: product.product.price * 1,
     };
     dispatch(addLineItem(lineItem));
   };
