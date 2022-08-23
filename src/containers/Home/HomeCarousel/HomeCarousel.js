@@ -54,7 +54,7 @@ function HomeCarousel({ items, config }) {
             {items.map((item, i) => {
               return (
                 <figure key={i}>
-                  <Image src={item.img} layout="fill" alt={item.title} />
+                  <Image loader={() => item.img} src={item.img} layout="fill" alt={item.title} />
                 </figure>
               );
             })}

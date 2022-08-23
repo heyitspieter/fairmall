@@ -3,58 +3,31 @@ import HomeCarousel from "src/containers/Home/HomeCarousel/HomeCarousel";
 
 import styles from "src/components/Home/Home.module.scss";
 
-function SectionThree() {
-  const items = [
-    {
-      title: "Slide 1",
-      img: "/images/slide-1.png",
-    },
-    {
-      title: "Slide 2",
-      img: "/images/slide-2.png",
-    },
-    {
-      title: "Slide 3",
-      img: "/images/slide-3.png",
-    },
-    {
-      title: "Slide 4",
-      img: "/images/slide-4.png",
-    },
-    {
-      title: "Slide 5",
-      img: "/images/slide-5.png",
-    },
-    {
-      title: "Slide 6",
-      img: "/images/slide-6.png",
-    },
-    {
-      title: "Slide 7",
-      img: "/images/slide-7.png",
-    },
-    {
-      title: "Slide 8",
-      img: "/images/slide-8.png",
-    },
-    {
-      title: "Slide 9",
-      img: "/images/slide-4.png",
-    },
-    {
-      title: "Slide 10",
-      img: "/images/slide-6.png",
-    },
-  ];
+function SectionThree({category}) {
+  console.log(category)
+  const items = [];
+  const addItems = []
+  category?.products.map((product) => {
+    items.push({
+      title: product.name,
+      img: product.image
+    })
+    product?.additional_images.map((addImg) => {
+      addItems.push({
+        title: product.name,
+        img: addImg
+      })
+    })
+  })
 
   return (
     <>
       <section className={styles.section_3}>
         <div className={styles.heading}>
-          <p>World Class Furniture</p>
+          <p>{category?.category?.description}</p>
         </div>
-        <HomeCarousel items={items} />
         <HomeCarousel items={items} config={{ outerSpacing: 25 }} />
+        <HomeCarousel items={addItems.reverse()} config={{ outerSpacing: 25 }} />
       </section>
       <style jsx global>
         {`

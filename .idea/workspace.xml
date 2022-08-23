@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ffacfcbf-acb6-4d88-b4d2-ba65a26b58ee" name="Changes" comment="Major page fixes" />
+    <list default="true" id="ffacfcbf-acb6-4d88-b4d2-ba65a26b58ee" name="Changes" comment="Major page fixes">
+      <change afterPath="$PROJECT_DIR$/src/store/slices/home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home/SectionFour/SectionFour.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/SectionFour/SectionFour.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home/SectionOne/SectionOne.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/SectionOne/SectionOne.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home/SectionThree/SectionThree.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/SectionThree/SectionThree.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/url.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/url.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Home/HomeCarousel/HomeCarousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/HomeCarousel/HomeCarousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +97,9 @@
       <workItem from="1659607447821" duration="491000" />
       <workItem from="1659685120560" duration="6147000" />
       <workItem from="1659698865778" duration="998000" />
-      <workItem from="1660628987530" duration="11366000" />
+      <workItem from="1660628987530" duration="11651000" />
+      <workItem from="1660652983655" duration="17000" />
+      <workItem from="1661229359586" duration="2817000" />
     </task>
     <task id="LOCAL-00001" summary="Unversioned files">
       <created>1658211574276</created>

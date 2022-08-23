@@ -9,6 +9,7 @@ import SectionFive from "src/components/Home/SectionFive/SectionFive";
 import styles from "src/components/Home/Home.module.scss";
 import { getInspirations } from "../../store/slices/inspirations";
 import { getGeneral } from "../../store/slices/general";
+import {homeData} from "../../store/slices/home";
 
 function Home() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function Home() {
   // fetch inspirations
   useEffect(() => {
     dispatch(getInspirations());
+    dispatch(homeData())
   }, [dispatch]);
 
   useEffect(() => {
@@ -23,13 +25,14 @@ function Home() {
   }, [dispatch]);
 
   const { inspirations } = useSelector((state) => state.inspiration);
+  const { home } = useSelector((state) => state.home);
 
   return (
     <div className={styles.container}>
-      <SectionOne />
+      <SectionOne products={home.products} />
       <SectionTwo />
-      <SectionThree />
-      <SectionFour />
+      <SectionThree category={home?.categories[0]} />
+      <SectionFour category={home?.categories[1]} />
       <SectionFive inspirations={inspirations} />
     </div>
   );

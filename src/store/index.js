@@ -7,6 +7,7 @@ import favoritesReducer from "./slices/favorites";
 import UserReducer from "./slices/user";
 import ordersReducer from "./slices/orders";
 import generalReducer from "./slices/general";
+import homeReducer from "./slices/home"
 
 import { combineReducers } from "@reduxjs/toolkit";
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   user: UserReducer,
   orders: ordersReducer,
   general: generalReducer,
+  home: homeReducer
 });
 
 const persistConfig = {

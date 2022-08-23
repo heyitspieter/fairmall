@@ -1,5 +1,8 @@
 export const baseUrl = "https://fairmall-v1.herokuapp.com/api/v1";
 
+// FETCH HOME DATA
+export const getHome = baseUrl + "/user/home"
+
 // MANAGE GENERAL SETTINGS
 export const getGeneral = baseUrl + "/general";
 
