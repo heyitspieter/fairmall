@@ -34,8 +34,8 @@ function Home() {
     <div className={styles.container}>
       <SectionOne products={home.products} />
       <SectionTwo />
-      <SectionThree category={home?.categories[0]} />
-      <SectionFour category={home?.categories[1]} />
+      <SectionThree category={home?.categories ? home?.categories[0] : []} />
+      <SectionFour category={home?.categories? home?.categories[1] : []} />
       <SectionFive inspirations={inspirations} />
     </div>
   );

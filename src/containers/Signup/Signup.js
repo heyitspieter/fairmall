@@ -182,14 +182,12 @@ function Signup() {
 
       dispatch(registerUser(data))
         .then((res) => {
-          // console.log(res);
+          console.log(res);
           if (res.payload.status === 201) {
-            console.log(res.payload.data);
+            toast.success(res.payload.data.message)
             localStorage.setItem("user", res.payload.data.user);
-            localStorage.setItem("token", res.payload.data.token.login.token);
-            router.push('/account/profile');
+            router.push('/signin');
           } else {
-            console.log(res.payload);
             toast.error(res.payload.message);
           }
         })
