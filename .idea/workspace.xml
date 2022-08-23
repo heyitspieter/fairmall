@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffacfcbf-acb6-4d88-b4d2-ba65a26b58ee" name="Changes" comment="Major page fixes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/SectionFive/SectionFive.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home/SectionFive/SectionFive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Inspirations/Inspirations.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Inspirations/Inspirations.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,7 @@
       <workItem from="1660628987530" duration="11651000" />
       <workItem from="1660652983655" duration="17000" />
       <workItem from="1661229359586" duration="3200000" />
-      <workItem from="1661280571718" duration="2164000" />
+      <workItem from="1661280571718" duration="2264000" />
     </task>
     <task id="LOCAL-00001" summary="Unversioned files">
       <created>1658211574276</created>

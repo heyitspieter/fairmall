@@ -27,7 +27,7 @@ function Inspirations() {
             return (
               <figure key={index}>
               <Image
-              loader={() => img} 
+              loader={() => item.image}
                 src={item.image}
                 objectFit="cover"
                 alt="Slide 1"
