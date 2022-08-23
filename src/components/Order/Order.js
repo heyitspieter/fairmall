@@ -24,20 +24,20 @@ function Order() {
       // .then(res => console.log(res))
       // .catch(err => toast.error(err.message))
     } 
-    // else {
-    //   router.push("/orders")
-    // }
+    else {
+      router.push("/orders")
+    }
   }, [dispatch]);
 
   useCallback(() => {
     if (id) {
       dispatch(getOrder(id))
-      .then(res => console.log(res))
-      .catch(err => toast.error(err.message))
+      // .then(res => console.log(res))
+      // .catch(err => toast.error(err.message))
     } 
-    // else {
-    //   router.push("/orders")
-    // }
+    else {
+      router.push("/orders")
+    }
   }, [dispatch]);
   const { data } = useSelector((state) => state.orders);
 

@@ -142,7 +142,7 @@ function Signin() {
           if (res?.payload?.status === 200) {
             localStorage.setItem("user", res.payload.data.user);
             localStorage.setItem("token", res.payload.data.token.login.token);
-            router.push('/account/profile');
+            router.push('/shop');
           } else {
             console.log(res.payload);
             toast.error(res.payload.message || res.payload || res.error.message);
