@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SectionOne from "src/components/Home/SectionOne/SectionOne";
 import SectionTwo from "src/components/Home/SectionTwo/SectionTwo";
@@ -17,10 +17,13 @@ function Home() {
   // fetch inspirations
   useEffect(() => {
     dispatch(getInspirations());
-    dispatch(homeData())
+    dispatch(homeData());
+    dispatch(getGeneral());
   }, [dispatch]);
 
-  useEffect(() => {
+  useCallback(() => {
+    dispatch(getInspirations());
+    dispatch(homeData());
     dispatch(getGeneral());
   }, [dispatch]);
 
