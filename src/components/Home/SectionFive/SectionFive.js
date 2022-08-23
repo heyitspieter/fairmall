@@ -23,7 +23,7 @@ function SectionFive({ inspirations }) {
             const img = `/images/inspo-2.png`;
             return (
               <figure key={idx}>
-                <Image loader={() => img} objectFit="cover" alt={inspiration.title} src={inspiration.image} layout="fill" />
+                <Image loader={() => inspiration.image} objectFit="cover" alt={inspiration.title} src={inspiration.image} layout="fill" />
               </figure>
             );
           })}
