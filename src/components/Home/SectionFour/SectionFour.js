@@ -30,7 +30,7 @@ function SectionFour({category}) {
           <Svg symbol="chevron" />
         </button>
       </div>
-      <div className={styles.section_4__carousel}>
+      {/* <div className={styles.section_4__carousel}>
         <button className={styles.carousel__btnPrev}>
           <Svg symbol="chevron" />
         </button>
@@ -50,7 +50,7 @@ function SectionFour({category}) {
         <button className={styles.carousel__btnNext}>
           <Svg symbol="chevron" />
         </button>
-      </div>
+      </div> */}
     </section>
   );
 }
