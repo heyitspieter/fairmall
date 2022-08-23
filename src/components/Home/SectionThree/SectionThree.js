@@ -26,7 +26,7 @@ function SectionThree({category}) {
         <div className={styles.heading}>
           <p>{category?.category?.description}</p>
         </div>
-        <HomeCarousel items={items} config={{ outerSpacing: 25 }} />
+        <HomeCarousel items={addItems} config={{ outerSpacing: 25 }} />
         <HomeCarousel items={addItems.reverse()} config={{ outerSpacing: 25 }} />
       </section>
       <style jsx global>
