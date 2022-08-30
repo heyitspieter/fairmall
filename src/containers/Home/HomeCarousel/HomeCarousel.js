@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import Svg from "src/components/Svg/Svg";
 import Carousel from "react-elastic-carousel";
+import Skeleton from "react-loading-skeleton";
 import { useIsMobile } from "src/hooks/media-query";
 
 import styles from "src/components/Home/Home.module.scss";
@@ -52,9 +53,18 @@ function HomeCarousel({ items, config }) {
             className={styles.carousel__inner}
           >
             {items.map((item, i) => {
+              if (typeof item === "string" && item.length <= 0) {
+                return (
+                  <figure key={i}>
+                    <Skeleton style={{ width: "100%", height: "100%" }} />
+                  </figure>
+                );
+              }
+
               return (
                 <figure key={i}>
-                  <Image loader={() => item.img} src={item.img} layout="fill" alt={item.title} />
+                  {/* removed loader property & added path to domains list in next config file */}
+                  <Image src={item} layout="fill" alt="" />
                 </figure>
               );
             })}

@@ -4,24 +4,8 @@ import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
 import Recommendations from "src/components/Recommendations/Recommendations";
 import ProductDescription from "src/components/ProductDescription/ProductDescription";
-import { useEffect } from "react";
-import { getProduct } from "src/store/slices/products";
-import { useSelector, useDispatch } from "react-redux";
-import { getInspirations } from "src/store/slices/inspirations";
 
-export default function Product({ id }) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProduct(id));
-  }, [dispatch, id]);
-  const { data, loading } = useSelector((state) => state.product);
-
-  useEffect(() => {
-    dispatch(getInspirations());
-  }, [dispatch]);
-  const { inspirations } = useSelector((state) => state.inspiration);
-
+export default function Product() {
   const breadcrumb = [
     {
       id: 1,
@@ -45,36 +29,12 @@ export default function Product({ id }) {
   ];
 
   return (
-    <BaseLayout title={data && data.name}>
-      {!loading && data && (
-        <>
-          {/*<Breadcrumb data={data} items={breadcrumb} />*/}
-          <ProductDescription product={data} variations={data.variation} />
-          {/* <Recommendations title="You might also like" /> */}
-          <Inspirations inspirations={inspirations} />
-          <NewsLetter />
-        </>
-      )}
+    <BaseLayout>
+      {/*<Breadcrumb data={data} items={breadcrumb} />*/}
+      <ProductDescription />
+      {/* <Recommendations title="You might also like" /> */}
+      <Inspirations />
+      <NewsLetter />
     </BaseLayout>
   );
-}
-
-export async function getStaticPaths() {
-  let paths = [];
-
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  // Fetch data from api server
-  const cont = params.id;
-
-  return {
-    props: {
-      id: cont,
-    },
-  };
 }

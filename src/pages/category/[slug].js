@@ -1,33 +1,16 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import {useSelector, useDispatch } from "react-redux";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
-import Breadcrumb from "src/components/Breadcrumb/Breadcrumb";
 import NewsLetter from "src/containers/NewsLetter/NewsLetter";
 import CategoryFeed from "src/containers/CategoryFeed/CategoryFeed";
 import Inspirations from "src/components/Home/SectionFive/SectionFive";
-import { FetchCategoryById, FetchProductByCategory, FetchInspirations, FetchProductCategories } from "src/utils/woo_commerce";
-import {getCategory} from "../../store/slices/categories";
 
-export default function Category({slug}) {
+import {
+  FetchCategoryById,
+  FetchProductByCategory,
+  FetchInspirations,
+  FetchProductCategories,
+} from "src/utils/woo_commerce";
 
-  const dispatch = useDispatch();
-
-  const {inspirations} = useSelector((state) => state.inspiration)
-
-  useEffect(() => {
-    dispatch(getCategory(slug));
-  }, [dispatch, slug]);
-
-  const {data, categoryProducts} = useSelector((state) => state.category);
-
-  const breadcrumb = {
-    id: data?.category?.id,
-    value: data?.category?.name,
-    route: "/shop",
-  };
-
-
+export default function Category() {
   // const items = categoryProducts;
   // const itemsPerPage = 9;
   // // We start with an empty list of items.
@@ -54,30 +37,9 @@ export default function Category({slug}) {
 
   return (
     <BaseLayout title="Category Name - Fairmall">
-      <Breadcrumb item={breadcrumb} />
-      <CategoryFeed category={data?.category} products={categoryProducts} />
-      <Inspirations inspirations={inspirations} />
+      <CategoryFeed />
+      <Inspirations />
       <NewsLetter />
     </BaseLayout>
   );
-}
-
-export async function getStaticPaths() {
-  let paths = [];
-
-  return {
-    paths,
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  // Fetch data from api server
-  const slug = params.slug;
-
-  return {
-    props: {
-      slug: slug,
-    },
-  };
 }

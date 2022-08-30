@@ -1,39 +1,64 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import Svg from "src/components/Svg/Svg";
-import ProductModal from "src/components/Modals/ProductModal/ProductModal";
-import styles from "src/containers/ShopFeed/ShopFeed.module.scss";
-import { useRouter } from "next/router";
-import formatToCurrency from "src/helpers/formatAmount";
-import { useDispatch } from "react-redux";
-import { addLineItem } from "src/store/slices/cartSlice";
-import { MaxAmount, MinAmount } from "src/utils/variable_amount";
-import { addToFavorites } from "src/store/slices/favorites";
 import { toast } from "react-toastify";
-// import product from "src/pages/[slug]";
+import { useRouter } from "next/router";
+import Svg from "src/components/Svg/Svg";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getProducts } from "src/store/slices/products";
+import formatToCurrency from "src/helpers/formatAmount";
+import { addLineItem } from "src/store/slices/cartSlice";
+import { addToFavorites } from "src/store/slices/favorites";
+import { MaxAmount, MinAmount } from "src/utils/variable_amount";
+import ProductModal from "src/components/Modals/ProductModal/ProductModal";
+import ShopFeedLoadingSkeleton from "src/components/UI/LoadingSkeletons/ShopFeedLoadingSkeleton";
 
-function ShopFeed({ products }) {
+import styles from "src/containers/ShopFeed/ShopFeed.module.scss";
+
+function ShopFeed() {
   const router = useRouter();
-  const dispatch = useDispatch();
 
-  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
 
   const [modal, setModal] = useState({
     visibility: false,
   });
+
+  const token = localStorage.getItem("token");
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [viewProduct, setViewProduct] = useState(null);
+
+  const [sortedProducts, setSortedProducts] = useState([]);
+
+  const { products } = useSelector((state) => state.product);
+
   const [selectedProduct, setSelectedProduct] = useState({});
-  const [viewProduct, setViewProduct] = useState();
 
-  const sortProducts = [...products];
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
 
-  sortProducts.sort((a, b) => {
-    return b.count - a.count;
-  });
+  useEffect(() => {
+    if (products && products?.length) {
+      const newProducts = [...products];
+
+      newProducts.sort((a, b) => {
+        return b.count - a.count;
+      });
+
+      setIsLoading(false);
+
+      setSortedProducts(newProducts);
+    }
+  }, [products]);
 
   const handleAddToCard = async (product) => {
     const lineItem = {
       product_id: product.product.id,
-      variation_id: product.product.variation ? product.product.variation.id : null,
+      variation_id: product.product.variation
+        ? product.product.variation.id
+        : null,
       name: product.product.name,
       price: parseFloat(product.product.price),
       image: product.product.image,
@@ -76,71 +101,75 @@ function ShopFeed({ products }) {
     });
   };
 
+  if (isLoading) {
+    return <ShopFeedLoadingSkeleton />;
+  }
+
   return (
     <>
-      {modal && <ProductModal product={selectedProduct} show={modal.visibility} close={toggleModalHandler} />}
+      {modal && (
+        <ProductModal
+          product={selectedProduct}
+          show={modal.visibility}
+          close={toggleModalHandler}
+        />
+      )}
       <div className={styles.container}>
         <div className={styles.heading}>
           <p>Popular Items</p>
         </div>
         <div className={styles.grid}>
-          {!!products && products.length > 0 ? (
-            sortProducts.map((product, i) => {
-              // console.log(product)
-              const popularProduct = product.product
-              const img = popularProduct.image;
-              return (
-                <div key={i} className={styles.grid__item}>
-                  <figure>
-                    <Image loader={() => img} objectFit="cover" alt={popularProduct.name} src={img} layout="fill" />
-                    <div className={styles.grid__item_options}>
-                      {!popularProduct?.variation && (
-                        <button onClick={() => handleAddToCard(product)}>
-                          <span>Add to Basket</span>
-                          <Svg symbol="shopping-basket" />
-                        </button>
-                      )}
-                      <button
-                        //  onClick={toggleModalHandler}
-                        onClick={() => {
-                          setSelectedProduct(popularProduct);
-                          toggleModalHandler();
-                          // singleProduct(product.id)
-                        }}
-                      >
-                        <span>Quick View</span>
-                        <Svg symbol="eye" />
-                      </button>
-                      {
-                        token !== null && (
-                          <button onClick={() => handleFavorite(popularProduct)}>
-                            <span>Save</span>
-                            <Svg symbol="heart-outline" />
-                          </button>
-                        )
-                      }
+          {sortedProducts.map(({ product }, i) => {
+            const img = product.image;
 
-                    </div>
-                  </figure>
-                  <h3>{popularProduct?.name}</h3>
-                  {popularProduct?.variation ? (
-                    <p>
-                      {formatToCurrency(MinAmount(popularProduct?.variation))} - {formatToCurrency(MaxAmount(popularProduct?.variation))}
-                    </p>
-                  ) : (
-                    <p>{formatToCurrency(popularProduct?.price)}</p>
-                  )}
-                </div>
-              );
-            })
-          ): (
-            <div className={styles.heading} style={{marginTop: 100, marginBottom: 100}}>
-              <p>
-                No products found
-              </p>
-            </div>
-          )
-          }
+            return (
+              <div key={i} className={styles.grid__item}>
+                <figure>
+                  {/* removed loader property & added path to domains list in next config file */}
+                  <Image
+                    src={img}
+                    layout="fill"
+                    objectFit="cover"
+                    alt={product.name}
+                  />
+                  <div className={styles.grid__item_options}>
+                    {!product?.variation && (
+                      <button onClick={() => handleAddToCard(product)}>
+                        <span>Add to Basket</span>
+                        <Svg symbol="shopping-basket" />
+                      </button>
+                    )}
+                    <button
+                      //  onClick={toggleModalHandler}
+                      onClick={() => {
+                        setSelectedProduct(product);
+                        toggleModalHandler();
+                        // singleProduct(product.id)
+                      }}
+                    >
+                      <span>Quick View</span>
+                      <Svg symbol="eye" />
+                    </button>
+                    {token !== null && (
+                      <button onClick={() => handleFavorite(product)}>
+                        <span>Save</span>
+                        <Svg symbol="heart-outline" />
+                      </button>
+                    )}
+                  </div>
+                </figure>
+                <h3>{product?.name}</h3>
+                {product?.variation ? (
+                  <p>
+                    {formatToCurrency(MinAmount(product?.variation))} -{" "}
+                    {formatToCurrency(MaxAmount(product?.variation))}
+                  </p>
+                ) : (
+                  <p>{formatToCurrency(product?.price)}</p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
@@ -148,3 +177,9 @@ function ShopFeed({ products }) {
 }
 
 export default ShopFeed;
+
+{
+  /* <div className={styles.heading} style={{ marginTop: 100, marginBottom: 100 }}>
+        <p>No products found</p>
+     </div> */
+}

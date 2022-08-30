@@ -14,6 +14,9 @@ function NavLinks() {
       <ActiveLink href="/inspirations" activeClassName={styles.active}>
         Inspiration
       </ActiveLink>
+      <ActiveLink href="/contact" activeClassName={styles.active}>
+        Contact Us
+      </ActiveLink>
     </div>
   );
 }

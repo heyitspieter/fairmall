@@ -2,18 +2,22 @@ import Link from "next/link";
 import className from "classnames";
 import { useRouter } from "next/router";
 import Svg from "src/components/Svg/Svg";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { SidedrawerContext } from "src/context/SidedrawerContext";
+import SearchDropdown from "src/components/SearchDropdown/SearchDropdown";
 
 import styles from "src/components/Header/NavMenu/NavMenu.module.scss";
 
 function NavMenu() {
   const router = useRouter();
+
+  const inputRef = useRef(null);
+
   const token = localStorage.getItem("token");
 
-  console.log('token',token)
-
   const sidedrawer = useContext(SidedrawerContext);
+
+  const [searchResults, setSearchResults] = useState([]);
 
   const [inputFocused, setInputFocused] = useState(false);
 
@@ -22,34 +26,48 @@ function NavMenu() {
     [styles.focused]: inputFocused,
   });
 
-  const onBlur = () => setInputFocused(false);
+  const onBlur = () => {
+    setInputFocused(false);
+  };
 
-  const onFocus = () => setInputFocused(true);
+  const onFocus = () => {
+    setInputFocused(true);
+    inputRef.current?.focus();
+  };
 
   const handleLogout = (e) => {
     e.preventDefault();
-    console.log('getting here')
-   localStorage.removeItem("token");
-   localStorage.removeItem("user");
-   window.localStorage.clear();
-   router.push('/')
-  }
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.localStorage.clear();
+    router.push("/");
+  };
 
   const onClickSearchBtn = () => {
     if (!inputFocused) {
-      return onFocus();
+      onFocus();
     }
 
     // Handle search logic here
   };
 
+  const searchMode = inputFocused && searchResults.length;
+
   return (
     <div role="navigation" className={styles.container}>
       <div className={searchClass}>
-        <input value="" type="text" onBlur={onBlur} onChange={() => { }} placeholder="Search furniture, household items, art and craft" />
+        <input
+          value=""
+          type="text"
+          ref={inputRef}
+          onBlur={onBlur}
+          onChange={() => {}}
+          placeholder="Search furniture, household items, art and craft"
+        />
         <button onClick={onClickSearchBtn}>
           <Svg symbol="search" />
         </button>
+        {searchMode ? <SearchDropdown /> : null}
       </div>
       <button>
         <Svg symbol="person" />

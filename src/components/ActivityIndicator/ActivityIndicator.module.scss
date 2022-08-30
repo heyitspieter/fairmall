@@ -1,0 +1,68 @@
+.spinner {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin: 140px auto 0;
+    border: 0.4rem solid rgba(192, 192, 192, 0.2);
+    border-top: 0.4rem solid #e11493;
+    -webkit-animation: spin 1.1s linear infinite; /* Safari */
+    animation: spin 1.1s linear infinite;
+}
+
+.overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 103;
+    display: flex;
+    overflow: auto;
+    position: fixed;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20vh 1.5rem 0;
+
+    p {
+        top: 45%;
+        color: #494949;
+        font-size: 1.4rem;
+        position: absolute;
+
+        @media screen and (max-width: 40em) {
+            top: 49%;
+        }
+    }
+}
+
+.backdrop {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    position: fixed;
+    pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.13);
+}
+
+/** SPINNER ANIMATION START **/
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/** SPINNER ANIMATION END **/

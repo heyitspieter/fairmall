@@ -89,6 +89,7 @@
 
 .search {
     display: flex;
+    position: relative;
     margin-right: 1rem;
     transition: all 0.3s ease-out;
 
@@ -96,9 +97,13 @@
         flex: 1 0 100%;
         border-bottom: 1px solid #000000;
 
+        @media screen and (max-width: 75em) {
+            flex: 1 0 70%;
+        }
+
         input[type="text"] {
             opacity: 1;
-            visibility: visible;
+            cursor: text;
         }
     }
 
@@ -107,8 +112,8 @@
         opacity: 0;
         width: 100%;
         outline: none;
+        cursor: default;
         background: none;
-        visibility: hidden;
         font-size: 1.35rem;
         font-family: inherit;
     }

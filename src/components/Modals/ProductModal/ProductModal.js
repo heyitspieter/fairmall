@@ -21,7 +21,6 @@ function ProductModal({ show, close, product }) {
   const ref = useRef();
   const router = useRouter();
   const dispatch = useDispatch();
-console.log(product)
   const carouselRef = useRef();
 
   const modalOverlayClass = className({

@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { removeFromFavorite } from "src/store/slices/favorites";
 import { toast } from "react-toastify";
 import formatToCurrency from "../../helpers/formatAmount";
-import {MaxAmount, MinAmount} from "../../utils/variable_amount";
+import { MaxAmount, MinAmount } from "../../utils/variable_amount";
 import Link from "next/link";
 
 function SavedItems({ favorites }) {
@@ -17,7 +17,7 @@ function SavedItems({ favorites }) {
   const handleRemoveItem = (id) => {
     let data = {
       product_id: id,
-    }
+    };
     dispatch(removeFromFavorite(data))
       .then((res) => {
         console.log(res);
@@ -31,8 +31,7 @@ function SavedItems({ favorites }) {
         console.log(err);
         toast.error(err.message);
       });
-  }
-
+  };
 
   return (
     <>
@@ -63,7 +62,13 @@ function SavedItems({ favorites }) {
                   <tr key={index}>
                     <td>
                       <figure>
-                        <Image loader={() => item.image} objectFit="cover" alt={item.name} src={item.image} layout="fill" />
+                        {/* removed loader property & added path to domains list in next config file */}
+                        <Image
+                          objectFit="cover"
+                          src={item.image}
+                          alt={item.name}
+                          layout="fill"
+                        />
                       </figure>
                     </td>
                     <td>
@@ -73,26 +78,24 @@ function SavedItems({ favorites }) {
                       </div>
                     </td>
                     {item?.variation === false ? (
-                        <td>{formatToCurrency(item.price)}</td>
+                      <td>{formatToCurrency(item.price)}</td>
                     ) : (
                       <td>
-                        {formatToCurrency(MinAmount(item.variation))} - {formatToCurrency(MaxAmount(item.variation))}
+                        {formatToCurrency(MinAmount(item.variation))} -{" "}
+                        {formatToCurrency(MaxAmount(item.variation))}
                       </td>
                     )}
 
                     <td>
                       <div className={styles.action}>
-                        {
-                          item.variation === false && (
-                            <Link href="/[id]" as={`/${item?.id}`}>
+                        {item.variation === false && (
+                          <Link href="/[id]" as={`/${item?.id}`}>
                             <button>
                               <Svg symbol="eye" />
                             </button>
-                            </Link>
-                           
-                          )
-                        }
-                        <button onClick={()=>handleRemoveItem(item.id)}>
+                          </Link>
+                        )}
+                        <button onClick={() => handleRemoveItem(item.id)}>
                           <Svg symbol="bin" />
                         </button>
                       </div>
@@ -103,10 +106,11 @@ function SavedItems({ favorites }) {
             </table>
           </div>
         ) : (
-          <div className={styles.heading} style={{marginTop: 100, marginBottom: 100}}>
-            <p>
-              No item saved
-            </p>
+          <div
+            className={styles.heading}
+            style={{ marginTop: 100, marginBottom: 100 }}
+          >
+            <p>No item saved</p>
           </div>
         )}
 

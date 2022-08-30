@@ -77,6 +77,16 @@ function Sidedrawer() {
                   </a>
                 </Link>
               </li>
+              <li className={styles.nav__list_item}>
+                <Link href="/contact">
+                  <a
+                    onClick={() => sidedrawer.toggle()}
+                    className={styles.nav__list_link}
+                  >
+                    Contact Us
+                  </a>
+                </Link>
+              </li>
             </ul>
           </nav>
           <nav className={styles.menu}>

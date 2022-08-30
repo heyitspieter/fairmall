@@ -3,43 +3,49 @@ import * as url from "../../config/url";
 // import axios from "axios";
 import axios from "../../config/axios";
 
-const getProducts = createAsyncThunk("products/getProducts", async (_, { rejectWithValue }) => {
-  const config = {
-    method: "get",
-    url: url.getProducts,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const response = await axios(config);
-    return response;
-  } catch (err) {
-    if (!err.response) {
-      throw err;
+const getProducts = createAsyncThunk(
+  "products/getProducts",
+  async (_, { rejectWithValue }) => {
+    const config = {
+      method: "get",
+      url: url.getProducts,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const response = await axios(config);
+      return response;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
     }
-    return rejectWithValue(err.response.data);
   }
-});
+);
 
-const getProduct = createAsyncThunk("products/getProduct", async (id, { rejectWithValue }) => {
-  const config = {
-    method: "get",
-    url: url.getProduct(id),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const response = await axios(config);
-    return response;
-  } catch (err) {
-    if (!err.response) {
-      throw err;
+const getProduct = createAsyncThunk(
+  "products/getProduct",
+  async (id, { rejectWithValue }) => {
+    const config = {
+      method: "get",
+      url: url.getProduct(id),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const response = await axios(config);
+      return response;
+    } catch (err) {
+      if (!err.response) {
+        throw err;
+      }
+      return rejectWithValue(err.response.data);
     }
-    return rejectWithValue(err.response.data);
   }
-});
+);
 
 const slice = createSlice({
   name: "products",
@@ -51,16 +57,14 @@ const slice = createSlice({
     error: null,
     products: [],
   },
-
   reducers: {},
-
   extraReducers: {
     //get products
     [getProducts.pending]: (state) => {
       state.loading = true;
     },
     [getProducts.fulfilled]: (state, { payload }) => {
-      state.products = payload.data.products;
+      state.products = payload.data?.products;
       state.loading = false;
     },
     [getProducts.rejected]: (state, { payload }) => {

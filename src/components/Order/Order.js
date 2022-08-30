@@ -8,43 +8,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
 import { getOrder } from "src/store/slices/orders";
 import formatToCurrency from "src/helpers/formatAmount";
-import moment from 'moment'
+import moment from "moment";
 import { toast } from "react-toastify";
 
 function Order() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { id } = router.query
+  const { id } = router.query;
 
-  console.log('id ====', id)
+  console.log("id ====", id);
 
   useEffect(() => {
     if (id) {
-      dispatch(getOrder(id))
+      dispatch(getOrder(id));
       // .then(res => console.log(res))
       // .catch(err => toast.error(err.message))
-    } 
-    else {
-      router.push("/orders")
+    } else {
+      router.push("/orders");
     }
   }, [dispatch]);
 
   useCallback(() => {
     if (id) {
-      dispatch(getOrder(id))
+      dispatch(getOrder(id));
       // .then(res => console.log(res))
       // .catch(err => toast.error(err.message))
-    } 
-    else {
-      router.push("/orders")
+    } else {
+      router.push("/orders");
     }
   }, [dispatch]);
   const { data } = useSelector((state) => state.orders);
 
   if (data) {
-    console.log('data===', data)
+    console.log("data===", data);
   }
-
 
   return (
     <div className={styles.container}>
@@ -68,7 +65,10 @@ function Order() {
             Order No: <span>{data?.order_id}</span>
           </p>
           <p>
-            Order Confirmed: <span>{moment(data?.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}</span>
+            Order Confirmed:{" "}
+            <span>
+              {moment(data?.createdAt).format("dddd, MMMM Do YYYY, h:mm:ss a")}
+            </span>
           </p>
           <p>
             Order Delivered: <span>-</span>
@@ -88,37 +88,37 @@ function Order() {
               </tr>
             </thead>
             <tbody>
-              {
-               !!data.products && data.products.map((product, index) =>{
+              {!!data.products &&
+                data.products.map((product, index) => {
                   const img = product.image;
 
                   return (
-                  <tr key={index}>
-                    <td>
-                      <figure>
-                        <Image
-                        loader={() => img}
-                          src={product?.image}
-                          objectFit="cover"
-                          layout="fill"
-                          alt="Product"
-                        />
-                      </figure>
-                    </td>
-                    <td>
-                      <div className={styles.desc}>
-                        <h4>{product?.name}</h4>
-                      </div>
-                    </td>
-                    <td>{product?.quantity}</td>
-                    <td>
-                      <div className={styles.action}>
-                        <button>Give Review</button>
-                      </div>
-                    </td>
-                  </tr>
-                )})}
-
+                    <tr key={index}>
+                      <td>
+                        <figure>
+                          {/* removed loader property & added path to domains list in next config file */}
+                          <Image
+                            src={product?.image}
+                            objectFit="cover"
+                            layout="fill"
+                            alt="Product"
+                          />
+                        </figure>
+                      </td>
+                      <td>
+                        <div className={styles.desc}>
+                          <h4>{product?.name}</h4>
+                        </div>
+                      </td>
+                      <td>{product?.quantity}</td>
+                      <td>
+                        <div className={styles.action}>
+                          <button>Give Review</button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
@@ -134,7 +134,7 @@ function Order() {
             </div>
             <div className={styles.summary__item}>
               <h4>Taxes</h4>
-              <p>{formatToCurrency(data.tax) || '-'}</p>
+              <p>{formatToCurrency(data.tax) || "-"}</p>
             </div>
             <div className={styles.summary__item}>
               <h4>Total</h4>

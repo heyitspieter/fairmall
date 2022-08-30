@@ -1,9 +1,11 @@
+import Image from "next/image";
 import { useState } from "react";
 import { updateObject, checkFormValidity } from "src/helpers";
 import FormInput from "src/components/Form/FormInput/FormInput";
 
 import formStyles from "styles/modules/Form.module.scss";
 import styles from "src/containers/Contact/Contact.module.scss";
+import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 
 function Contact() {
   // Form state
@@ -56,6 +58,30 @@ function Contact() {
         message: "Your email is required",
       },
     },
+    subject: {
+      label: {
+        title: "Subject",
+        htmlFor: "subject",
+        classes: [],
+      },
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        id: "subject",
+        placeholder: "Enter your subject",
+      },
+      elementClasses: [formStyles.formInput],
+      parentClasses: [styles.formGroup],
+      value: "",
+      validation: {
+        required: true,
+      },
+      valid: false,
+      touched: false,
+      error: {
+        message: "Your subject is required",
+      },
+    },
     message: {
       label: {
         title: "Message",
@@ -65,7 +91,7 @@ function Contact() {
       elementType: "textarea",
       elementConfig: {
         id: "message",
-        rows: 1,
+        rows: 2,
         placeholder: "Enter your message",
       },
       elementClasses: [formStyles.formTextarea],
@@ -153,6 +179,9 @@ function Contact() {
 
   return (
     <div className={styles.container}>
+      <div className={spiralLeft}>
+        <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
+      </div>
       <div className={styles.heading}>
         <p>Contact Us</p>
       </div>
@@ -177,6 +206,9 @@ function Contact() {
             <a href="mailto:support@fairmall.co">support@fairmall.co</a>
           </div>
         </form>
+      </div>
+      <div className={spiralRight}>
+        <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
       </div>
     </div>
   );

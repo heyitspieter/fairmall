@@ -1,34 +1,58 @@
-import Svg from "src/components/Svg/Svg";
+import { useEffect, useState } from "react";
+import { homeData } from "src/store/slices/home";
+import { useSelector, useDispatch } from "react-redux";
 import HomeCarousel from "src/containers/Home/HomeCarousel/HomeCarousel";
+import SectionThreeLoadingSkeleton from "src/components/UI/LoadingSkeletons/SectionThreeLoadingSkeleton";
 
 import styles from "src/components/Home/Home.module.scss";
 
-function SectionThree({category}) {
-  console.log(category)
-  const items = [];
-  const addItems = []
-  category?.products.map((product) => {
-    items.push({
-      title: product.name,
-      img: product.image
-    })
-    product?.additional_images.map((addImg) => {
-      addItems.push({
-        title: product.name,
-        img: addImg
-      })
-    })
-  })
+function SectionThree() {
+  const dispatch = useDispatch();
+
+  const [category, setCategory] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const { home } = useSelector((state) => state.home);
+
+  const [carouselItems, setCarouselItems] = useState([]);
+
+  useEffect(() => {
+    dispatch(homeData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (home && home?.categories?.length) {
+      setIsLoading(false);
+      setCategory(home?.categories[0]);
+    }
+  }, [home]);
+
+  useEffect(() => {
+    if (category && category?.products) {
+      if (category?.products?.length && category?.products?.length > 0) {
+        let items = [];
+
+        for (let i = 0; i < category.products.length; i++) {
+          items = [...items, ...category.products[i].additional_images];
+        }
+
+        setCarouselItems(items);
+      }
+    }
+  }, [category]);
+
+  if (isLoading) {
+    return <SectionThreeLoadingSkeleton />;
+  }
 
   return (
-    <>
-      <section className={styles.section_3}>
-        <div className={styles.heading}>
-          <p>{category?.category?.description}</p>
-        </div>
-        <HomeCarousel items={addItems} config={{ outerSpacing: 25 }} />
-        {/* <HomeCarousel items={addItems.reverse()} config={{ outerSpacing: 25 }} /> */}
-      </section>
+    <section className={styles.section_3}>
+      <div className={styles.heading}>
+        <p>{category?.category?.description}</p>
+      </div>
+      <HomeCarousel items={carouselItems} config={{ outerSpacing: 25 }} />
+      {/* <HomeCarousel items={addItems.reverse()} config={{ outerSpacing: 25 }} /> */}
       <style jsx global>
         {`
           .rec-carousel-item {
@@ -50,7 +74,7 @@ function SectionThree({category}) {
           }
         `}
       </style>
-    </>
+    </section>
   );
 }
 
