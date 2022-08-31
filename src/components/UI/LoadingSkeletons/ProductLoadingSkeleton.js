@@ -10,21 +10,21 @@ function ProductLoadingSkeleton() {
         <div className={styles.gallery}>
           <div className={styles.gallery__left}>
             {/* removed loader property & added path to domains list in next config file */}
-            <Skeleton style={{ height: "100%" }} />
+            <Skeleton style={{ width: "100%", height: "100%" }} />
           </div>
           <div className={styles.gallery__right}>
-            <figure>
+            <button>
               <Skeleton style={{ width: "100%", height: "100%" }} />
-            </figure>
-            <figure>
+            </button>
+            <button>
               <Skeleton style={{ width: "100%", height: "100%" }} />
-            </figure>
-            <figure>
+            </button>
+            <button>
               <Skeleton style={{ width: "100%", height: "100%" }} />
-            </figure>
-            <figure>
+            </button>
+            <button>
               <Skeleton style={{ width: "100%", height: "100%" }} />
-            </figure>
+            </button>
           </div>
         </div>
         <div className={styles.info}>

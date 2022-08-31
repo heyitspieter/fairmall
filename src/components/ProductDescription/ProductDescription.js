@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Svg from "src/components/Svg/Svg";
 import { useEffect, useState } from "react";
+import { imagePlaceholderData } from "src/helpers";
 import { getProduct } from "src/store/slices/products";
 import { useSelector, useDispatch } from "react-redux";
 import formatToCurrency from "src/helpers/formatAmount";
@@ -37,6 +38,14 @@ function ProductDescription() {
   const [addToVariationCard, setAddToVariationCard] = useState(true);
   const [productVariations, setProductVariations] = useState(variations);
 
+  const [currentImage, setCurrentImage] = useState(imagePlaceholderData);
+
+  useEffect(() => {
+
+    // Reset current image to defaut when componenet is unmounted
+    return () => setCurrentImage(imagePlaceholderData);
+  }, []);
+
   useEffect(() => {
     if (query?.id) {
       dispatch(getProduct(query.id));
@@ -50,6 +59,12 @@ function ProductDescription() {
       setVariations(data.variations);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (product) {
+      setCurrentImage(product?.product?.image);
+    }
+  }, [product]);
 
   useEffect(() => {
     if (product && product.variations) {
@@ -127,6 +142,10 @@ function ProductDescription() {
     dispatch(addLineItem(lineItem));
   };
 
+  const setImageOnHover = (imageSrc) => {
+    setCurrentImage(imageSrc);
+  };
+
   if (isLoading) {
     return <ProductLoadingSkeleton />;
   }
@@ -143,7 +162,7 @@ function ProductDescription() {
               {/* removed loader property & added path to domains list in next config file */}
               <Image
                 // src="/images/product-cover.png"
-                src={`${product?.product?.image}`}
+                src={currentImage}
                 alt="Product Name"
                 objectFit="cover"
                 layout="fill"
@@ -152,16 +171,18 @@ function ProductDescription() {
             <div className={styles.gallery__right}>
               {product?.product?.additional_images?.map((image, index) => {
                 const img = `${image}`;
+
                 return (
-                  <figure key={index}>
+                  <button onMouseOver={() => setImageOnHover(img)} key={index}>
+                    <div className={styles.overlay}></div>
                     {/* removed loader property & added path to domains list in next config file */}
                     <Image
                       src={img}
+                      layout="fill"
                       alt="Product Name"
                       objectFit="cover"
-                      layout="fill"
                     />
-                  </figure>
+                  </button>
                 );
               })}
             </div>

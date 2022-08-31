@@ -1,0 +1,67 @@
+.container {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    padding: 3rem 13rem 10rem;
+
+    @media screen and (max-width: 72em) {
+        padding: 3rem 5rem 10rem;
+    }
+
+    @media screen and (max-width: 50em) {
+        padding: 3rem 1.5rem 5rem;
+    }
+}
+
+.content {
+    display: flex;
+    padding: 6rem 0;
+    align-self: center;
+    flex-direction: column;
+
+    @media screen and (max-width: 50em) {
+        padding: 1rem 0 3rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    p {
+        width: 30rem;
+        margin: 0 auto;
+        font-size: 1.55rem;
+        text-align: center;
+    }
+
+    button {
+        border: 0;
+        margin: 0 auto;
+        cursor: pointer;
+        color: #ffffff;
+        background: none;
+        font-family: inherit;
+        padding: 1.2rem 2rem;
+        text-transform: uppercase;
+        background-color: #e11493;
+        transition: all 0.3s ease-in-out;
+
+        &:disabled {
+            background-color: #828282;
+        }
+
+        &:hover:enabled {
+            background-color: #d11d8c;
+        }
+    }
+}
+
+.action {
+    display: flex;
+    padding: 2rem 0 0;
+    align-items: center;
+    justify-content: center;
+}

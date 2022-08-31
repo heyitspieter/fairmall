@@ -1,10 +1,66 @@
 .container {
     display: flex;
-    overflow: hidden;
+    padding: 3rem 0 0;
     position: relative;
     grid-column: 1 / -1;
     flex-direction: column;
-    padding: 3rem 13rem 10rem;
+}
+
+.banner {
+    height: 60vh;
+    display: grid;
+    background-size: cover;
+    grid-template-rows: 1fr;
+    background-repeat: no-repeat;
+    background-position: center center;
+    grid-template-columns: repeat(7, minmax(14rem, 1fr));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/images/banner-about-us.jpg");
+
+    @media screen and (max-width: 60em) {
+        grid-template-columns: 1fr;
+    }
+
+    &__hero {
+        padding: 10rem 0;
+        grid-column: 2 / 6;
+
+        @media screen and (max-width: 85.3em) {
+            grid-column: 2/ 7;
+        }
+
+        @media screen and (max-width: 60em) {
+            padding: 3rem 0;
+            grid-column: 1 / -1;
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 3rem;
+
+            @media screen and (max-width: 60em) {
+                text-align: center;
+            }
+        }
+
+        p {
+            color: #ffffff;
+            padding-top: 1rem;
+            font-size: 1.5rem;
+
+            @media screen and (max-width: 60em) {
+                text-align: center;
+                padding: 1rem 1.2rem 0;
+            }
+        }
+    }
+}
+
+.inner {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+    padding: 6rem 13rem 10rem;
 
     @media screen and (max-width: 72em) {
         padding: 3rem 5rem 10rem;
@@ -23,8 +79,83 @@
 
     p {
         font-size: 1.8rem;
+        text-align: center;
         letter-spacing: 3px;
         text-transform: uppercase;
+    }
+}
+
+.row {
+    &_1 {
+        display: block;
+    }
+
+    &_2,
+    &_3,
+    &_4 {
+        padding-top: 2rem;
+    }
+
+    &_4 {
+        width: 100%;
+        display: flex;
+        min-width: 80rem;
+        max-width: 80rem;
+        margin-top: 6rem;
+        align-self: center;
+
+        @media screen and (max-width: 50em) {
+            min-width: 100%;
+            max-width: 100%;
+            margin-top: 4rem;
+        }
+
+        @media screen and (max-width: 60em) {
+            flex-direction: column;
+        }
+
+        .box {
+            flex: 1;
+            padding: 1rem 1.4rem;
+
+            &:nth-of-type(1) {
+                background-color: #e11493;
+            }
+
+            &:nth-of-type(2) {
+                border-left: 0;
+                border: 2px dashed #e11493;
+
+                h2 {
+                    color: #333333;
+                    text-align: center;
+                }
+
+                p {
+                    color: #333333;
+                }
+            }
+
+            &_content {
+                display: block;
+
+                h2 {
+                    color: #ffffff;
+                    font-weight: 400;
+                    font-size: 1.6rem;
+                    text-align: center;
+                    margin-bottom: 1rem;
+                    padding: 0.5rem 0 0;
+                    text-transform: uppercase;
+                }
+
+                p {
+                    padding: 0.5rem;
+                    color: #ffffff;
+                    font-size: 1.4rem;
+                }
+            }
+        }
     }
 }
 
@@ -57,16 +188,9 @@
 .content {
     width: 100%;
     display: flex;
-    min-width: 70rem;
-    max-width: 70rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     align-self: center;
     flex-direction: column;
-
-    @media screen and (max-width: 50em) {
-        min-width: 100%;
-        max-width: 100%;
-    }
 
     p {
         text-align: center;

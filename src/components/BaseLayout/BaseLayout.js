@@ -20,7 +20,7 @@ function BaseLayout({ title, children }) {
         {children}
         <Footer />
       </div>
-      <ActivityIndicator />
+      {/* <ActivityIndicator /> */}
     </>
   );
 }

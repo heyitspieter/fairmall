@@ -17,7 +17,7 @@ function Footer() {
           </span>
         </div>
         <p>
-          . We ensure that
+          We ensure that
           producers receive premium value for their wares thereby improving their livelihoods
           and stimulating economic growth in their communities. 
         </p>
