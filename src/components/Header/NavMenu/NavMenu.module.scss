@@ -1,10 +1,11 @@
 .container {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-self: flex-end;
     justify-content: flex-end;
 
-    @media screen and (max-width: 50em) {
+    @media screen and (max-width: 60em) {
         & > *:nth-last-child(4) {
             display: none;
         }
@@ -53,14 +54,14 @@
             height: 2.2rem;
             fill: #212121;
 
-            @media screen and (max-width: 42.5em) {
+            @media screen and (max-width: 60em) {
                 width: 2.6rem;
                 height: 2.6rem;
             }
         }
 
         &:last-of-type {
-            @media screen and (min-width: 42.5em) {
+            @media screen and (min-width: 60em) {
                 display: none;
             }
 
@@ -88,21 +89,20 @@
 }
 
 .search {
+    flex: 1;
     display: flex;
-    position: relative;
     margin-right: 1rem;
+    position: relative;
+    justify-content: flex-end;
     transition: all 0.3s ease-out;
 
     &.focused {
-        flex: 1 0 100%;
         border-bottom: 1px solid #000000;
 
-        @media screen and (max-width: 75em) {
-            flex: 1 0 70%;
-        }
-
         input[type="text"] {
+            flex: 1;
             opacity: 1;
+            width: 100%;
             cursor: text;
         }
     }
@@ -110,7 +110,7 @@
     input[type="text"] {
         border: 0;
         opacity: 0;
-        width: 100%;
+        width: 0;
         outline: none;
         cursor: default;
         background: none;

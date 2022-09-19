@@ -17,7 +17,9 @@ function Header() {
   return (
     <div className={containerClass}>
       <NavLinks />
-      <Logo />
+      <div className={styles.search}>
+        <Logo />
+      </div>
       <NavMenu />
     </div>
   );

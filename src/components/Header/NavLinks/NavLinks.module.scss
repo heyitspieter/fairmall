@@ -1,19 +1,10 @@
 .container {
+    flex: 1;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
 
-    @media screen and (max-width: 50em) {
-        & > *:nth-last-child(1) {
-            display: none;
-        }
-
-        & > *:nth-last-child(2) {
-            border-right: 0 !important;
-            padding-right: 0 !important;
-        }
-    }
-
-    @media screen and (max-width: 42.5em) {
+    @media screen and (max-width: 60em) {
         display: none;
     }
 
