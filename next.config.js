@@ -7,6 +7,10 @@ module.exports = {
     PAYSTACK_PUBLIC_KEY: "pk_test_4f62633a5deb95e0076922a9e4cb161e5a0a5751",
   },
   images: {
-    domains: ["fairmall.azurewebsites.net", "fairmall.s3.us-east-2.amazonaws.com"],
+    domains: [
+      "fairmall.azurewebsites.net",
+      "fairmall.s3.us-east-2.amazonaws.com",
+      "fairmall-admin.s3.us-east-2.amazonaws.com",
+    ],
   },
 };
