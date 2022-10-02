@@ -41,7 +41,6 @@ function ProductDescription() {
   const [currentImage, setCurrentImage] = useState(imagePlaceholderData);
 
   useEffect(() => {
-
     // Reset current image to defaut when componenet is unmounted
     return () => setCurrentImage(imagePlaceholderData);
   }, []);
@@ -258,9 +257,6 @@ function ProductDescription() {
           <div className={styles.actions}>
             <button>
               <Svg symbol="heart-outline" />
-            </button>
-            <button>
-              <Svg symbol="share" />
             </button>
           </div>
         </div>

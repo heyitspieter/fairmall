@@ -21,6 +21,12 @@ function NavMenu() {
 
   const [inputFocused, setInputFocused] = useState(false);
 
+  const [inputControls, setInputControls] = useState({
+    search: {
+      value: "",
+    },
+  });
+
   const searchClass = className({
     [styles.search]: true,
     [styles.focused]: inputFocused,
@@ -51,17 +57,31 @@ function NavMenu() {
     // Handle search logic here
   };
 
+  const inputChangeHandler = (e) => {
+    // Input validation here
+
+
+    // Set input value after validation
+    setInputControls((prevState) => ({
+      ...prevState,
+      search: {
+        ...prevState.search,
+        value: e.target.value,
+      },
+    }));
+  };
+
   const searchMode = inputFocused && searchResults.length;
 
   return (
     <div role="navigation" className={styles.container}>
       <div className={searchClass}>
         <input
-          value=""
           type="text"
           ref={inputRef}
           onBlur={onBlur}
-          onChange={() => {}}
+          value={inputControls.search.value}
+          onChange={(e) => inputChangeHandler(e)}
           placeholder="Search furniture, household items, art and craft"
         />
         <button onClick={onClickSearchBtn}>

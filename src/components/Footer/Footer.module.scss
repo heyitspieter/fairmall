@@ -182,6 +182,15 @@
             font-size: 1.45rem;
         }
     }
+
+    &:nth-of-type(2),
+    &:nth-of-type(3) {
+        margin-top: 2rem;
+
+        @media screen and (max-width: 60em) {
+            margin-top: 0;
+        }
+    }
 }
 
 .emblem {
@@ -235,8 +244,11 @@
             margin-right: 2.4rem;
         }
 
-        button {
-            display: flex;
+        a {
+            &:link,
+            &:visited {
+                display: flex;
+            }
 
             svg {
                 width: 2rem;

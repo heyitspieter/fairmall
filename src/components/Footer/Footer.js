@@ -17,26 +17,39 @@ function Footer() {
           </span>
         </div>
         <p>
-          We ensure that
-          producers receive premium value for their wares thereby improving their livelihoods
-          and stimulating economic growth in their communities. 
+          We ensure that producers receive premium value for their wares thereby
+          improving their livelihoods and stimulating economic growth in their
+          communities.
         </p>
         <p>
-          Be sure to take a look at our <Link href="/about-us">Terms of Use</Link> and{" "}
+          Be sure to take a look at our{" "}
+          <Link href="/about-us">Terms of Use</Link> and{" "}
           <Link href="/about-us">Privacy Policy</Link>
         </p>
         <div className={styles.socials}>
           <h4>Stay In Touch</h4>
           <div className={styles.socials__flex}>
-            <button>
+            <a
+              rel="noreferrer"
+              target="__blank"
+              href="https://www.facebook.com/fairmallng"
+            >
               <Svg symbol="facebook" />
-            </button>
-            <button>
+            </a>
+            <a
+              rel="noreferrer"
+              target="__blank"
+              href="https://www.instagram.com/fairmallng/"
+            >
               <Svg symbol="instagram" />
-            </button>
-            <button>
+            </a>
+            <a
+              rel="noreferrer"
+              target="__blank"
+              href="https://twitter.com/Fairmallng?t=ARY51zykeEIWw3ZOEqBN9g&s=08"
+            >
               <Svg symbol="twitter" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
