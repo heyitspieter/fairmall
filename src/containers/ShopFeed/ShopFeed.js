@@ -107,13 +107,11 @@ function ShopFeed() {
 
   return (
     <>
-      {modal && (
-        <ProductModal
-          product={selectedProduct}
-          show={modal.visibility}
-          close={toggleModalHandler}
-        />
-      )}
+      <ProductModal
+        product={selectedProduct}
+        show={modal.visibility}
+        close={toggleModalHandler}
+      />
       <div className={styles.container}>
         <div className={styles.heading}>
           <p>Popular Items</p>

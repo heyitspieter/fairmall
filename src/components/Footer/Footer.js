@@ -1,8 +1,8 @@
+import Link from "next/link";
 import Image from "next/image";
 import Svg from "src/components/Svg/Svg";
 
 import styles from "src/components/Footer/Footer.module.scss";
-import Link from "next/link";
 
 function Footer() {
   return (
@@ -58,16 +58,24 @@ function Footer() {
           <h4>Details</h4>
           <ul>
             <li>
-              <a href="#">Shop</a>
+              <Link href="/shop">
+                <a>Shop</a>
+              </Link>
             </li>
             <li>
-              <a href="#">About Us</a>
+              <Link href="/about-us">
+                <a>About Us</a>
+              </Link>
             </li>
             <li>
-              <a href="#">Faqs</a>
+              <Link href="/about-us">
+                <a>Faqs</a>
+              </Link>
             </li>
             <li>
-              <a href="#">Contact</a>
+              <Link href="/contact">
+                <a>Contact</a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -75,10 +83,14 @@ function Footer() {
           <h4>Legal</h4>
           <ul>
             <li>
-              <a href="#">Privacy Policy</a>
+              <Link href="/privacy">
+                <a>Privacy Policy</a>
+              </Link>
             </li>
             <li>
-              <a href="#">Terms of Use</a>
+              <Link href="/terms">
+                <a>Terms of Use</a>
+              </Link>
             </li>
           </ul>
         </div>

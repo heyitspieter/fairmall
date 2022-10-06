@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import formatToCurrency from "src/helpers/formatAmount";
 import { addLineItem } from "src/store/slices/cartSlice";
 import { MaxAmount, MinAmount } from "src/utils/variable_amount";
+import ReviewModal from "src/components/Modals/ReviewModal/ReviewModal";
 import ProductLoadingSkeleton from "src/components/UI/LoadingSkeletons/ProductLoadingSkeleton";
 
 import styles from "src/components/ProductDescription/ProductDescription.module.scss";
@@ -19,6 +20,10 @@ function ProductDescription() {
   const query = router.query;
 
   const dispatch = useDispatch();
+
+  const [modal, setModal] = useState({
+    visibility: false,
+  });
 
   const [product, setProduct] = useState(null);
 
@@ -145,6 +150,12 @@ function ProductDescription() {
     setCurrentImage(imageSrc);
   };
 
+  const toggleModalHandler = () => {
+    setModal((prevState) => ({
+      visibility: !prevState.visibility,
+    }));
+  };
+
   if (isLoading) {
     return <ProductLoadingSkeleton />;
   }
@@ -216,7 +227,7 @@ function ProductDescription() {
                 {/*<button>({product?.average_rating})</button>*/}
               </div>
               <div className={styles.rating_btn}>
-                <button>Submit a review</button>
+                <button onClick={toggleModalHandler}>Submit a review</button>
               </div>
             </div>
             {product.variations && (
@@ -284,6 +295,7 @@ function ProductDescription() {
           </div>
         </div>
       </div>
+      <ReviewModal show={modal.visibility} close={toggleModalHandler} />
     </>
   );
 }
