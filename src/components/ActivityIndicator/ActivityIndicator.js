@@ -12,7 +12,7 @@ function ActivityIndicator() {
       <p>{spinner.text || spinner.message}</p>
       <div className={styles.backdrop}></div>
       <div className={styles.spinner}></div>
-      <style jsx global>
+      <style global jsx>
         {`
           body {
             overflow: ${spinner.visibility ? `hidden` : `auto`}!important;

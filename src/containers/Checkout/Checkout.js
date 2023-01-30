@@ -16,7 +16,9 @@ import { shippingDetails } from "src/store/slices/cartSlice";
 function Checkout() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { total, subTotal, rate, lineItems } = useSelector((state) => state.cart);
+  const { total, subTotal, rate, lineItems } = useSelector(
+    (state) => state.cart
+  );
   const [countries, setCountries] = useState([]);
   const [countryCode, setCountryCode] = useState(null);
   const [states, setStates] = useState([{ text: "Select a state", value: "" }]);
@@ -33,8 +35,9 @@ function Checkout() {
     });
     allCountries.unshift({ text: "Select a country", value: "" });
     setCountries(allCountries);
-    formControls["country"].elementConfig.options = allCountries.length > 0 ? allCountries : "Loading";
-  }, []);
+    formControls["country"].elementConfig.options =
+      allCountries.length > 0 ? allCountries : "Loading";
+  }, [formControls]);
 
   // Form state
   const [formControls, setFormControls] = useState({
@@ -295,7 +298,10 @@ function Checkout() {
     const updatededFormControls = updateObject(formControls, {
       [formControlKey]: updateObject(formControls[formControlKey], {
         value: event.target.value,
-        valid: checkFormValidity(event.target.value, formControls[formControlKey].validation),
+        valid: checkFormValidity(
+          event.target.value,
+          formControls[formControlKey].validation
+        ),
         touched: true,
       }),
     });
@@ -331,7 +337,8 @@ function Checkout() {
     allStates.unshift({ text: "Select a state", value: "" });
     setCountryCode(value);
     setStates(allStates);
-    formControls["state"].elementConfig.options = allStates.length > 0 ? allStates : "Loading";
+    formControls["state"].elementConfig.options =
+      allStates.length > 0 ? allStates : "Loading";
   };
 
   const handleStateChange = (value) => {
@@ -344,7 +351,8 @@ function Checkout() {
     });
     allCities.unshift({ text: "Select a city", value: "" });
     setStates(allCities);
-    formControls["city"].elementConfig.options = allCities.length > 0 ? allCities : "Loading";
+    formControls["city"].elementConfig.options =
+      allCities.length > 0 ? allCities : "Loading";
   };
 
   const onSubmitFormHandler = (e) => {
@@ -368,10 +376,12 @@ function Checkout() {
         address_1: formControls.address1.value,
         address_2: formControls.address2.value,
         country: Country.getCountryByCode(formControls.country.value).name,
-        state: FORMAT_STATE_NAME(State.getStateByCode(formControls.state.value).name),
+        state: FORMAT_STATE_NAME(
+          State.getStateByCode(formControls.state.value).name
+        ),
         city: formControls.city.value,
         postcode: formControls.postcode.value,
-        product: lineItems
+        product: lineItems,
       };
 
       // router.push({
@@ -457,11 +467,16 @@ function Checkout() {
               <p>{total.toLocaleString("en-US")} NGN</p>
             </div>
           </div>
-          <button onClick={onSubmitFormHandler} {...btnConfig} className={styles.btnCheckout}>
+          <button
+            onClick={onSubmitFormHandler}
+            {...btnConfig}
+            className={styles.btnCheckout}
+          >
             Place Order
           </button>
           <p>
-            By placing an order, you agree to our company <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
+            By placing an order, you agree to our company{" "}
+            <a href="#">Privacy Policy</a> and <a href="#">Terms of Use</a>.
           </p>
         </div>
       </form>

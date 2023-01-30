@@ -86,19 +86,20 @@ function ProductModal({ show, close, product }) {
 
   const handleFavorite = (product) => {
     let data = {
-      product_id: product.id
-    }
+      product_id: product.id,
+    };
     dispatch(addToFavorites(data))
-    .then(res => {
-      if(res.payload.status === 200) {
-        console.log("===add to favorites===", res.payload.data);
-      }else{
-        console.log("===did not add to favorites===", res.payload.message);
-      }
-    }).catch(err => {
-      console.log(err)
-    })
-  }
+      .then((res) => {
+        if (res.payload.status === 200) {
+          console.log("===add to favorites===", res.payload.data);
+        } else {
+          console.log("===did not add to favorites===", res.payload.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const gotoPrev = () => {
     if (carouselRef.current) {
@@ -125,14 +126,30 @@ function ProductModal({ show, close, product }) {
                     <button onClick={gotoPrev} className={styles.sliderBtn}>
                       <Svg symbol="arrow" />
                     </button>
-                    <Carousel showEmptySlots itemsToShow={2} itemsToScroll={1} outerSpacing={20} ref={carouselRef} breakPoints={breakpoints} itemPadding={[0, 15, 0, 0]} className={styles.slider__flex}>
+                    <Carousel
+                      showEmptySlots
+                      itemsToShow={2}
+                      itemsToScroll={1}
+                      outerSpacing={20}
+                      ref={carouselRef}
+                      breakPoints={breakpoints}
+                      itemPadding={[0, 15, 0, 0]}
+                      className={styles.slider__flex}
+                    >
                       {!!product?.additional_images &&
                         product?.additional_images.map((image, i) => {
                           const img = image;
                           return (
                             <div key={i} className={styles.slider__item}>
                               <figure>
-                                <Image width={400} height={700} loader={() => img} layout="fill" src={image} alt={product.name} />
+                                <Image
+                                  width={400}
+                                  height={700}
+                                  loader={() => img}
+                                  layout="fill"
+                                  src={image}
+                                  alt={product.name}
+                                />
                               </figure>
                             </div>
                           );
@@ -168,7 +185,7 @@ function ProductModal({ show, close, product }) {
                           </button>
                         </div>
                         <a href="#">(20)</a>
-                        <button onClick={()=>handleFavorite(product)}>
+                        <button onClick={() => handleFavorite(product)}>
                           <Svg symbol="heart-outline" />
                         </button>
                       </div>
@@ -188,11 +205,15 @@ function ProductModal({ show, close, product }) {
                         ))
                       : null} */}
                     <div className={styles.description__row}>
-                      <Link href="/[id]" as={`/${product?.id}`}>
+                      <Link href={`/${product?.id}`} passHref>
                         <button>View More</button>
                       </Link>
                       {!product?.variation && (
-                        <button onClick={()=>{handleAddToCard(product)}}>
+                        <button
+                          onClick={() => {
+                            handleAddToCard(product);
+                          }}
+                        >
                           <Svg symbol="shopping-basket" />
                           <span>Add to Basket</span>
                         </button>

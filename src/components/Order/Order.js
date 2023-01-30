@@ -26,7 +26,7 @@ function Order() {
     } else {
       router.push("/orders");
     }
-  }, [dispatch]);
+  }, [dispatch, id, router]);
 
   useCallback(() => {
     if (id) {
@@ -36,7 +36,7 @@ function Order() {
     } else {
       router.push("/orders");
     }
-  }, [dispatch]);
+  }, [dispatch, id, router]);
   const { data } = useSelector((state) => state.orders);
 
   if (data) {

@@ -13,7 +13,7 @@ export default function Orders() {
     if (!token) {
       router.push("/signin");
     }
-  }, []);
+  }, [router]);
   const dispatch = useDispatch();
   const { orders } = useSelector((state) => state.orders);
 

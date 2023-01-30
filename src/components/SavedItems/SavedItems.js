@@ -89,7 +89,7 @@ function SavedItems({ favorites }) {
                     <td>
                       <div className={styles.action}>
                         {item.variation === false && (
-                          <Link href="/[id]" as={`/${item?.id}`}>
+                          <Link href={`/${item?.id}`} passHref>
                             <button>
                               <Svg symbol="eye" />
                             </button>

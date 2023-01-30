@@ -1,24 +1,23 @@
 import ProfilePage from "src/containers/Profile/Profile";
 import BaseLayout from "src/components/BaseLayout/BaseLayout";
 import PrivateRoute from "src/components/PrivateRoute/PrivateRoute";
-import {useEffect} from "react";
-import { useRouter } from 'next/router';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Profile() {
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
       router.push("/signin");
     }
-  }, []);
+  }, [router]);
   return (
     // <PrivateRoute>
-      <BaseLayout title="Profile - Fairmall">
-        <ProfilePage />
-      </BaseLayout>
+    <BaseLayout title="Profile - Fairmall">
+      <ProfilePage />
+    </BaseLayout>
     // </PrivateRoute>
-
   );
 }
 

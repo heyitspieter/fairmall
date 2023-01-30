@@ -58,9 +58,9 @@ function Orders({ orders }) {
                           query: { order: order },
                         });
                     }}>View</button> */}
-                    <Link href="/order/[id]" as={`order/${order?.id}`}>
-                    <button>View</button>
-                    </Link>
+                      <Link href={`order/${order?.id}`} passHref>
+                        <button>View</button>
+                      </Link>
                     </div>
                   </td>
                 </tr>

@@ -10,7 +10,6 @@ import styles from "src/containers/Profile/Profile.module.scss";
 import { spiralLeft, spiralRight } from "styles/modules/Ui.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile, updateProfile } from "src/store/slices/user";
-import LoadingOverlay from "react-loading-overlay";
 import { Country, State, City } from "country-state-city";
 import { FORMAT_STATE_NAME } from "src/utils/statename_formatter";
 
@@ -43,8 +42,9 @@ function Profile() {
     });
     allCountries.unshift({ text: "Select a country", value: "" });
     setCountries(allCountries);
-    formControls["country"].elementConfig.options = allCountries.length > 0 ? allCountries : "Loading";
-  }, []);
+    formControls["country"].elementConfig.options =
+      allCountries.length > 0 ? allCountries : "Loading";
+  }, [formControls]);
 
   // Form state
   const [formControls, setFormControls] = useState({
@@ -304,7 +304,10 @@ function Profile() {
     const updatededFormControls = updateObject(formControls, {
       [formControlKey]: updateObject(formControls[formControlKey], {
         value: event.target.value,
-        valid: checkFormValidity(event.target.value, formControls[formControlKey].validation),
+        valid: checkFormValidity(
+          event.target.value,
+          formControls[formControlKey].validation
+        ),
         touched: true,
       }),
     });
@@ -340,7 +343,8 @@ function Profile() {
     allStates.unshift({ text: "Select a state", value: "" });
     setCountryCode(value);
     setStates(allStates);
-    formControls["state"].elementConfig.options = allStates.length > 0 ? allStates : "Loading";
+    formControls["state"].elementConfig.options =
+      allStates.length > 0 ? allStates : "Loading";
   };
 
   const handleStateChange = (value) => {
@@ -353,7 +357,8 @@ function Profile() {
     });
     allCities.unshift({ text: "Select a city", value: "" });
     setStates(allCities);
-    formControls["city"].elementConfig.options = allCities.length > 0 ? allCities : "Loading";
+    formControls["city"].elementConfig.options =
+      allCities.length > 0 ? allCities : "Loading";
   };
 
   const onSubmitFormHandler = (e) => {
@@ -374,7 +379,9 @@ function Profile() {
         address1: formControls.address1.value,
         address2: formControls.address2.value,
         country: Country.getCountryByCode(formControls.country.value).name,
-        state: FORMAT_STATE_NAME(State.getStateByCode(formControls.state.value).name),
+        state: FORMAT_STATE_NAME(
+          State.getStateByCode(formControls.state.value).name
+        ),
         city: formControls.city.value,
         postcode: formControls.postcode.value,
       };
@@ -415,45 +422,63 @@ function Profile() {
 
   return (
     <div className={styles.container}>
-      <LoadingOverlay active={loading} spinner text={"Loading..."}>
-        <div className={spiralLeft}>
-          <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
-        </div>
-        <div className={styles.heading}>
-          <p>Profile</p>
-        </div>
-        <div className={styles.formPanel}>
-          <form className={styles.formElement}>
-            <div className={styles.col}>
-              <h3>Account Details</h3>
-              <div className={styles.col__grid}>{formInputs.slice(0, 4)}</div>
-            </div>
-            <div className={styles.col}>
-              <h3>Address Book</h3>
-              <div className={styles.col__grid}>{formInputs.slice(4)}</div>
-            </div>
-            <div className={styles.col}>
-              <div className={styles.col__grid}>
-                <button {...btnConfig} onClick={onSubmitFormHandler} className={styles.btnSubmit}>
-                  Save Changes
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    router.push("/account/password");
-                  }}
-                  className={styles.btnChange}
-                >
-                  Change Password
-                </button>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <div className={spiralLeft}>
+            <Image
+              src="/svgs/spiral.svg"
+              width={361}
+              height={364}
+              alt="Spiral"
+            />
+          </div>
+          <div className={styles.heading}>
+            <p>Profile</p>
+          </div>
+          <div className={styles.formPanel}>
+            <form className={styles.formElement}>
+              <div className={styles.col}>
+                <h3>Account Details</h3>
+                <div className={styles.col__grid}>{formInputs.slice(0, 4)}</div>
               </div>
-            </div>
-          </form>
-        </div>
-        <div className={spiralRight}>
-          <Image src="/svgs/spiral.svg" width={361} height={364} alt="Spiral" />
-        </div>
-      </LoadingOverlay>
+              <div className={styles.col}>
+                <h3>Address Book</h3>
+                <div className={styles.col__grid}>{formInputs.slice(4)}</div>
+              </div>
+              <div className={styles.col}>
+                <div className={styles.col__grid}>
+                  <button
+                    {...btnConfig}
+                    onClick={onSubmitFormHandler}
+                    className={styles.btnSubmit}
+                  >
+                    Save Changes
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      router.push("/account/password");
+                    }}
+                    className={styles.btnChange}
+                  >
+                    Change Password
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div className={spiralRight}>
+            <Image
+              src="/svgs/spiral.svg"
+              width={361}
+              height={364}
+              alt="Spiral"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
